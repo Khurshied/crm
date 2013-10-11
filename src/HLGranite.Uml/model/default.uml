@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_DfFAUDJKEeOtAb3tAJMBww" name="default">
+  <elementImport xmi:id="_DfsEUDJKEeOtAb3tAJMBww">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_DfzZEDJKEeOtAb3tAJMBww">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_DfzZETJKEeOtAb3tAJMBww">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_DfzZEjJKEeOtAb3tAJMBww">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_Efn3UDJKEeOtAb3tAJMBww" name="Admin">
+    <generalization xmi:id="_betCMDJKEeOtAb3tAJMBww" general="_SZYccDJKEeOtAb3tAJMBww"/>
+    <generalization xmi:id="_iiw60DJKEeOtAb3tAJMBww" general="_KUn70DJKEeOtAb3tAJMBww"/>
+    <generalization xmi:id="_rZfq8DJKEeOtAb3tAJMBww" general="_XvCSgDJKEeOtAb3tAJMBww"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_F6tVQDJKEeOtAb3tAJMBww" name="Staff">
+    <generalization xmi:id="_k4Jd0DJKEeOtAb3tAJMBww" general="_WWw4ADJKEeOtAb3tAJMBww"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_HffhwDJKEeOtAb3tAJMBww" name="Agent/Customer">
+    <generalization xmi:id="_kIil0DJKEeOtAb3tAJMBww" general="_KUn70DJKEeOtAb3tAJMBww"/>
+    <generalization xmi:id="_tbpv8DJKEeOtAb3tAJMBww" general="_XvCSgDJKEeOtAb3tAJMBww"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_KUn70DJKEeOtAb3tAJMBww" name="Create Order"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_SZYccDJKEeOtAb3tAJMBww" name="Configure Setting"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_WWw4ADJKEeOtAb3tAJMBww" name="Update Order Status"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_XvCSgDJKEeOtAb3tAJMBww" name="Check Status"/>
+</uml:Package>
