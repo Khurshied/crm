@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLGranite.Mvc", "HLGranite.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLGranite.Mvc.Tests", "HLGranite.Mvc.Tests\HLGranite.Mvc.Tests.csproj", "{906394A4-410D-48B7-920D-A2ABE15B6EAC}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HLGranite.Sql", "HLGranite.Sql\HLGranite.Sql.sqlproj", "{DBB62695-BADA-44E3-9303-8407F70C4196}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,12 +18,6 @@ Global
 		{906394A4-410D-48B7-920D-A2ABE15B6EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{906394A4-410D-48B7-920D-A2ABE15B6EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{906394A4-410D-48B7-920D-A2ABE15B6EAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBB62695-BADA-44E3-9303-8407F70C4196}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
