@@ -1,0 +1,94 @@
+﻿@model HLGranite.Mvc.Models.Nisan
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Nisan</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StockId, "Stock")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StockId", String.Empty)
+            @Html.ValidationMessageFor(model => model.StockId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoldToId, "SoldTo")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SoldToId", String.Empty)
+            @Html.ValidationMessageFor(model => model.SoldToId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rumi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rumi)
+            @Html.ValidationMessageFor(model => model.Rumi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Jawi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Jawi)
+            @Html.ValidationMessageFor(model => model.Jawi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Born)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Born)
+            @Html.ValidationMessageFor(model => model.Born)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Death)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Death)
+            @Html.ValidationMessageFor(model => model.Death)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Deathm)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Deathm)
+            @Html.ValidationMessageFor(model => model.Deathm)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Remarks)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

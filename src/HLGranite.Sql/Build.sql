@@ -3,6 +3,17 @@ IF NOT EXISTS(SELECT name FROM master.dbo.sysdatabases WHERE name = 'hlgranite')
 CREATE database [hlgranite]
 GO
 
+--DROP TABLE Activities;
+--DROP TABLE Statuses;
+--DROP TABLE Slabs;
+--DROP TABLE Tombs;
+--DROP TABLE Nisans;
+--DROP TABLE Stocks;
+--DROP TABLE StockTypes;
+--DROP TABLE Users;
+--DROP TABLE UserTypes;
+
+
 USE [hlgranite]
 
 -- Create user role table
@@ -69,18 +80,6 @@ CONSTRAINT [FK_Stocks_StockTypeId] FOREIGN KEY ([StockTypeId]) REFERENCES [Stock
 )
 GO
 
--- Create Statuses table
--- New, Open, Cut, Delivered, Paid
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Statuses]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
-CREATE TABLE [Statuses] (
-        [Id]                                    smallint IDENTITY NOT NULL,
-        [Status]								nvarchar(50) NOT NULL,
-		[StockTypeId]							smallint NOT NULL,
-CONSTRAINT [PK_Statuses] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Statuses_StockTypeId] FOREIGN KEY ([StockTypeId]) REFERENCES [StockTypes]([Id])
-)
-GO
-
 -- Create Nisan table
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Nisans]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 CREATE TABLE [Nisans] (
@@ -94,7 +93,8 @@ CREATE TABLE [Nisans] (
 		[Deathm]								datetime,
 		[Remarks]								ntext
 CONSTRAINT [PK_Nisans] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Nisans_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id])
+CONSTRAINT [FK_Nisans_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Nisans_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id])
 )
 GO
 
@@ -110,7 +110,8 @@ CREATE TABLE [Slabs] (
 		[Height]								int,
 		[Remarks]								ntext
 CONSTRAINT [PK_Slabs] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Slabs_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id])
+CONSTRAINT [FK_Slabs_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Slabs_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id])
 )
 GO
 
@@ -123,7 +124,20 @@ CREATE TABLE [Tombs] (
 		[Reference]								nvarchar(100), -- refer to project name
 		[Remarks]								ntext
 CONSTRAINT [PK_Tombs] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Tomb_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id])
+CONSTRAINT [FK_Tomb_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Tombs_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id])
+)
+GO
+
+-- Create Statuses table
+-- New, Open, Cut, Delivered, Paid
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Statuses]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE [Statuses] (
+        [Id]                                    smallint IDENTITY NOT NULL,
+        [Status]								nvarchar(50) NOT NULL,
+		[StockTypeId]							smallint NOT NULL,
+CONSTRAINT [PK_Statuses] PRIMARY KEY ([Id]),
+CONSTRAINT [FK_Statuses_StockTypeId] FOREIGN KEY ([StockTypeId]) REFERENCES [StockTypes]([Id])
 )
 GO
 
