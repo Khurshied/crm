@@ -34,7 +34,7 @@ CREATE TABLE [Users] (
         [Id]                                    int IDENTITY NOT NULL,
         [UserTypeId]                            smallint NOT NULL,
 		[UserName]                              nvarchar(100) NOT NULL,
-        [Password]                              nvarchar(100) NOT NULL,	--stored hash instead of pure text
+        [Password]                              char(128), --stored hash instead of pure text
 
         [FirstName]								nvarchar(100) NOT NULL,
 		[LastName]								nvarchar(100),

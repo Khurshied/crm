@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using System.Web.Security;
 using HLGranite.Mvc.Models;
 using System.Security;
@@ -63,7 +64,7 @@ namespace HLGranite.Mvc.Controllers
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
             if (user == null)
                 return false;
-            else if (password.Equals(user.Password))
+            else if(Crypto.VerifyHashedPassword(user.Password, password))
                 return true;
             else
                 return false;
@@ -110,7 +111,7 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: user.Password = SecurityManager.HashData(user.Password);
+                user.Password = Crypto.HashPassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -173,6 +174,7 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = Crypto.HashPassword(user.Password);
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

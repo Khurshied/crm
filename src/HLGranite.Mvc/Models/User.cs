@@ -11,7 +11,6 @@ namespace HLGranite.Mvc.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class User
     {
