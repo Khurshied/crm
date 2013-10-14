@@ -73,7 +73,7 @@ CREATE TABLE [Stocks] (
         [StockTypeId]							smallint NOT NULL,
 		[Name]									nvarchar(50),
         [Code]                                  nvarchar(50) NOT NULL, --This become a key link to Stocks fusion table for Warehouse Scanner app
-        [Url]                                   nvarchar(255),  --stored image url
+        [Image]                                 nvarchar(255),  --stored image url
         [Price]                                 money NOT NULL DEFAULT 0,
 		[Remarks]								ntext,
 		[Active]								bit NOT NULL DEFAULT 1

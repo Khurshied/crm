@@ -40,8 +40,9 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Create()
         {
+            Stock stock = db.Stocks.Create();
             ViewBag.StockTypeId = new SelectList(db.StockTypes, "Id", "Type");
-            return View();
+            return View(stock);
         }
 
         //

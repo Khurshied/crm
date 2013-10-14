@@ -26,10 +26,10 @@ namespace HLGranite.Mvc.Models
         public short StockTypeId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public string Url { get; set; }
         public decimal Price { get; set; }
         public string Remarks { get; set; }
         public bool Active { get; set; }
+        public string Image { get; set; }
     
         public virtual ICollection<Nisan> Nisans { get; set; }
         public virtual ICollection<Slab> Slabs { get; set; }

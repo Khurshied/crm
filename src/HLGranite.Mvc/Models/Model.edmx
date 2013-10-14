@@ -153,10 +153,10 @@
           <Property Name="StockTypeId" Type="smallint" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Url" Type="nvarchar" MaxLength="255" />
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Remarks" Type="ntext" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="StockTypes">
           <Key>
@@ -582,7 +582,6 @@
           <Property Name="StockTypeId" Type="Int16" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
@@ -590,6 +589,7 @@
           <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_StockId" FromRole="Stocks" ToRole="Slabs" />
           <NavigationProperty Name="StockType" Relationship="hlgraniteModel.FK_Stocks_StockTypeId" FromRole="Stocks" ToRole="StockTypes" />
           <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tomb_StockId" FromRole="Stocks" ToRole="Tombs" />
+          <Property Type="String" Name="Image" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StockType">
           <Key>
@@ -936,11 +936,11 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="hlgraniteModel.Stock">
               <MappingFragment StoreEntitySet="Stocks">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockTypeId" ColumnName="StockTypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
