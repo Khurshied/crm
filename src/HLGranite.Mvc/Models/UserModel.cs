@@ -14,5 +14,9 @@ namespace HLGranite.Mvc.Models
         {
             get { return this.FirstName + " " + this.LastName; }
         }
+        /// <summary>
+        /// For display at login page purpose.
+        /// </summary>
+        public bool RememberMe { get; set; }
     }
 }
