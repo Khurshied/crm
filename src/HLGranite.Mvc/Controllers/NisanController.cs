@@ -63,8 +63,8 @@ namespace HLGranite.Mvc.Controllers
                 WorkItem workItem = db.WorkItems.Create();
                 db.WorkItems.Add(workItem);
 
-                short nextStatus = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID && s.Id != nisan.StatusId).First().Id;
-                nisan.StatusId = nextStatus;
+                //short nextStatus = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID && s.Id != nisan.StatusId).First().Id;
+                //nisan.StatusId = nextStatus;
                 nisan.WorkItemId = workItem.Id;
                 db.Nisans.Add(nisan);
                 db.SaveChanges();

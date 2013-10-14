@@ -26,7 +26,7 @@
             grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item.Rumi</a></text>),
             grid.Column("Jawi", "Jawi"),
             grid.Column("Death", "Death"),
-            grid.Column("Deathm", "Deathm"),
+            grid.Column("Deathm", "Muslim"),
             grid.Column("Remarks","Remarks"),
             grid.Column("Assignee","Assignee"),
             grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)

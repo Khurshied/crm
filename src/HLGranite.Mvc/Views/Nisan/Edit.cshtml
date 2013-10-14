@@ -4,6 +4,82 @@
     ViewBag.Title = "Edit";
 }
 
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+<script>
+    $(function () {
+        $("#new").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "new") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#submit").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "submit") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#design").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "design") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#cut").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "cut") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#complete").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "complete") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#deliver").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "deliver") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+        $("#close").click(function () {
+            $("#StatusId option").each(function () {
+                console.log($(this).html());
+                if ($(this).html().toLowerCase() == "close") {
+                    $(this).attr("selected", true);
+                    return;
+                }
+            });
+        });
+
+    });
+</script>
+
 <h2>Edit</h2>
 
 @using (Html.BeginForm()) {
@@ -14,7 +90,6 @@
         <legend>Nisan</legend>
 
         @Html.HiddenFor(model => model.Id)
-
         <div class="editor-label">
             @Html.LabelFor(model => model.StatusId, "Status")
         </div>
@@ -83,13 +158,20 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Remarks)
+            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
+
         @Html.HiddenFor(model => model.WorkItemId)
 
         <p>
-            <input type="submit" value="Save" />
+            <input id="new" type="submit" value="Save" />
+            <input id="submit" type="submit" value="Submit" />
+            <input id="design" type="submit" value="Design" />
+            <input id="cut" type="submit" value="Cut" />
+            <input id="complete" type="submit" value="Complete" />
+            <input id="deliver" type="submit" value="Deliver" />
+            <input id="close" type="submit" value="Close" />
         </p>
     </fieldset>
 }
