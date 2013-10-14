@@ -40,8 +40,8 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name");
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName");
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name");
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName");
             return View();
         }
 
@@ -58,14 +58,14 @@ namespace HLGranite.Mvc.Controllers
                 db.WorkItems.Add(workItem);
                 //db.SaveChanges();
 
-                nisan.WorItemId = workItem.Id;
+                nisan.WorkItemId = workItem.Id;
                 db.Nisans.Add(nisan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -79,8 +79,8 @@ namespace HLGranite.Mvc.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -93,12 +93,14 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();
+                //db.Entry(nisan.WorkItem).State = EntityState.Modified;
                 db.Entry(nisan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 

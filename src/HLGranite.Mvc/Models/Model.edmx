@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="hlgraniteModelStoreContainer">
           <EntitySet Name="Activities" EntityType="hlgraniteModel.Store.Activities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Nisans" EntityType="hlgraniteModel.Store.Nisans" store:Type="Tables" Schema="dbo" />
@@ -109,7 +109,7 @@
           <Property Name="Death" Type="datetime" />
           <Property Name="Deathm" Type="datetime" />
           <Property Name="Remarks" Type="ntext" />
-          <Property Name="WorItemId" Type="int" Nullable="false" />
+          <Property Name="WorkItemId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Projects">
           <Key>
@@ -279,7 +279,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Nisans">
-              <PropertyRef Name="WorItemId" />
+              <PropertyRef Name="WorkItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -415,7 +415,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hlgraniteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -526,7 +527,7 @@
           <Property Name="Death" Type="DateTime" Precision="3" />
           <Property Name="Deathm" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="WorItemId" Type="Int32" Nullable="false" />
+          <Property Name="WorkItemId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="hlgraniteModel.FK_Nisans_SoldToId" FromRole="Nisans" ToRole="Users" />
           <NavigationProperty Name="Stock" Relationship="hlgraniteModel.FK_Nisans_StockId" FromRole="Nisans" ToRole="Stocks" />
           <NavigationProperty Name="WorkItem" Relationship="hlgraniteModel.FK_Nisans_WorkItemId" FromRole="Nisans" ToRole="WorkItems" />
@@ -585,11 +586,11 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
+          <Property Name="Image" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_StockId" FromRole="Stocks" ToRole="Nisans" />
           <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_StockId" FromRole="Stocks" ToRole="Slabs" />
           <NavigationProperty Name="StockType" Relationship="hlgraniteModel.FK_Stocks_StockTypeId" FromRole="Stocks" ToRole="StockTypes" />
           <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tomb_StockId" FromRole="Stocks" ToRole="Tombs" />
-          <Property Type="String" Name="Image" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StockType">
           <Key>
@@ -727,7 +728,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Nisans">
-              <PropertyRef Name="WorItemId" />
+              <PropertyRef Name="WorkItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -892,7 +893,7 @@
                 <ScalarProperty Name="Death" ColumnName="Death" />
                 <ScalarProperty Name="Deathm" ColumnName="Deathm" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="WorItemId" ColumnName="WorItemId" />
+                <ScalarProperty Name="WorkItemId" ColumnName="WorkItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -936,7 +937,6 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="hlgraniteModel.Stock">
               <MappingFragment StoreEntitySet="Stocks">
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockTypeId" ColumnName="StockTypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -944,6 +944,7 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

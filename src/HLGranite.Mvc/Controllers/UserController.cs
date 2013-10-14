@@ -16,6 +16,19 @@ namespace HLGranite.Mvc.Controllers
     {
         private hlgraniteEntities db = new hlgraniteEntities();
 
+        public static int CUSTOMER_TYPE_ID
+        {
+            get
+            {
+                hlgraniteEntities db = new hlgraniteEntities();
+                UserType userType = db.UserTypes.Where(t => t.Type.ToLower().Equals("customer")).FirstOrDefault();
+                if (userType == null)
+                    return 0;
+                else
+                    return userType.Id;
+            }
+        }
+
         [HttpGet]
         public ActionResult Login()
         {

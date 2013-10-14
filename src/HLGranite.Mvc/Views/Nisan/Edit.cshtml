@@ -70,6 +70,7 @@
             @Html.EditorFor(model => model.Remarks)
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
+        @Html.HiddenFor(model => model.WorkItemId)
 
         <p>
             <input type="submit" value="Save" />

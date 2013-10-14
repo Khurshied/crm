@@ -117,7 +117,7 @@ CREATE TABLE [Nisans] (
 		[Death]									datetime,
 		[Deathm]								datetime,
 		[Remarks]								ntext,
-		[WorItemId]								int NOT NULL
+		[WorkItemId]							int NOT NULL
 CONSTRAINT [PK_Nisans] PRIMARY KEY ([Id]),
 CONSTRAINT [FK_Nisans_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
 CONSTRAINT [FK_Nisans_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id]),

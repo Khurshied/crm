@@ -23,7 +23,7 @@ namespace HLGranite.Mvc.Models
         public Nullable<System.DateTime> Death { get; set; }
         public Nullable<System.DateTime> Deathm { get; set; }
         public string Remarks { get; set; }
-        public int WorItemId { get; set; }
+        public int WorkItemId { get; set; }
     
         public virtual User User { get; set; }
         public virtual Stock Stock { get; set; }
