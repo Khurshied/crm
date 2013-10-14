@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="hlgraniteModelStoreContainer">
           <EntitySet Name="Activities" EntityType="hlgraniteModel.Store.Activities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Nisans" EntityType="hlgraniteModel.Store.Nisans" store:Type="Tables" Schema="dbo" />
@@ -185,7 +185,7 @@
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="100" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="100" />
@@ -415,8 +415,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hlgraniteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -586,7 +585,7 @@
           <Property Name="Url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_StockId" FromRole="Stocks" ToRole="Nisans" />
           <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_StockId" FromRole="Stocks" ToRole="Slabs" />
           <NavigationProperty Name="StockType" Relationship="hlgraniteModel.FK_Stocks_StockTypeId" FromRole="Stocks" ToRole="StockTypes" />
@@ -624,7 +623,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Telephone" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Mobile" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -635,7 +634,7 @@
           <Property Name="State" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Country" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" DefaultValue="True" />
           <NavigationProperty Name="Activities" Relationship="hlgraniteModel.FK_Activities_UserId" FromRole="Users" ToRole="Activities" />
           <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_SoldToId" FromRole="Users" ToRole="Nisans" />
           <NavigationProperty Name="Projects" Relationship="hlgraniteModel.FK_Projects_SoldToId" FromRole="Users" ToRole="Projects" />

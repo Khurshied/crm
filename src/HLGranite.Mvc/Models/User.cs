@@ -11,11 +11,13 @@ namespace HLGranite.Mvc.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class User
     {
         public User()
         {
+            this.Active = true;
             this.Activities = new HashSet<Activity>();
             this.Nisans = new HashSet<Nisan>();
             this.Projects = new HashSet<Project>();

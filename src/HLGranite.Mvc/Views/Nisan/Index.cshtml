@@ -15,16 +15,13 @@
             @Html.DisplayNameFor(model => model.Stock.Code)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoldTo.UserName)
+            @Html.DisplayNameFor(model => model.User.DisplayName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Rumi)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Jawi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Born)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Death)
@@ -44,16 +41,13 @@
             @Html.DisplayFor(modelItem => item.Stock.Code)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SoldTo.UserName)
+            @Html.DisplayFor(modelItem => item.User.DisplayName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Rumi)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Jawi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Born)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Death)

@@ -37,7 +37,7 @@ CREATE TABLE [Users] (
         [Password]                              nvarchar(100) NOT NULL,	--stored hash instead of pure text
 
         [FirstName]								nvarchar(100) NOT NULL,
-		[LastName]								nvarchar(100) NOT NULL,
+		[LastName]								nvarchar(100),
 		[Email]                                 nvarchar(100),
 		[Telephone]								nvarchar(100),
 		[Mobile]								nvarchar(100),

@@ -391,16 +391,16 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\Stock\Index.cshtml" />
-    <Content Include="Views\Stock\Details.cshtml" />
-    <Content Include="Views\Stock\Create.cshtml" />
-    <Content Include="Views\Stock\Edit.cshtml" />
-    <Content Include="Views\Stock\Delete.cshtml" />
     <Content Include="Views\Nisan\Index.cshtml" />
     <Content Include="Views\Nisan\Details.cshtml" />
     <Content Include="Views\Nisan\Create.cshtml" />
     <Content Include="Views\Nisan\Edit.cshtml" />
     <Content Include="Views\Nisan\Delete.cshtml" />
+    <Content Include="Views\Stock\Index.cshtml" />
+    <Content Include="Views\Stock\Details.cshtml" />
+    <Content Include="Views\Stock\Create.cshtml" />
+    <Content Include="Views\Stock\Edit.cshtml" />
+    <Content Include="Views\Stock\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

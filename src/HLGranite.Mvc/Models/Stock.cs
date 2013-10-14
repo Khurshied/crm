@@ -16,6 +16,7 @@ namespace HLGranite.Mvc.Models
     {
         public Stock()
         {
+            this.Active = true;
             this.Nisans = new HashSet<Nisan>();
             this.Slabs = new HashSet<Slab>();
             this.Tombs = new HashSet<Tomb>();

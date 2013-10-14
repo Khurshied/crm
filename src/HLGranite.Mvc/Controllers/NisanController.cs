@@ -40,8 +40,8 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code");
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.StockId = new SelectList(db.Stocks, "Id", "Name");
+            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace HLGranite.Mvc.Controllers
             }
 
             ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "UserName", nisan.SoldToId);
+            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -80,7 +80,7 @@ namespace HLGranite.Mvc.Controllers
                 return HttpNotFound();
             }
             ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "UserName", nisan.SoldToId);
+            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -98,7 +98,7 @@ namespace HLGranite.Mvc.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.StockId = new SelectList(db.Stocks, "Id", "Code", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users, "Id", "UserName", nisan.SoldToId);
+            ViewBag.SoldToId = new SelectList(db.Users, "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
