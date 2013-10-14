@@ -1,0 +1,1 @@
+﻿sp_rename 'Nisans.WorItemId', 'WorkItemId', 'COLUMN';
