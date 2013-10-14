@@ -96,8 +96,9 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Create()
         {
+            User user = db.Users.Create();
             ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Type");
-            return View();
+            return View(user);
         }
 
         //
@@ -113,6 +114,36 @@ namespace HLGranite.Mvc.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Type", user.UserTypeId);
+            return View(user);
+        }
+
+        //
+        // GET: /User/Register
+
+        public ActionResult Register()
+        {
+            User user = db.Users.Create();
+            user.UserTypeId = db.UserTypes.Where(u => u.Type == "Customer").First().Id;
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Type");
+            return View(user);
+        }
+
+        //
+        // POST: /User/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: user.Password = SecurityManager.HashData(user.Password);
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Type", user.UserTypeId);
