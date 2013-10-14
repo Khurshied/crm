@@ -18,7 +18,8 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
+            short closeStatus = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo).Where(n => n.StatusId < closeStatus);
             return View(nisans.ToList());
         }
 
