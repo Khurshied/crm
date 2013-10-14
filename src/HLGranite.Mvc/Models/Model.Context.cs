@@ -27,6 +27,7 @@ namespace HLGranite.Mvc.Models
     
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Nisan> Nisans { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public DbSet<Slab> Slabs { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Stock> Stocks { get; set; }
@@ -34,5 +35,6 @@ namespace HLGranite.Mvc.Models
         public DbSet<Tomb> Tombs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<WorkItem> WorkItems { get; set; }
     }
 }

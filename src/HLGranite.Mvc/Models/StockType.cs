@@ -16,7 +16,6 @@ namespace HLGranite.Mvc.Models
     {
         public StockType()
         {
-            this.Activities = new HashSet<Activity>();
             this.Statuses = new HashSet<Status>();
             this.Stocks = new HashSet<Stock>();
         }
@@ -24,7 +23,6 @@ namespace HLGranite.Mvc.Models
         public short Id { get; set; }
         public string Type { get; set; }
     
-        public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Status> Statuses { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
     }

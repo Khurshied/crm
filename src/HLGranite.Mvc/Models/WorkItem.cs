@@ -12,38 +12,21 @@ namespace HLGranite.Mvc.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class WorkItem
     {
-        public User()
+        public WorkItem()
         {
             this.Activities = new HashSet<Activity>();
             this.Nisans = new HashSet<Nisan>();
-            this.Projects = new HashSet<Project>();
             this.Slabs = new HashSet<Slab>();
+            this.Tombs = new HashSet<Tomb>();
         }
     
         public int Id { get; set; }
-        public short UserTypeId { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Telephone { get; set; }
-        public string Mobile { get; set; }
-        public string Street1 { get; set; }
-        public string Street2 { get; set; }
-        public string City { get; set; }
-        public string Postcode { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string Remarks { get; set; }
-        public bool Active { get; set; }
     
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Nisan> Nisans { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<Slab> Slabs { get; set; }
-        public virtual UserType UserType { get; set; }
+        public virtual ICollection<Tomb> Tombs { get; set; }
     }
 }

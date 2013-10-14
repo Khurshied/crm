@@ -12,16 +12,23 @@ namespace HLGranite.Mvc.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Activity
+    public partial class Project
     {
-        public long Id { get; set; }
-        public int WorkItemId { get; set; }
-        public short StatusId { get; set; }
-        public int UserId { get; set; }
-        public System.DateTime Date { get; set; }
+        public Project()
+        {
+            this.Slabs = new HashSet<Slab>();
+            this.Tombs = new HashSet<Tomb>();
+        }
     
-        public virtual Status Status { get; set; }
+        public int Id { get; set; }
+        public string Reference { get; set; }
+        public int SoldToId { get; set; }
+        public Nullable<System.DateTime> Due { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public string Remarks { get; set; }
+    
         public virtual User User { get; set; }
-        public virtual WorkItem WorkItem { get; set; }
+        public virtual ICollection<Slab> Slabs { get; set; }
+        public virtual ICollection<Tomb> Tombs { get; set; }
     }
 }

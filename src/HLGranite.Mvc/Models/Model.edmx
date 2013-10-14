@@ -4,62 +4,84 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HLGranite.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="HLGraniteModelStoreContainer">
-          <EntitySet Name="Activities" EntityType="HLGranite.Model.Store.Activities" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Nisans" EntityType="HLGranite.Model.Store.Nisans" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Slabs" EntityType="HLGranite.Model.Store.Slabs" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Statuses" EntityType="HLGranite.Model.Store.Statuses" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Stocks" EntityType="HLGranite.Model.Store.Stocks" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StockTypes" EntityType="HLGranite.Model.Store.StockTypes" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Tombs" EntityType="HLGranite.Model.Store.Tombs" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="HLGranite.Model.Store.Users" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserTypes" EntityType="HLGranite.Model.Store.UserTypes" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Activities_StatusId" Association="HLGranite.Model.Store.FK_Activities_StatusId">
+      <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="hlgraniteModelStoreContainer">
+          <EntitySet Name="Activities" EntityType="hlgraniteModel.Store.Activities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Nisans" EntityType="hlgraniteModel.Store.Nisans" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projects" EntityType="hlgraniteModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Slabs" EntityType="hlgraniteModel.Store.Slabs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Statuses" EntityType="hlgraniteModel.Store.Statuses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Stocks" EntityType="hlgraniteModel.Store.Stocks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StockTypes" EntityType="hlgraniteModel.Store.StockTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tombs" EntityType="hlgraniteModel.Store.Tombs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="hlgraniteModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserTypes" EntityType="hlgraniteModel.Store.UserTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WorkItems" EntityType="hlgraniteModel.Store.WorkItems" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Activities_StatusId" Association="hlgraniteModel.Store.FK_Activities_StatusId">
             <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
-          <AssociationSet Name="FK_Activities_StockTypeId" Association="HLGranite.Model.Store.FK_Activities_StockTypeId">
-            <End Role="StockTypes" EntitySet="StockTypes" />
-            <End Role="Activities" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Activities_UserId" Association="HLGranite.Model.Store.FK_Activities_UserId">
+          <AssociationSet Name="FK_Activities_UserId" Association="hlgraniteModel.Store.FK_Activities_UserId">
             <End Role="Users" EntitySet="Users" />
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
-          <AssociationSet Name="FK_Nisans_SoldToId" Association="HLGranite.Model.Store.FK_Nisans_SoldToId">
+          <AssociationSet Name="FK_Activities_WorkItemId" Association="hlgraniteModel.Store.FK_Activities_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nisans_SoldToId" Association="hlgraniteModel.Store.FK_Nisans_SoldToId">
             <End Role="Users" EntitySet="Users" />
             <End Role="Nisans" EntitySet="Nisans" />
           </AssociationSet>
-          <AssociationSet Name="FK_Nisans_StockId" Association="HLGranite.Model.Store.FK_Nisans_StockId">
+          <AssociationSet Name="FK_Nisans_StockId" Association="hlgraniteModel.Store.FK_Nisans_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Nisans" EntitySet="Nisans" />
           </AssociationSet>
-          <AssociationSet Name="FK_Slabs_SoldToId" Association="HLGranite.Model.Store.FK_Slabs_SoldToId">
+          <AssociationSet Name="FK_Nisans_WorkItemId" Association="hlgraniteModel.Store.FK_Nisans_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Nisans" EntitySet="Nisans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_SoldToId" Association="hlgraniteModel.Store.FK_Projects_SoldToId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slabs_ParentId" Association="hlgraniteModel.Store.FK_Slabs_ParentId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Slabs" EntitySet="Slabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slabs_SoldToId" Association="hlgraniteModel.Store.FK_Slabs_SoldToId">
             <End Role="Users" EntitySet="Users" />
             <End Role="Slabs" EntitySet="Slabs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Slabs_StockId" Association="HLGranite.Model.Store.FK_Slabs_StockId">
+          <AssociationSet Name="FK_Slabs_StockId" Association="hlgraniteModel.Store.FK_Slabs_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Slabs" EntitySet="Slabs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Statuses_StockTypeId" Association="HLGranite.Model.Store.FK_Statuses_StockTypeId">
+          <AssociationSet Name="FK_Slabs_WorkItemId" Association="hlgraniteModel.Store.FK_Slabs_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Slabs" EntitySet="Slabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statuses_StockTypeId" Association="hlgraniteModel.Store.FK_Statuses_StockTypeId">
             <End Role="StockTypes" EntitySet="StockTypes" />
             <End Role="Statuses" EntitySet="Statuses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Stocks_StockTypeId" Association="HLGranite.Model.Store.FK_Stocks_StockTypeId">
+          <AssociationSet Name="FK_Stocks_StockTypeId" Association="hlgraniteModel.Store.FK_Stocks_StockTypeId">
             <End Role="StockTypes" EntitySet="StockTypes" />
             <End Role="Stocks" EntitySet="Stocks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tomb_StockId" Association="HLGranite.Model.Store.FK_Tomb_StockId">
+          <AssociationSet Name="FK_Tomb_StockId" Association="hlgraniteModel.Store.FK_Tomb_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Tombs" EntitySet="Tombs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tombs_SoldToId" Association="HLGranite.Model.Store.FK_Tombs_SoldToId">
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_Tombs_ParentId" Association="hlgraniteModel.Store.FK_Tombs_ParentId">
+            <End Role="Projects" EntitySet="Projects" />
             <End Role="Tombs" EntitySet="Tombs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_UserTypeId" Association="HLGranite.Model.Store.FK_Users_UserTypeId">
+          <AssociationSet Name="FK_Tombs_WorkItemId" Association="hlgraniteModel.Store.FK_Tombs_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Tombs" EntitySet="Tombs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypeId" Association="hlgraniteModel.Store.FK_Users_UserTypeId">
             <End Role="UserTypes" EntitySet="UserTypes" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -69,8 +91,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="StockTypeId" Type="smallint" Nullable="false" />
+          <Property Name="WorkItemId" Type="int" Nullable="false" />
           <Property Name="StatusId" Type="smallint" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
@@ -81,12 +102,24 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" />
           <Property Name="SoldToId" Type="int" Nullable="false" />
           <Property Name="Rumi" Type="nvarchar" MaxLength="100" />
           <Property Name="Jawi" Type="nvarchar" MaxLength="100" />
-          <Property Name="Born" Type="datetime" />
           <Property Name="Death" Type="datetime" />
           <Property Name="Deathm" Type="datetime" />
+          <Property Name="Remarks" Type="ntext" />
+          <Property Name="WorItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="100" />
+          <Property Name="SoldToId" Type="int" Nullable="false" />
+          <Property Name="Due" Type="datetime" />
+          <Property Name="Total" Type="money" />
           <Property Name="Remarks" Type="ntext" />
         </EntityType>
         <EntityType Name="Slabs">
@@ -95,19 +128,21 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" />
           <Property Name="SoldToId" Type="int" Nullable="false" />
-          <Property Name="Reference" Type="nvarchar" MaxLength="100" />
           <Property Name="Length" Type="int" />
           <Property Name="Width" Type="int" />
           <Property Name="Height" Type="int" />
           <Property Name="Remarks" Type="ntext" />
+          <Property Name="WorkItemId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Statuses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="StockTypeId" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Stocks">
@@ -116,8 +151,8 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StockTypeId" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="Url" Type="nvarchar" MaxLength="255" />
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Remarks" Type="ntext" />
@@ -136,9 +171,10 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="int" Nullable="false" />
-          <Property Name="SoldToId" Type="int" Nullable="false" />
-          <Property Name="Reference" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="money" />
           <Property Name="Remarks" Type="ntext" />
+          <Property Name="WorkItemId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -169,9 +205,15 @@
           <Property Name="Id" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="WorkItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
         <Association Name="FK_Activities_StatusId">
-          <End Role="Statuses" Type="HLGranite.Model.Store.Statuses" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Store.Activities" Multiplicity="*" />
+          <End Role="Statuses" Type="hlgraniteModel.Store.Statuses" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Store.Activities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
               <PropertyRef Name="Id" />
@@ -181,21 +223,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Activities_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.Store.StockTypes" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Store.Activities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StockTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Activities">
-              <PropertyRef Name="StockTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Activities_UserId">
-          <End Role="Users" Type="HLGranite.Model.Store.Users" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Store.Activities" Multiplicity="*" />
+          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Store.Activities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -205,9 +235,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Activities_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.Store.WorkItems" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Store.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="WorkItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Nisans_SoldToId">
-          <End Role="Users" Type="HLGranite.Model.Store.Users" Multiplicity="1" />
-          <End Role="Nisans" Type="HLGranite.Model.Store.Nisans" Multiplicity="*" />
+          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Store.Nisans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -218,8 +260,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Nisans_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Store.Stocks" Multiplicity="1" />
-          <End Role="Nisans" Type="HLGranite.Model.Store.Nisans" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Store.Stocks" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Store.Nisans" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -229,9 +271,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Nisans_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.Store.WorkItems" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Store.Nisans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nisans">
+              <PropertyRef Name="WorItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_SoldToId">
+          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="1" />
+          <End Role="Projects" Type="hlgraniteModel.Store.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="SoldToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Slabs_ParentId">
+          <End Role="Projects" Type="hlgraniteModel.Store.Projects" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Store.Slabs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slabs">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Slabs_SoldToId">
-          <End Role="Users" Type="HLGranite.Model.Store.Users" Multiplicity="1" />
-          <End Role="Slabs" Type="HLGranite.Model.Store.Slabs" Multiplicity="*" />
+          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Store.Slabs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -242,8 +320,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Slabs_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Store.Stocks" Multiplicity="1" />
-          <End Role="Slabs" Type="HLGranite.Model.Store.Slabs" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Store.Stocks" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Store.Slabs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -253,9 +331,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Slabs_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.Store.WorkItems" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Store.Slabs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slabs">
+              <PropertyRef Name="WorkItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Statuses_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.Store.StockTypes" Multiplicity="1" />
-          <End Role="Statuses" Type="HLGranite.Model.Store.Statuses" Multiplicity="*" />
+          <End Role="StockTypes" Type="hlgraniteModel.Store.StockTypes" Multiplicity="1" />
+          <End Role="Statuses" Type="hlgraniteModel.Store.Statuses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StockTypes">
               <PropertyRef Name="Id" />
@@ -266,8 +356,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stocks_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.Store.StockTypes" Multiplicity="1" />
-          <End Role="Stocks" Type="HLGranite.Model.Store.Stocks" Multiplicity="*" />
+          <End Role="StockTypes" Type="hlgraniteModel.Store.StockTypes" Multiplicity="1" />
+          <End Role="Stocks" Type="hlgraniteModel.Store.Stocks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StockTypes">
               <PropertyRef Name="Id" />
@@ -278,8 +368,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tomb_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Store.Stocks" Multiplicity="1" />
-          <End Role="Tombs" Type="HLGranite.Model.Store.Tombs" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Store.Stocks" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Store.Tombs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -289,21 +379,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tombs_SoldToId">
-          <End Role="Users" Type="HLGranite.Model.Store.Users" Multiplicity="1" />
-          <End Role="Tombs" Type="HLGranite.Model.Store.Tombs" Multiplicity="*" />
+        <Association Name="FK_Tombs_ParentId">
+          <End Role="Projects" Type="hlgraniteModel.Store.Projects" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Store.Tombs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="Projects">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Tombs">
-              <PropertyRef Name="SoldToId" />
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tombs_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.Store.WorkItems" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Store.Tombs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tombs">
+              <PropertyRef Name="WorkItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_UserTypeId">
-          <End Role="UserTypes" Type="HLGranite.Model.Store.UserTypes" Multiplicity="1" />
-          <End Role="Users" Type="HLGranite.Model.Store.Users" Multiplicity="*" />
+          <End Role="UserTypes" Type="hlgraniteModel.Store.UserTypes" Multiplicity="1" />
+          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserTypes">
               <PropertyRef Name="Id" />
@@ -313,67 +415,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="HLGranite.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="hlgraniteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="hlgraniteEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Activities" EntityType="HLGranite.Model.Activity" />
-          <EntitySet Name="Nisans" EntityType="HLGranite.Model.Nisan" />
-          <EntitySet Name="Slabs" EntityType="HLGranite.Model.Slab" />
-          <EntitySet Name="Statuses" EntityType="HLGranite.Model.Status" />
-          <EntitySet Name="Stocks" EntityType="HLGranite.Model.Stock" />
-          <EntitySet Name="StockTypes" EntityType="HLGranite.Model.StockType" />
-          <EntitySet Name="Tombs" EntityType="HLGranite.Model.Tomb" />
-          <EntitySet Name="Users" EntityType="HLGranite.Model.User" />
-          <EntitySet Name="UserTypes" EntityType="HLGranite.Model.UserType" />
-          <AssociationSet Name="FK_Activities_StatusId" Association="HLGranite.Model.FK_Activities_StatusId">
+          <EntitySet Name="Activities" EntityType="hlgraniteModel.Activity" />
+          <EntitySet Name="Nisans" EntityType="hlgraniteModel.Nisan" />
+          <EntitySet Name="Projects" EntityType="hlgraniteModel.Project" />
+          <EntitySet Name="Slabs" EntityType="hlgraniteModel.Slab" />
+          <EntitySet Name="Statuses" EntityType="hlgraniteModel.Status" />
+          <EntitySet Name="Stocks" EntityType="hlgraniteModel.Stock" />
+          <EntitySet Name="StockTypes" EntityType="hlgraniteModel.StockType" />
+          <EntitySet Name="Tombs" EntityType="hlgraniteModel.Tomb" />
+          <EntitySet Name="Users" EntityType="hlgraniteModel.User" />
+          <EntitySet Name="UserTypes" EntityType="hlgraniteModel.UserType" />
+          <EntitySet Name="WorkItems" EntityType="hlgraniteModel.WorkItem" />
+          <AssociationSet Name="FK_Activities_StatusId" Association="hlgraniteModel.FK_Activities_StatusId">
             <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
-          <AssociationSet Name="FK_Activities_StockTypeId" Association="HLGranite.Model.FK_Activities_StockTypeId">
-            <End Role="StockTypes" EntitySet="StockTypes" />
-            <End Role="Activities" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Activities_UserId" Association="HLGranite.Model.FK_Activities_UserId">
+          <AssociationSet Name="FK_Activities_UserId" Association="hlgraniteModel.FK_Activities_UserId">
             <End Role="Users" EntitySet="Users" />
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
-          <AssociationSet Name="FK_Nisans_StockId" Association="HLGranite.Model.FK_Nisans_StockId">
+          <AssociationSet Name="FK_Activities_WorkItemId" Association="hlgraniteModel.FK_Activities_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nisans_SoldToId" Association="hlgraniteModel.FK_Nisans_SoldToId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Nisans" EntitySet="Nisans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nisans_StockId" Association="hlgraniteModel.FK_Nisans_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Nisans" EntitySet="Nisans" />
           </AssociationSet>
-          <AssociationSet Name="FK_Slabs_StockId" Association="HLGranite.Model.FK_Slabs_StockId">
+          <AssociationSet Name="FK_Nisans_WorkItemId" Association="hlgraniteModel.FK_Nisans_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Nisans" EntitySet="Nisans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_SoldToId" Association="hlgraniteModel.FK_Projects_SoldToId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slabs_ParentId" Association="hlgraniteModel.FK_Slabs_ParentId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Slabs" EntitySet="Slabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tombs_ParentId" Association="hlgraniteModel.FK_Tombs_ParentId">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tombs" EntitySet="Tombs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slabs_SoldToId" Association="hlgraniteModel.FK_Slabs_SoldToId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Slabs" EntitySet="Slabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Slabs_StockId" Association="hlgraniteModel.FK_Slabs_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Slabs" EntitySet="Slabs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Statuses_StockTypeId" Association="HLGranite.Model.FK_Statuses_StockTypeId">
+          <AssociationSet Name="FK_Slabs_WorkItemId" Association="hlgraniteModel.FK_Slabs_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Slabs" EntitySet="Slabs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statuses_StockTypeId" Association="hlgraniteModel.FK_Statuses_StockTypeId">
             <End Role="StockTypes" EntitySet="StockTypes" />
             <End Role="Statuses" EntitySet="Statuses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Stocks_StockTypeId" Association="HLGranite.Model.FK_Stocks_StockTypeId">
+          <AssociationSet Name="FK_Stocks_StockTypeId" Association="hlgraniteModel.FK_Stocks_StockTypeId">
             <End Role="StockTypes" EntitySet="StockTypes" />
             <End Role="Stocks" EntitySet="Stocks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tomb_StockId" Association="HLGranite.Model.FK_Tomb_StockId">
+          <AssociationSet Name="FK_Tomb_StockId" Association="hlgraniteModel.FK_Tomb_StockId">
             <End Role="Stocks" EntitySet="Stocks" />
             <End Role="Tombs" EntitySet="Tombs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_UserTypeId" Association="HLGranite.Model.FK_Users_UserTypeId">
+          <AssociationSet Name="FK_Tombs_WorkItemId" Association="hlgraniteModel.FK_Tombs_WorkItemId">
+            <End Role="WorkItems" EntitySet="WorkItems" />
+            <End Role="Tombs" EntitySet="Tombs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserTypeId" Association="hlgraniteModel.FK_Users_UserTypeId">
             <End Role="UserTypes" EntitySet="UserTypes" />
             <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Nisans_SoldToId" Association="HLGranite.Model.FK_Nisans_SoldToId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Nisan" EntitySet="Nisans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Slabs_SoldToId" Association="HLGranite.Model.FK_Slabs_SoldToId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Slab" EntitySet="Slabs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tombs_SoldToId" Association="HLGranite.Model.FK_Tombs_SoldToId">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Tomb" EntitySet="Tombs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Activity">
@@ -381,14 +506,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="StockTypeId" Type="Int16" Nullable="false" />
+          <Property Name="WorkItemId" Type="Int32" Nullable="false" />
           <Property Name="StatusId" Type="Int16" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Status" Relationship="HLGranite.Model.FK_Activities_StatusId" FromRole="Activities" ToRole="Statuses" />
-          <NavigationProperty Name="StockType" Relationship="HLGranite.Model.FK_Activities_StockTypeId" FromRole="Activities" ToRole="StockTypes" />
-          <NavigationProperty Name="User" Relationship="HLGranite.Model.FK_Activities_UserId" FromRole="Activities" ToRole="Users" />
+          <NavigationProperty Name="Status" Relationship="hlgraniteModel.FK_Activities_StatusId" FromRole="Activities" ToRole="Statuses" />
+          <NavigationProperty Name="User" Relationship="hlgraniteModel.FK_Activities_UserId" FromRole="Activities" ToRole="Users" />
+          <NavigationProperty Name="WorkItem" Relationship="hlgraniteModel.FK_Activities_WorkItemId" FromRole="Activities" ToRole="WorkItems" />
         </EntityType>
         <EntityType Name="Nisan">
           <Key>
@@ -396,15 +520,31 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SoldToId" Type="Int32" Nullable="false" />
           <Property Name="Rumi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Jawi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Born" Type="DateTime" Precision="3" />
           <Property Name="Death" Type="DateTime" Precision="3" />
           <Property Name="Deathm" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Stock" Relationship="HLGranite.Model.FK_Nisans_StockId" FromRole="Nisans" ToRole="Stocks" />
-          <NavigationProperty Name="SoldTo" Relationship="HLGranite.Model.FK_Nisans_SoldToId" FromRole="Nisan" ToRole="User" />
+          <Property Name="WorItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="hlgraniteModel.FK_Nisans_SoldToId" FromRole="Nisans" ToRole="Users" />
+          <NavigationProperty Name="Stock" Relationship="hlgraniteModel.FK_Nisans_StockId" FromRole="Nisans" ToRole="Stocks" />
+          <NavigationProperty Name="WorkItem" Relationship="hlgraniteModel.FK_Nisans_WorkItemId" FromRole="Nisans" ToRole="WorkItems" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reference" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="SoldToId" Type="Int32" Nullable="false" />
+          <Property Name="Due" Type="DateTime" Precision="3" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="hlgraniteModel.FK_Projects_SoldToId" FromRole="Projects" ToRole="Users" />
+          <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_ParentId" FromRole="Projects" ToRole="Slabs" />
+          <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tombs_ParentId" FromRole="Projects" ToRole="Tombs" />
         </EntityType>
         <EntityType Name="Slab">
           <Key>
@@ -412,24 +552,28 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SoldToId" Type="Int32" Nullable="false" />
-          <Property Name="Reference" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Length" Type="Int32" />
           <Property Name="Width" Type="Int32" />
           <Property Name="Height" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Stock" Relationship="HLGranite.Model.FK_Slabs_StockId" FromRole="Slabs" ToRole="Stocks" />
-          <NavigationProperty Name="SoldTo" Relationship="HLGranite.Model.FK_Slabs_SoldToId" FromRole="Slab" ToRole="User" />
+          <Property Name="WorkItemId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="hlgraniteModel.FK_Slabs_ParentId" FromRole="Slabs" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="hlgraniteModel.FK_Slabs_SoldToId" FromRole="Slabs" ToRole="Users" />
+          <NavigationProperty Name="Stock" Relationship="hlgraniteModel.FK_Slabs_StockId" FromRole="Slabs" ToRole="Stocks" />
+          <NavigationProperty Name="WorkItem" Relationship="hlgraniteModel.FK_Slabs_WorkItemId" FromRole="Slabs" ToRole="WorkItems" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="StockTypeId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="HLGranite.Model.FK_Activities_StatusId" FromRole="Statuses" ToRole="Activities" />
-          <NavigationProperty Name="StockType" Relationship="HLGranite.Model.FK_Statuses_StockTypeId" FromRole="Statuses" ToRole="StockTypes" />
+          <NavigationProperty Name="Activities" Relationship="hlgraniteModel.FK_Activities_StatusId" FromRole="Statuses" ToRole="Activities" />
+          <NavigationProperty Name="StockType" Relationship="hlgraniteModel.FK_Statuses_StockTypeId" FromRole="Statuses" ToRole="StockTypes" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -437,16 +581,16 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StockTypeId" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Nisans" Relationship="HLGranite.Model.FK_Nisans_StockId" FromRole="Stocks" ToRole="Nisans" />
-          <NavigationProperty Name="Slabs" Relationship="HLGranite.Model.FK_Slabs_StockId" FromRole="Stocks" ToRole="Slabs" />
-          <NavigationProperty Name="StockType" Relationship="HLGranite.Model.FK_Stocks_StockTypeId" FromRole="Stocks" ToRole="StockTypes" />
-          <NavigationProperty Name="Tombs" Relationship="HLGranite.Model.FK_Tomb_StockId" FromRole="Stocks" ToRole="Tombs" />
+          <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_StockId" FromRole="Stocks" ToRole="Nisans" />
+          <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_StockId" FromRole="Stocks" ToRole="Slabs" />
+          <NavigationProperty Name="StockType" Relationship="hlgraniteModel.FK_Stocks_StockTypeId" FromRole="Stocks" ToRole="StockTypes" />
+          <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tomb_StockId" FromRole="Stocks" ToRole="Tombs" />
         </EntityType>
         <EntityType Name="StockType">
           <Key>
@@ -454,9 +598,8 @@
           </Key>
           <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Activities" Relationship="HLGranite.Model.FK_Activities_StockTypeId" FromRole="StockTypes" ToRole="Activities" />
-          <NavigationProperty Name="Statuses" Relationship="HLGranite.Model.FK_Statuses_StockTypeId" FromRole="StockTypes" ToRole="Statuses" />
-          <NavigationProperty Name="Stocks" Relationship="HLGranite.Model.FK_Stocks_StockTypeId" FromRole="StockTypes" ToRole="Stocks" />
+          <NavigationProperty Name="Statuses" Relationship="hlgraniteModel.FK_Statuses_StockTypeId" FromRole="StockTypes" ToRole="Statuses" />
+          <NavigationProperty Name="Stocks" Relationship="hlgraniteModel.FK_Stocks_StockTypeId" FromRole="StockTypes" ToRole="Stocks" />
         </EntityType>
         <EntityType Name="Tomb">
           <Key>
@@ -464,11 +607,13 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StockId" Type="Int32" Nullable="false" />
-          <Property Name="SoldToId" Type="Int32" Nullable="false" />
-          <Property Name="Reference" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Stock" Relationship="HLGranite.Model.FK_Tomb_StockId" FromRole="Tombs" ToRole="Stocks" />
-          <NavigationProperty Name="SoldTo" Relationship="HLGranite.Model.FK_Tombs_SoldToId" FromRole="Tomb" ToRole="User" />
+          <Property Name="WorkItemId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="hlgraniteModel.FK_Tombs_ParentId" FromRole="Tombs" ToRole="Projects" />
+          <NavigationProperty Name="Stock" Relationship="hlgraniteModel.FK_Tomb_StockId" FromRole="Tombs" ToRole="Stocks" />
+          <NavigationProperty Name="WorkItem" Relationship="hlgraniteModel.FK_Tombs_WorkItemId" FromRole="Tombs" ToRole="WorkItems" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -491,11 +636,11 @@
           <Property Name="Country" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="HLGranite.Model.FK_Activities_UserId" FromRole="Users" ToRole="Activities" />
-          <NavigationProperty Name="UserType" Relationship="HLGranite.Model.FK_Users_UserTypeId" FromRole="Users" ToRole="UserTypes" />
-          <NavigationProperty Name="Nisans" Relationship="HLGranite.Model.FK_Nisans_SoldToId" FromRole="User" ToRole="Nisan" />
-          <NavigationProperty Name="Slabs" Relationship="HLGranite.Model.FK_Slabs_SoldToId" FromRole="User" ToRole="Slab" />
-          <NavigationProperty Name="Tombs" Relationship="HLGranite.Model.FK_Tombs_SoldToId" FromRole="User" ToRole="Tomb" />
+          <NavigationProperty Name="Activities" Relationship="hlgraniteModel.FK_Activities_UserId" FromRole="Users" ToRole="Activities" />
+          <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_SoldToId" FromRole="Users" ToRole="Nisans" />
+          <NavigationProperty Name="Projects" Relationship="hlgraniteModel.FK_Projects_SoldToId" FromRole="Users" ToRole="Projects" />
+          <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_SoldToId" FromRole="Users" ToRole="Slabs" />
+          <NavigationProperty Name="UserType" Relationship="hlgraniteModel.FK_Users_UserTypeId" FromRole="Users" ToRole="UserTypes" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -503,11 +648,21 @@
           </Key>
           <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Users" Relationship="HLGranite.Model.FK_Users_UserTypeId" FromRole="UserTypes" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="hlgraniteModel.FK_Users_UserTypeId" FromRole="UserTypes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="WorkItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Activities" Relationship="hlgraniteModel.FK_Activities_WorkItemId" FromRole="WorkItems" ToRole="Activities" />
+          <NavigationProperty Name="Nisans" Relationship="hlgraniteModel.FK_Nisans_WorkItemId" FromRole="WorkItems" ToRole="Nisans" />
+          <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_WorkItemId" FromRole="WorkItems" ToRole="Slabs" />
+          <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tombs_WorkItemId" FromRole="WorkItems" ToRole="Tombs" />
         </EntityType>
         <Association Name="FK_Activities_StatusId">
-          <End Role="Statuses" Type="HLGranite.Model.Status" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Activity" Multiplicity="*" />
+          <End Role="Statuses" Type="hlgraniteModel.Status" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Statuses">
               <PropertyRef Name="Id" />
@@ -517,21 +672,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Activities_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.StockType" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Activity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StockTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Activities">
-              <PropertyRef Name="StockTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Activities_UserId">
-          <End Role="Users" Type="HLGranite.Model.User" Multiplicity="1" />
-          <End Role="Activities" Type="HLGranite.Model.Activity" Multiplicity="*" />
+          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -541,9 +684,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Activities_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.WorkItem" Multiplicity="1" />
+          <End Role="Activities" Type="hlgraniteModel.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="WorkItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nisans_SoldToId">
+          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Nisan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nisans">
+              <PropertyRef Name="SoldToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Nisans_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Stock" Multiplicity="1" />
-          <End Role="Nisans" Type="HLGranite.Model.Nisan" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Stock" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Nisan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -553,9 +720,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Nisans_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.WorkItem" Multiplicity="1" />
+          <End Role="Nisans" Type="hlgraniteModel.Nisan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nisans">
+              <PropertyRef Name="WorItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_SoldToId">
+          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="1" />
+          <End Role="Projects" Type="hlgraniteModel.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="SoldToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Slabs_ParentId">
+          <End Role="Projects" Type="hlgraniteModel.Project" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Slab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slabs">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tombs_ParentId">
+          <End Role="Projects" Type="hlgraniteModel.Project" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Tomb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tombs">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Slabs_SoldToId">
+          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Slab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slabs">
+              <PropertyRef Name="SoldToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Slabs_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Stock" Multiplicity="1" />
-          <End Role="Slabs" Type="HLGranite.Model.Slab" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Stock" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Slab" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -565,9 +792,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Slabs_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.WorkItem" Multiplicity="1" />
+          <End Role="Slabs" Type="hlgraniteModel.Slab" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Slabs">
+              <PropertyRef Name="WorkItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Statuses_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.StockType" Multiplicity="1" />
-          <End Role="Statuses" Type="HLGranite.Model.Status" Multiplicity="*" />
+          <End Role="StockTypes" Type="hlgraniteModel.StockType" Multiplicity="1" />
+          <End Role="Statuses" Type="hlgraniteModel.Status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StockTypes">
               <PropertyRef Name="Id" />
@@ -578,8 +817,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Stocks_StockTypeId">
-          <End Role="StockTypes" Type="HLGranite.Model.StockType" Multiplicity="1" />
-          <End Role="Stocks" Type="HLGranite.Model.Stock" Multiplicity="*" />
+          <End Role="StockTypes" Type="hlgraniteModel.StockType" Multiplicity="1" />
+          <End Role="Stocks" Type="hlgraniteModel.Stock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StockTypes">
               <PropertyRef Name="Id" />
@@ -590,8 +829,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tomb_StockId">
-          <End Role="Stocks" Type="HLGranite.Model.Stock" Multiplicity="1" />
-          <End Role="Tombs" Type="HLGranite.Model.Tomb" Multiplicity="*" />
+          <End Role="Stocks" Type="hlgraniteModel.Stock" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Tomb" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stocks">
               <PropertyRef Name="Id" />
@@ -601,9 +840,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tombs_WorkItemId">
+          <End Role="WorkItems" Type="hlgraniteModel.WorkItem" Multiplicity="1" />
+          <End Role="Tombs" Type="hlgraniteModel.Tomb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tombs">
+              <PropertyRef Name="WorkItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_UserTypeId">
-          <End Role="UserTypes" Type="HLGranite.Model.UserType" Multiplicity="1" />
-          <End Role="Users" Type="HLGranite.Model.User" Multiplicity="*" />
+          <End Role="UserTypes" Type="hlgraniteModel.UserType" Multiplicity="1" />
+          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserTypes">
               <PropertyRef Name="Id" />
@@ -613,54 +864,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Nisans_SoldToId">
-          <End Type="HLGranite.Model.User" Role="User" Multiplicity="1" />
-          <End Type="HLGranite.Model.Nisan" Role="Nisan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Nisan">
-              <PropertyRef Name="SoldToId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Slabs_SoldToId">
-          <End Type="HLGranite.Model.User" Role="User" Multiplicity="1" />
-          <End Type="HLGranite.Model.Slab" Role="Slab" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Slab">
-              <PropertyRef Name="SoldToId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tombs_SoldToId">
-          <End Type="HLGranite.Model.User" Role="User" Multiplicity="1" />
-          <End Type="HLGranite.Model.Tomb" Role="Tomb" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tomb">
-              <PropertyRef Name="SoldToId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HLGraniteModelStoreContainer" CdmEntityContainer="hlgraniteEntities">
+        <EntityContainerMapping StorageEntityContainer="hlgraniteModelStoreContainer" CdmEntityContainer="hlgraniteEntities">
           <EntitySetMapping Name="Activities">
-            <EntityTypeMapping TypeName="HLGranite.Model.Activity">
+            <EntityTypeMapping TypeName="hlgraniteModel.Activity">
               <MappingFragment StoreEntitySet="Activities">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="StockTypeId" ColumnName="StockTypeId" />
+                <ScalarProperty Name="WorkItemId" ColumnName="WorkItemId" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -668,50 +882,65 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Nisans">
-            <EntityTypeMapping TypeName="HLGranite.Model.Nisan">
+            <EntityTypeMapping TypeName="hlgraniteModel.Nisan">
               <MappingFragment StoreEntitySet="Nisans">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="SoldToId" ColumnName="SoldToId" />
                 <ScalarProperty Name="Rumi" ColumnName="Rumi" />
                 <ScalarProperty Name="Jawi" ColumnName="Jawi" />
-                <ScalarProperty Name="Born" ColumnName="Born" />
                 <ScalarProperty Name="Death" ColumnName="Death" />
                 <ScalarProperty Name="Deathm" ColumnName="Deathm" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WorItemId" ColumnName="WorItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="hlgraniteModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="SoldToId" ColumnName="SoldToId" />
+                <ScalarProperty Name="Due" ColumnName="Due" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Slabs">
-            <EntityTypeMapping TypeName="HLGranite.Model.Slab">
+            <EntityTypeMapping TypeName="hlgraniteModel.Slab">
               <MappingFragment StoreEntitySet="Slabs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="SoldToId" ColumnName="SoldToId" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WorkItemId" ColumnName="WorkItemId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Statuses">
-            <EntityTypeMapping TypeName="HLGranite.Model.Status">
+            <EntityTypeMapping TypeName="hlgraniteModel.Status">
               <MappingFragment StoreEntitySet="Statuses">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Status1" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StockTypeId" ColumnName="StockTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stocks">
-            <EntityTypeMapping TypeName="HLGranite.Model.Stock">
+            <EntityTypeMapping TypeName="hlgraniteModel.Stock">
               <MappingFragment StoreEntitySet="Stocks">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockTypeId" ColumnName="StockTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -720,7 +949,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StockTypes">
-            <EntityTypeMapping TypeName="HLGranite.Model.StockType">
+            <EntityTypeMapping TypeName="hlgraniteModel.StockType">
               <MappingFragment StoreEntitySet="StockTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -728,18 +957,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tombs">
-            <EntityTypeMapping TypeName="HLGranite.Model.Tomb">
+            <EntityTypeMapping TypeName="hlgraniteModel.Tomb">
               <MappingFragment StoreEntitySet="Tombs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StockId" ColumnName="StockId" />
-                <ScalarProperty Name="SoldToId" ColumnName="SoldToId" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WorkItemId" ColumnName="WorkItemId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="HLGranite.Model.User">
+            <EntityTypeMapping TypeName="hlgraniteModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
@@ -762,10 +992,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTypes">
-            <EntityTypeMapping TypeName="HLGranite.Model.UserType">
+            <EntityTypeMapping TypeName="hlgraniteModel.UserType">
               <MappingFragment StoreEntitySet="UserTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkItems">
+            <EntityTypeMapping TypeName="hlgraniteModel.WorkItem">
+              <MappingFragment StoreEntitySet="WorkItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,15 +16,17 @@ namespace HLGranite.Mvc.Models
     {
         public int Id { get; set; }
         public int StockId { get; set; }
+        public Nullable<decimal> Price { get; set; }
         public int SoldToId { get; set; }
         public string Rumi { get; set; }
         public string Jawi { get; set; }
-        public Nullable<System.DateTime> Born { get; set; }
         public Nullable<System.DateTime> Death { get; set; }
         public Nullable<System.DateTime> Deathm { get; set; }
         public string Remarks { get; set; }
+        public int WorItemId { get; set; }
     
+        public virtual User User { get; set; }
         public virtual Stock Stock { get; set; }
-        public virtual User SoldTo { get; set; }
+        public virtual WorkItem WorkItem { get; set; }
     }
 }

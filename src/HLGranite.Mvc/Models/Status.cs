@@ -20,7 +20,7 @@ namespace HLGranite.Mvc.Models
         }
     
         public short Id { get; set; }
-        public string Status1 { get; set; }
+        public string Name { get; set; }
         public short StockTypeId { get; set; }
     
         public virtual ICollection<Activity> Activities { get; set; }

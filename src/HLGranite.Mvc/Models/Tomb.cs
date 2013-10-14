@@ -16,11 +16,13 @@ namespace HLGranite.Mvc.Models
     {
         public int Id { get; set; }
         public int StockId { get; set; }
-        public int SoldToId { get; set; }
-        public string Reference { get; set; }
+        public Nullable<decimal> Price { get; set; }
         public string Remarks { get; set; }
+        public int WorkItemId { get; set; }
+        public int ParentId { get; set; }
     
+        public virtual Project Project { get; set; }
         public virtual Stock Stock { get; set; }
-        public virtual User SoldTo { get; set; }
+        public virtual WorkItem WorkItem { get; set; }
     }
 }

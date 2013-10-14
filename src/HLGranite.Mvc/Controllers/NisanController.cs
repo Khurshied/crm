@@ -18,7 +18,7 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.User);
             return View(nisans.ToList());
         }
 
@@ -54,6 +54,11 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                WorkItem workItem = db.WorkItems.Create();
+                db.WorkItems.Add(workItem);
+                //db.SaveChanges();
+
+                nisan.WorItemId = workItem.Id;
                 db.Nisans.Add(nisan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
