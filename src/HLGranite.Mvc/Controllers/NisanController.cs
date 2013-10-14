@@ -42,9 +42,8 @@ namespace HLGranite.Mvc.Controllers
         public ActionResult Create()
         {
             Nisan nisan = db.Nisans.Create();
-            nisan.StatusId = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).First().Id;
-
-            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
+            //nisan.StatusId = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).First().Id;
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name");
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name");
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.STAFF_TYPE_ID), "Id", "DisplayName");
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.AGENT_TYPE_ID), "Id", "DisplayName");
@@ -105,7 +104,6 @@ namespace HLGranite.Mvc.Controllers
             if (ModelState.IsValid)
             {
                 nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();
-                //db.Entry(nisan.WorkItem).State = EntityState.Modified;
                 db.Entry(nisan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
