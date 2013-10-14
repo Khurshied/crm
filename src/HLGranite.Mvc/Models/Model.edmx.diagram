@@ -4,33 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="868a41ffbcb44e6cb2ea0ed2855e1bde" Name="Diagram1">
-        <EntityTypeShape EntityType="hlgraniteModel.Activity" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.Nisan" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.Project" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.Slab" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+      <Diagram DiagramId="df50c65b7da045c09a95d5e5cdfb9ba6" Name="Diagram1">
+        <EntityTypeShape EntityType="hlgraniteModel.Activity" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.Nisan" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.Project" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.Slab" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="hlgraniteModel.Status" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.Stock" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.StockType" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.Tomb" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.UserType" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="hlgraniteModel.WorkItem" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.Stock" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.StockType" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.Tomb" Width="1.5" PointX="10.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.User" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.UserType" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hlgraniteModel.WorkItem" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
         <AssociationConnector Association="hlgraniteModel.FK_Activities_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Activities_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Activities_WorkItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Nisans_AssigneeId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Nisans_SoldToId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Nisans_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Nisans_StockId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Nisans_WorkItemId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Projects_SoldToId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Slabs_ParentId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Tombs_ParentId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Slabs_AssigneeId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Slabs_SoldToId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Slabs_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Slabs_StockId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Slabs_WorkItemId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Statuses_StockTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Tombs_StatusId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Stocks_StockTypeId" ManuallyRouted="false" />
-        <AssociationConnector Association="hlgraniteModel.FK_Tomb_StockId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Tombs_StockId" ManuallyRouted="false" />
+        <AssociationConnector Association="hlgraniteModel.FK_Tombs_AssigneeId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Tombs_WorkItemId" ManuallyRouted="false" />
         <AssociationConnector Association="hlgraniteModel.FK_Users_UserTypeId" ManuallyRouted="false" />
       </Diagram>

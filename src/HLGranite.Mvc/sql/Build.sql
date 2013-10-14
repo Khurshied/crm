@@ -4,10 +4,10 @@ CREATE database [hlgranite]
 GO
 
 DROP TABLE Activities;
-DROP TABLE Statuses;
 DROP TABLE Slabs;
 DROP TABLE Tombs;
 DROP TABLE Nisans;
+DROP TABLE Statuses;
 DROP TABLE Projects;
 DROP TABLE WorkItems;
 DROP TABLE Stocks;
@@ -90,6 +90,18 @@ CONSTRAINT [PK_WorkItems] PRIMARY KEY ([Id])
 )
 GO
 
+-- Create Statuses table
+-- New, Open, Cut, Delivered, Paid
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Statuses]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
+CREATE TABLE [Statuses] (
+        [Id]                                    smallint IDENTITY NOT NULL,
+        [Name]									nvarchar(50) NOT NULL,
+		[StockTypeId]							smallint NOT NULL,
+CONSTRAINT [PK_Statuses] PRIMARY KEY ([Id]),
+CONSTRAINT [FK_Statuses_StockTypeId] FOREIGN KEY ([StockTypeId]) REFERENCES [StockTypes]([Id])
+)
+GO
+
 -- Create Project table
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Projects]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 CREATE TABLE [Projects] (
@@ -109,7 +121,9 @@ GO
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Nisans]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 CREATE TABLE [Nisans] (
         [Id]                                    int IDENTITY NOT NULL,
+		[StatusId]								smallint NOT NULL,
 		[StockId]								int NOT NULL,
+		[AssigneeId]							int,
 		[Price]									money,
         [SoldToId]								int NOT NULL,
 		[Rumi]									nvarchar(100),
@@ -119,9 +133,11 @@ CREATE TABLE [Nisans] (
 		[Remarks]								ntext,
 		[WorkItemId]							int NOT NULL
 CONSTRAINT [PK_Nisans] PRIMARY KEY ([Id]),
+CONSTRAINT [FK_Nisans_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [Statuses]([Id]),
 CONSTRAINT [FK_Nisans_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Nisans_AssigneeId] FOREIGN KEY ([AssigneeId]) REFERENCES [Users]([Id]),
 CONSTRAINT [FK_Nisans_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id]),
-CONSTRAINT [FK_Nisans_WorkItemId] FOREIGN KEY ([WorItemId]) REFERENCES [WorkItems]([Id])
+CONSTRAINT [FK_Nisans_WorkItemId] FOREIGN KEY ([WorkItemId]) REFERENCES [WorkItems]([Id])
 )
 GO
 
@@ -129,9 +145,10 @@ GO
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Slabs]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 CREATE TABLE [Slabs] (
         [Id]                                    int IDENTITY NOT NULL,
+		[StatusId]								smallint NOT NULL,
 		[StockId]								int NOT NULL,
+		[AssigneeId]							int,
 		[Price]									money,
-        [SoldToId]								int NOT NULL,
 		[Length]								int,
 		[Width]									int,
 		[Height]								int,
@@ -139,8 +156,9 @@ CREATE TABLE [Slabs] (
 		[WorkItemId]							int NOT NULL,
 		[ParentId]								int NOT NULL
 CONSTRAINT [PK_Slabs] PRIMARY KEY ([Id]),
+CONSTRAINT [FK_Slabs_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [Statuses]([Id]),
 CONSTRAINT [FK_Slabs_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
-CONSTRAINT [FK_Slabs_SoldToId] FOREIGN KEY ([SoldToId]) REFERENCES [Users]([Id]),
+CONSTRAINT [FK_Slabs_AssigneeId] FOREIGN KEY ([AssigneeId]) REFERENCES [Users]([Id]),
 CONSTRAINT [FK_Slabs_WorkItemId] FOREIGN KEY ([WorkItemId]) REFERENCES [WorkItems]([Id]),
 CONSTRAINT [FK_Slabs_ParentId] FOREIGN KEY ([ParentId]) REFERENCES [Projects]([Id])
 )
@@ -150,27 +168,19 @@ GO
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Fengshuis]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 CREATE TABLE [Tombs] (
         [Id]                                    int IDENTITY NOT NULL,
+		[StatusId]								smallint NOT NULL,
 		[StockId]								int NOT NULL,
+		[AssigneeId]							int,
 		[Price]									money,
 		[Remarks]								ntext,
 		[WorkItemId]							int NOT NULL,
 		[ParentId]								int NOT NULL,
 CONSTRAINT [PK_Tombs] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Tomb_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Tombs_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [Statuses]([Id]),
+CONSTRAINT [FK_Tombs_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks]([Id]),
+CONSTRAINT [FK_Tombs_AssigneeId] FOREIGN KEY ([AssigneeId]) REFERENCES [Users]([Id]),
 CONSTRAINT [FK_Tombs_WorkItemId] FOREIGN KEY ([WorkItemId]) REFERENCES [WorkItems]([Id]),
 CONSTRAINT [FK_Tombs_ParentId] FOREIGN KEY ([ParentId]) REFERENCES [Projects]([Id])
-)
-GO
-
--- Create Statuses table
--- New, Open, Cut, Delivered, Paid
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Statuses]') AND OBJECTPROPERTY(id, N'IsTable') = 1)
-CREATE TABLE [Statuses] (
-        [Id]                                    smallint IDENTITY NOT NULL,
-        [Name]									nvarchar(50) NOT NULL,
-		[StockTypeId]							smallint NOT NULL,
-CONSTRAINT [PK_Statuses] PRIMARY KEY ([Id]),
-CONSTRAINT [FK_Statuses_StockTypeId] FOREIGN KEY ([StockTypeId]) REFERENCES [StockTypes]([Id])
 )
 GO
 
@@ -200,19 +210,18 @@ INSERT INTO [StockTypes](Type) VALUES ('Renovation');
 INSERT INTO [StockTypes](Type) VALUES ('Tomb');
 INSERT INTO [StockTypes](Type) VALUES ('Nisan');
 
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('New', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('New', 1); --indicate save draft
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Start', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Profiling', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Completed', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Delivered', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Installing', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Close', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Paid', 1);
 
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Submitted', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('New', 3); --indicate save draft
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Submitted', 3); --submitted by customer or confirm created
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Design', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Cut', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Completed', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Delivered', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Close', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Paid', 3);

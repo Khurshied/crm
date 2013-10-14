@@ -196,7 +196,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NisanController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\StockTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -393,7 +395,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\Nisan\Index.cshtml" />
-    <Content Include="Views\Nisan\Details.cshtml" />
     <Content Include="Views\Nisan\Create.cshtml" />
     <Content Include="Views\Nisan\Edit.cshtml" />
     <Content Include="Views\Nisan\Delete.cshtml" />
@@ -404,6 +405,16 @@
     <Content Include="Views\Stock\Delete.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\StockType\Index.cshtml" />
+    <Content Include="Views\StockType\Details.cshtml" />
+    <Content Include="Views\StockType\Create.cshtml" />
+    <Content Include="Views\StockType\Edit.cshtml" />
+    <Content Include="Views\StockType\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
