@@ -15,7 +15,9 @@ namespace HLGranite.Mvc.Models
     public partial class Slab
     {
         public int Id { get; set; }
+        public short StatusId { get; set; }
         public int StockId { get; set; }
+        public Nullable<int> AssigneeId { get; set; }
         public Nullable<decimal> Price { get; set; }
         public int SoldToId { get; set; }
         public Nullable<int> Length { get; set; }
@@ -26,7 +28,8 @@ namespace HLGranite.Mvc.Models
         public int ParentId { get; set; }
     
         public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
+        public virtual User Assignee { get; set; }
+        public virtual Status Status { get; set; }
         public virtual Stock Stock { get; set; }
         public virtual WorkItem WorkItem { get; set; }
     }

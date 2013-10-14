@@ -27,7 +27,7 @@ namespace HLGranite.Mvc.Models
         public Nullable<decimal> Total { get; set; }
         public string Remarks { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual User SoldTo { get; set; }
         public virtual ICollection<Slab> Slabs { get; set; }
         public virtual ICollection<Tomb> Tombs { get; set; }
     }

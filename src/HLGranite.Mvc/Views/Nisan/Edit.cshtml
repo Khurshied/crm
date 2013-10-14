@@ -16,6 +16,22 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.StatusId, "Status")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StatusId", String.Empty)
+            @Html.ValidationMessageFor(model => model.StatusId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssigneeId, "Assignee")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AssigneeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.AssigneeId)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.StockId, "Stock")
         </div>
         <div class="editor-field">

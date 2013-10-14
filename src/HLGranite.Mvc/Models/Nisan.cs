@@ -15,7 +15,9 @@ namespace HLGranite.Mvc.Models
     public partial class Nisan
     {
         public int Id { get; set; }
+        public short StatusId { get; set; }
         public int StockId { get; set; }
+        public Nullable<int> AssigneeId { get; set; }
         public Nullable<decimal> Price { get; set; }
         public int SoldToId { get; set; }
         public string Rumi { get; set; }
@@ -25,7 +27,9 @@ namespace HLGranite.Mvc.Models
         public string Remarks { get; set; }
         public int WorkItemId { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual User Assignee { get; set; }
+        public virtual User SoldTo { get; set; }
+        public virtual Status Status { get; set; }
         public virtual Stock Stock { get; set; }
         public virtual WorkItem WorkItem { get; set; }
     }

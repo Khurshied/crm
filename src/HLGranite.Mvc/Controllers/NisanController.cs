@@ -18,7 +18,7 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.User);
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
             return View(nisans.ToList());
         }
 
@@ -40,9 +40,14 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Create()
         {
+            Nisan nisan = db.Nisans.Create();
+            nisan.StatusId = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).First().Id;
+
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name");
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName");
-            return View();
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.STAFF_TYPE_ID), "Id", "DisplayName");
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.AGENT_TYPE_ID), "Id", "DisplayName");
+            return View(nisan);
         }
 
         //
@@ -58,14 +63,18 @@ namespace HLGranite.Mvc.Controllers
                 db.WorkItems.Add(workItem);
                 //db.SaveChanges();
 
+                short nextStatus = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID && s.Id != nisan.StatusId).First().Id;
+                nisan.StatusId = nextStatus;
                 nisan.WorkItemId = workItem.Id;
                 db.Nisans.Add(nisan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -79,8 +88,10 @@ namespace HLGranite.Mvc.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -99,8 +110,10 @@ namespace HLGranite.Mvc.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.CUSTOMER_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == UserController.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 

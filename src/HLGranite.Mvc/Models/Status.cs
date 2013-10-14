@@ -17,6 +17,9 @@ namespace HLGranite.Mvc.Models
         public Status()
         {
             this.Activities = new HashSet<Activity>();
+            this.Nisans = new HashSet<Nisan>();
+            this.Slabs = new HashSet<Slab>();
+            this.Tombs = new HashSet<Tomb>();
         }
     
         public short Id { get; set; }
@@ -24,6 +27,9 @@ namespace HLGranite.Mvc.Models
         public short StockTypeId { get; set; }
     
         public virtual ICollection<Activity> Activities { get; set; }
+        public virtual ICollection<Nisan> Nisans { get; set; }
+        public virtual ICollection<Slab> Slabs { get; set; }
         public virtual StockType StockType { get; set; }
+        public virtual ICollection<Tomb> Tombs { get; set; }
     }
 }

@@ -15,14 +15,18 @@ namespace HLGranite.Mvc.Models
     public partial class Tomb
     {
         public int Id { get; set; }
+        public short StatusId { get; set; }
         public int StockId { get; set; }
+        public Nullable<int> AssigneeId { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Remarks { get; set; }
         public int WorkItemId { get; set; }
         public int ParentId { get; set; }
     
         public virtual Project Project { get; set; }
+        public virtual Status Status { get; set; }
         public virtual Stock Stock { get; set; }
+        public virtual User Assignee { get; set; }
         public virtual WorkItem WorkItem { get; set; }
     }
 }
