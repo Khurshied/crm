@@ -317,6 +317,18 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\add.png" />
+    <Content Include="Images\cog.png" />
+    <Content Include="Images\cross.png" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\disk.png" />
+    <Content Include="Images\email.png" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\magnifier.png" />
+    <Content Include="Images\tick.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\user_add.png" />
+    <Content Include="Images\zoom.png" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
