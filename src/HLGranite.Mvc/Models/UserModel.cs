@@ -18,5 +18,17 @@ namespace HLGranite.Mvc.Models
         /// For display at login page purpose.
         /// </summary>
         public bool RememberMe { get; set; }
+
+        /// <summary>
+        /// Override toString value.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            if (this != null)
+                return DisplayName;
+            else
+                return string.Empty;
+        }
     }
 }

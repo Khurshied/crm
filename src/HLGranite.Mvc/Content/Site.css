@@ -755,3 +755,13 @@ tr.pager td {
             margin: 0;
         }
 }
+
+
+/** Customization **/
+.delete a
+{
+	color: transparent;
+	background: url(/images/cross.png) no-repeat;
+	cursor: pointer;
+	text-decoration: none;
+}

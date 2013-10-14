@@ -9,72 +9,27 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoldTo)
-        </th>
-        <th>
-            Batu
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rumi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Jawi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Death)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Deathm)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Assignee)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoldTo.DisplayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rumi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Jawi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Death)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deathm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Assignee.DisplayName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@{
+    var grid = new WebGrid(source: Model, rowsPerPage: 30);
 }
 
-</table>
+<div id="grid">
+    @grid.GetHtml(
+        htmlAttributes: new {id = "nisan_table"},
+        tableStyle: "grid",
+        headerStyle: "head",
+        alternatingRowStyle: "alt",
+        columns: grid.Columns(
+            grid.Column("Status.Name","Status"),
+            grid.Column("SoldTo.DisplayName","To"),
+            grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item.Rumi</a></text>),
+            grid.Column("Jawi", "Jawi"),
+            grid.Column("Death", "Death"),
+            grid.Column("Deathm", "Deathm"),
+            grid.Column("Remarks","Remarks"),
+            grid.Column("Assignee","Assignee"),
+            grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)
+        )
+    )
+</div>
