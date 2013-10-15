@@ -58,10 +58,12 @@ namespace HLGranite.Mvc.Models
                     return userType.Id;
             }
         }
-
-        public bool IsAdmin()
+        /// <summary>
+        /// True if is admin otherwise false.
+        /// </summary>
+        public bool IsAdmin
         {
-            return this.UserTypeId.Equals(ADMIN_TYPE_ID);
+            get { return this.UserTypeId.Equals(ADMIN_TYPE_ID); }
         }
 
         /// <summary>

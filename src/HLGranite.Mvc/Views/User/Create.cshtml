@@ -13,13 +13,26 @@
     <fieldset>
         <legend>User</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserTypeId, "UserType")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("UserTypeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.UserTypeId)
-        </div>
+        @{
+            HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            bool isAdmin = false;
+            if (user != null)
+            {
+                isAdmin = user.IsAdmin;
+            }
+            
+            if (isAdmin)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.UserTypeId, "UserType")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("UserTypeId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.UserTypeId)
+                </div>
+            }
+        }
 
         <div class="editor-label">
             @Html.LabelFor(model => model.UserName)

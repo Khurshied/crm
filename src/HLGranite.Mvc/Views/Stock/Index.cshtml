@@ -6,9 +6,23 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    bool isAdmin = false;
+    if (user != null)
+    {
+        isAdmin = user.IsAdmin;
+    }
+            
+    if (isAdmin)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
+
 <table>
     <tr>
         <th>
