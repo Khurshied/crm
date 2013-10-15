@@ -16,10 +16,58 @@ namespace HLGranite.Mvc.Controllers
         //
         // GET: /Nisan/
 
-        public ActionResult Index()
+        public ActionResult Index(string soldTo, string status, string searchString)
         {
-            short closeStatus = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
-            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo).Where(n => n.StatusId < closeStatus);
+            ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName");
+            short submit = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == "Submit").First().Id;
+
+            // TODO: SelectList statusList = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");//, submit);
+            IEnumerable<SelectListItem> statusList = new[]{
+                new SelectListItem{Text="Pending", Value=""},
+                new SelectListItem{Text="Save", Value="Save"},
+                new SelectListItem{Text="Submit", Value="Submit"},
+                new SelectListItem{Text="Design", Value="Design"},
+                new SelectListItem{Text="Cut", Value="Cut"},
+                new SelectListItem{Text="Complete", Value="Complete"},
+                new SelectListItem{Text="Deliver", Value="Deliver"},
+                new SelectListItem{Text="Close", Value="Close"},
+                new SelectListItem{Text="All Status", Value="all"}
+            };
+            ViewBag.Status = statusList;
+
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);//.OrderBy(n => n.StatusId);
+            if (!String.IsNullOrEmpty(soldTo))
+            {
+                int id = Convert.ToInt32(soldTo);
+                nisans = nisans.Where(n => n.SoldToId == id);
+            }
+
+            if (String.IsNullOrEmpty(status))
+            {
+                // pending case
+                short draft = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).First().Id;
+                short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+                nisans = nisans.Where(n => n.StatusId > draft && n.StatusId < close);
+            }
+            else
+            {
+                if (status.ToLower() == "all")
+                {
+                    //short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+                    //nisans = nisans.Where(n => n.StatusId < close);
+                }
+                else
+                {
+                    short id = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == status).First().Id;
+                    //int id = Convert.ToInt32(status);
+                    nisans = nisans.Where(n => n.StatusId == id);
+                }
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+                nisans = nisans.Where(n => n.Rumi.ToLower().Contains(searchString.ToLower()));
+
+            nisans = nisans.OrderBy(n => n.StatusId);
             return View(nisans.ToList());
         }
 

@@ -757,6 +757,7 @@ tr.pager td {
 }
 
 
+/**----------------------------------------------------------*/
 /** Customization **/
 .delete a
 {
@@ -770,5 +771,18 @@ tr.pager td {
 .readonly {border: 0; resize:none;}
 .readonly input[type="text"] {border: 0;}
 
-/** Dim the button after pressed */
+/** TODO: Dim the button after pressed */
 .pressed {background-color: red;}
+
+/* Make submit button become a search icon. */
+input[type="submit"].search,
+.search
+{
+    background: url(/Images/magnifier.png) no-repeat;
+    cursor: pointer;
+    border: solid 0;
+	margin-top: 0;
+    padding: 0;
+	width: 24px;
+	height: 24px;
+}

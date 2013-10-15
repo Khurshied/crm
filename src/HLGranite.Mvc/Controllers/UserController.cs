@@ -18,6 +18,27 @@ namespace HLGranite.Mvc.Controllers
     {
         private hlgraniteEntities db = new hlgraniteEntities();
 
+        /// <summary>
+        /// List out all Malaysia states in dropdownlist.
+        /// </summary>
+        public static IEnumerable<SelectListItem> States = new[]{
+            new SelectListItem{Text="Johor", Value="Johor"},
+            new SelectListItem{Text="Kedah", Value="Kedah"},
+            new SelectListItem{Text="Kelantan", Value="Kelantan"},
+            new SelectListItem{Text="Kuala Lumpur", Value="Kuala Lumpur"},
+            new SelectListItem{Text="Melaka", Value="Melaka"},
+            new SelectListItem{Text="Negeri Sembilan", Value="Negeri Sembilan"},
+            new SelectListItem{Text="Pahang", Value="Pahang"},
+            new SelectListItem{Text="Penang", Value="Penang"},
+            new SelectListItem{Text="Perak", Value="Perak"},
+            new SelectListItem{Text="Perlis", Value="Perlis"},
+            new SelectListItem{Text="Pulau Labuan", Value="Pulau Labuan"},
+            new SelectListItem{Text="Sabah", Value="Sabah"},
+            new SelectListItem{Text="Sarawak", Value="Sarawak"},
+            new SelectListItem{Text="Selangor", Value="Selangor"},
+            new SelectListItem{Text="Terengganu", Value="Terengganu"},
+        };
+
         [HttpGet]
         public ActionResult Login()
         {

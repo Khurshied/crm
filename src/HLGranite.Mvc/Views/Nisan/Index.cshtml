@@ -10,6 +10,14 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm()) {
+    <p>                
+        @Html.DropDownList("SoldTo", "All Customer")
+        @Html.DropDownList("Status")
+        @Html.TextBox("SearchString") <input type="submit" class="search" value="" />
+    </p>
+}
+
 @{
     var grid = new WebGrid(source: Model, rowsPerPage: 30);
 }
@@ -23,6 +31,7 @@
         columns: grid.Columns(
             grid.Column("Status.Name","Status"),
             grid.Column("SoldTo.DisplayName","To"),
+            grid.Column("Stock.Name", "Batu"),
             grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),
             grid.Column("Jawi", "Jawi"),
             grid.Column("Death", "Death"),
