@@ -1,6 +1,8 @@
 ﻿@if (Request.IsAuthenticated) {
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    int id = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).First().Id;
     <text>
-        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        Hello, @Html.ActionLink(User.Identity.Name, "Edit", "User", routeValues: new {Id = id}, htmlAttributes: new { @class = "username", title = "Manage" })!
         @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" })) {
             //@Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
