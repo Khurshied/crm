@@ -403,7 +403,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
@@ -412,7 +411,6 @@
     <Content Include="Views\Nisan\Edit.cshtml" />
     <Content Include="Views\Nisan\Delete.cshtml" />
     <Content Include="Views\Stock\Index.cshtml" />
-    <Content Include="Views\Stock\Details.cshtml" />
     <Content Include="Views\Stock\Create.cshtml" />
     <Content Include="Views\Stock\Edit.cshtml" />
     <Content Include="Views\Stock\Delete.cshtml" />
