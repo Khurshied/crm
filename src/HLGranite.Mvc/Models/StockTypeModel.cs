@@ -7,7 +7,7 @@ namespace HLGranite.Mvc.Models
 {
     public partial class StockType
     {
-        public static int RENOVATION_TYPE_ID
+        public static short RENOVATION_TYPE_ID
         {
             get
             {
@@ -20,7 +20,7 @@ namespace HLGranite.Mvc.Models
             }
         }
 
-        public static int TOMB_TYPE_ID
+        public static short TOMB_TYPE_ID
         {
             get
             {
@@ -33,7 +33,7 @@ namespace HLGranite.Mvc.Models
             }
         }
 
-        public static int NISAN_TYPE_ID
+        public static short NISAN_TYPE_ID
         {
             get
             {

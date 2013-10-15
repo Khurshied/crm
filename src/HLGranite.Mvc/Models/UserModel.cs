@@ -7,7 +7,7 @@ namespace HLGranite.Mvc.Models
 {
     public partial class User
     {
-        public static int ADMIN_TYPE_ID
+        public static short ADMIN_TYPE_ID
         {
             get
             {
@@ -20,7 +20,7 @@ namespace HLGranite.Mvc.Models
             }
         }
 
-        public static int STAFF_TYPE_ID
+        public static short STAFF_TYPE_ID
         {
             get
             {
@@ -33,7 +33,7 @@ namespace HLGranite.Mvc.Models
             }
         }
 
-        public static int AGENT_TYPE_ID
+        public static short AGENT_TYPE_ID
         {
             get
             {
@@ -46,7 +46,7 @@ namespace HLGranite.Mvc.Models
             }
         }
 
-        public static int CUSTOMER_TYPE_ID
+        public static short CUSTOMER_TYPE_ID
         {
             get
             {
