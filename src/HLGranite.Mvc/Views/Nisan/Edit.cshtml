@@ -52,7 +52,7 @@
             @Html.LabelFor(model => model.Rumi)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Rumi)
+            @Html.TextBoxFor(model => model.Rumi, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Rumi)
         </div>
 
@@ -60,7 +60,7 @@
             @Html.LabelFor(model => model.Jawi)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Jawi)
+            @Html.TextBoxFor(model => model.Jawi, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Jawi)
         </div>
 
@@ -68,7 +68,7 @@
             @Html.LabelFor(model => model.Death)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Death)
+            @Html.TextBoxFor(model => model.Death, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Death)
         </div>
 
@@ -76,7 +76,7 @@
             @Html.LabelFor(model => model.Deathm)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Deathm)
+            @Html.TextBoxFor(model => model.Deathm, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Deathm)
         </div>
 
@@ -84,7 +84,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4" })
+            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 

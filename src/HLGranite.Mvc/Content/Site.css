@@ -770,4 +770,5 @@ tr.pager td {
 .readonly {border: 0; resize:none;}
 .readonly input[type="text"] {border: 0;}
 
-input[type="button"]:active { background: #787878; }
+/** Dim the button after pressed */
+.pressed {background-color: red;}

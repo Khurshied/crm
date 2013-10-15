@@ -6,6 +6,21 @@
 
 <h2>Edit</h2>
 
+@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+<script>
+    $(function () {
+        $("#edit").click(function () {
+            $(this).css("background", "#ccc");
+            $("#body input").each(function () {
+                $(this).removeAttr("readonly");
+            });
+            $("#body textarea").each(function () {
+                $(this).removeAttr("readonly");
+            });
+        });
+    });
+</script>
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -27,7 +42,7 @@
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -35,7 +50,7 @@
             @Html.LabelFor(model => model.Code)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Code)
+            @Html.TextBoxFor(model => model.Code, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Code)
         </div>
 
@@ -43,7 +58,7 @@
             @Html.LabelFor(model => model.Image)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Image)
+            @Html.TextBoxFor(model => model.Image, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Image)
         </div>
 
@@ -51,7 +66,7 @@
             @Html.LabelFor(model => model.Price)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
+            @Html.TextBoxFor(model => model.Price, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Price)
         </div>
 
@@ -59,7 +74,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Remarks)
+            @Html.TextBoxFor(model => model.Remarks, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 
@@ -67,11 +82,12 @@
             @Html.LabelFor(model => model.Active)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Active)
+            @Html.CheckBoxFor(model => model.Active, new { @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Active)
         </div>
 
         <p>
+            <input id="edit" type="button" value="Edit" />
             <input type="submit" value="Save" />
         </p>
     </fieldset>

@@ -8,7 +8,12 @@
 <script>
     $(function () {
         $("#edit").click(function () {
+            //$(this).addClass("pressed");
+            $(this).css("background", "#ccc");
             $("#body input").each(function () {
+                $(this).removeAttr("readonly");
+            });
+            $("#body textarea").each(function () {
                 $(this).removeAttr("readonly");
             });
         });

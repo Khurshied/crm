@@ -9,20 +9,33 @@
             }
         });
     }
+
+    $(function () {
+        $("#edit").click(function () {
+            $(this).css("background", "#ccc");
+            $("#body input").each(function () {
+                $(this).removeAttr("readonly");
+            });
+            $("#body textarea").each(function () {
+                $(this).removeAttr("readonly");
+            });
+        });
+    });
 </script>
 
 <p>
     @{
-        var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Controllers.StockController.NISAN_TYPE_ID);
+        <input id="edit" type="button" value="Edit" />
+        var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
         int i = 0;
-        foreach(var status in statuses)
+        foreach (var status in statuses)
         {
-            if(Model.StatusId == 0 && i == 2)
+            if (Model.StatusId == 0 && i == 2)
             {
                 break;
             }
-            
-            if(status.Id > Model.StatusId)
+
+            if (status.Id > Model.StatusId)
             {
                 <input id="@status.Name" type="submit" value="@status.Name" onclick="setStatus('@status.Name');" />
             }
