@@ -241,6 +241,7 @@
     <Compile Include="Models\StockType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StockTypeModel.cs" />
     <Compile Include="Models\Tomb.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
