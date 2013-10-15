@@ -765,3 +765,9 @@ tr.pager td {
 	cursor: pointer;
 	text-decoration: none;
 }
+
+/** HACK: Make textarea or textbox look like label */
+.readonly {border: 0; resize:none;}
+.readonly input[type="text"] {border: 0;}
+
+input[type="button"]:active { background: #787878; }
