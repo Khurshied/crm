@@ -19,7 +19,6 @@ namespace HLGranite.Mvc.Models
         public int StockId { get; set; }
         public Nullable<int> AssigneeId { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public int SoldToId { get; set; }
         public Nullable<int> Length { get; set; }
         public Nullable<int> Width { get; set; }
         public Nullable<int> Height { get; set; }

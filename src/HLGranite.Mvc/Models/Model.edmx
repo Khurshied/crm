@@ -61,10 +61,6 @@
             <End Role="Projects" EntitySet="Projects" />
             <End Role="Slabs" EntitySet="Slabs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Slabs_SoldToId" Association="hlgraniteModel.Store.FK_Slabs_SoldToId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Slabs" EntitySet="Slabs" />
-          </AssociationSet>
           <AssociationSet Name="FK_Slabs_StatusId" Association="hlgraniteModel.Store.FK_Slabs_StatusId">
             <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Slabs" EntitySet="Slabs" />
@@ -157,7 +153,6 @@
           <Property Name="StockId" Type="int" Nullable="false" />
           <Property Name="AssigneeId" Type="int" />
           <Property Name="Price" Type="money" />
-          <Property Name="SoldToId" Type="int" Nullable="false" />
           <Property Name="Length" Type="int" />
           <Property Name="Width" Type="int" />
           <Property Name="Height" Type="int" />
@@ -213,7 +208,7 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeId" Type="smallint" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Password" Type="char" MaxLength="128" />
+          <Property Name="Password" Type="char" Nullable="false" MaxLength="128" />
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
@@ -370,18 +365,6 @@
             </Principal>
             <Dependent Role="Slabs">
               <PropertyRef Name="ParentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Slabs_SoldToId">
-          <End Role="Users" Type="hlgraniteModel.Store.Users" Multiplicity="1" />
-          <End Role="Slabs" Type="hlgraniteModel.Store.Slabs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Slabs">
-              <PropertyRef Name="SoldToId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -582,10 +565,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Slabs" EntitySet="Slabs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Slabs_SoldToId" Association="hlgraniteModel.FK_Slabs_SoldToId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Slabs" EntitySet="Slabs" />
-          </AssociationSet>
           <AssociationSet Name="FK_Slabs_StatusId" Association="hlgraniteModel.FK_Slabs_StatusId">
             <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Slabs" EntitySet="Slabs" />
@@ -685,7 +664,6 @@
           <Property Name="StockId" Type="Int32" Nullable="false" />
           <Property Name="AssigneeId" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SoldToId" Type="Int32" Nullable="false" />
           <Property Name="Length" Type="Int32" />
           <Property Name="Width" Type="Int32" />
           <Property Name="Height" Type="Int32" />
@@ -762,7 +740,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeId" Type="Int16" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Password" Type="String" MaxLength="128" Unicode="false" FixedLength="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -781,7 +759,6 @@
           <NavigationProperty Name="Nisans1" Relationship="hlgraniteModel.FK_Nisans_SoldToId" FromRole="Users" ToRole="Nisans" />
           <NavigationProperty Name="Projects" Relationship="hlgraniteModel.FK_Projects_SoldToId" FromRole="Users" ToRole="Projects" />
           <NavigationProperty Name="Slabs" Relationship="hlgraniteModel.FK_Slabs_AssigneeId" FromRole="Users" ToRole="Slabs" />
-          <NavigationProperty Name="Slabs1" Relationship="hlgraniteModel.FK_Slabs_SoldToId" FromRole="Users" ToRole="Slabs" />
           <NavigationProperty Name="Tombs" Relationship="hlgraniteModel.FK_Tombs_AssigneeId" FromRole="Users" ToRole="Tombs" />
           <NavigationProperty Name="UserType" Relationship="hlgraniteModel.FK_Users_UserTypeId" FromRole="Users" ToRole="UserTypes" />
         </EntityType>
@@ -944,18 +921,6 @@
             </Principal>
             <Dependent Role="Slabs">
               <PropertyRef Name="AssigneeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Slabs_SoldToId">
-          <End Role="Users" Type="hlgraniteModel.User" Multiplicity="1" />
-          <End Role="Slabs" Type="hlgraniteModel.Slab" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Slabs">
-              <PropertyRef Name="SoldToId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1134,7 +1099,6 @@
                 <ScalarProperty Name="StockId" ColumnName="StockId" />
                 <ScalarProperty Name="AssigneeId" ColumnName="AssigneeId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SoldToId" ColumnName="SoldToId" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Height" ColumnName="Height" />

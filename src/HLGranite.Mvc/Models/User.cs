@@ -22,7 +22,6 @@ namespace HLGranite.Mvc.Models
             this.Nisans1 = new HashSet<Nisan>();
             this.Projects = new HashSet<Project>();
             this.Slabs = new HashSet<Slab>();
-            this.Slabs1 = new HashSet<Slab>();
             this.Tombs = new HashSet<Tomb>();
         }
     
@@ -48,7 +47,6 @@ namespace HLGranite.Mvc.Models
         public virtual ICollection<Nisan> Nisans1 { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<Slab> Slabs { get; set; }
-        public virtual ICollection<Slab> Slabs1 { get; set; }
         public virtual ICollection<Tomb> Tombs { get; set; }
         public virtual UserType UserType { get; set; }
     }
