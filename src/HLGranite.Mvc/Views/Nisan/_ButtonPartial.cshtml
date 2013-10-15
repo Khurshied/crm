@@ -1,8 +1,9 @@
 ﻿@model HLGranite.Mvc.Models.Nisan
 <script>
     function setStatus(status) {
+        //$(this).css("background", "#ccc");
         $("#StatusId option").each(function () {
-            console.log($(this).html());
+            //console.log($(this).html());
             if ($(this).html() == status) {
                 $(this).attr("selected", true);
                 return;
@@ -33,6 +34,11 @@
             if (Model.StatusId == 0 && i == 2)
             {
                 break;
+            }
+            
+            if (status.Id == Model.StatusId)
+            {
+                <input id="@status.Name" type="submit" value="@status.Name" style="background: #ccc");" />
             }
 
             if (status.Id > Model.StatusId)
