@@ -63,7 +63,7 @@ namespace HLGranite.Mvc.Models
         /// </summary>
         public bool IsAdmin
         {
-            get { return this.UserTypeId.Equals(ADMIN_TYPE_ID); }
+            get { return this.UserTypeId == ADMIN_TYPE_ID; }
         }
 
         /// <summary>
