@@ -57,7 +57,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Remarks)
+            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4"})
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 

@@ -9,6 +9,8 @@ using System.Web.Helpers;
 using System.Web.Security;
 using HLGranite.Mvc.Models;
 using System.Security;
+using System.Data.Entity.Validation;
+using System.Text;
 
 namespace HLGranite.Mvc.Controllers
 {
@@ -111,7 +113,10 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Password = Crypto.HashPassword(user.Password);
+                if (user.UserTypeId == 0)
+                    user.UserTypeId = HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID;
+                if(!String.IsNullOrEmpty(user.Password))
+                    user.Password = Crypto.HashPassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,7 +132,7 @@ namespace HLGranite.Mvc.Controllers
         public ActionResult Register()
         {
             User user = db.Users.Create();
-            user.UserTypeId = db.UserTypes.Where(u => u.Type == "Customer").First().Id;
+            user.UserTypeId = HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID;
             ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Type");
             return View(user);
         }
@@ -141,7 +146,10 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: user.Password = SecurityManager.HashData(user.Password);
+                if (user.UserTypeId == 0)
+                    user.UserTypeId = HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID;
+                if (!String.IsNullOrEmpty(user.Password))
+                    user.Password = Crypto.HashPassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
