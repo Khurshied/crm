@@ -107,7 +107,7 @@ namespace HLGranite.Mvc.Controllers
                 db.Entry(nisan).State = EntityState.Modified;
                 db.SaveChanges();
                 //return RedirectToAction("Edit", "Nisan",  new { Id = nisan.Id});
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
