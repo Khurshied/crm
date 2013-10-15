@@ -23,7 +23,7 @@
         columns: grid.Columns(
             grid.Column("Status.Name","Status"),
             grid.Column("SoldTo.DisplayName","To"),
-            grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item.Rumi</a></text>),
+            grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),
             grid.Column("Jawi", "Jawi"),
             grid.Column("Death", "Death"),
             grid.Column("Deathm", "Muslim"),
