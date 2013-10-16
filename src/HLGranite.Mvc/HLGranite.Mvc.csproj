@@ -434,6 +434,7 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
+    <Content Include="Views\Activity\WorkItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
