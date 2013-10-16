@@ -109,11 +109,12 @@ namespace HLGranite.Mvc.Controllers
             {
                 WorkItem workItem = db.WorkItems.Create();
                 db.WorkItems.Add(workItem);
-
-                //short nextStatus = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID && s.Id != nisan.StatusId).First().Id;
-                //nisan.StatusId = nextStatus;
                 nisan.WorkItemId = workItem.Id;
+
                 db.Nisans.Add(nisan);
+
+                LogActivity(nisan);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -123,6 +124,17 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
+        }
+
+        private void LogActivity(Nisan nisan)
+        {
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            Activity activity = db.Activities.Create();
+            activity.WorkItemId = nisan.WorkItemId;
+            activity.Date = DateTime.Now;
+            activity.StatusId = nisan.StatusId;
+            if (user != null) activity.UserId = user.Id;
+            db.Activities.Add(activity);
         }
 
         //
@@ -153,6 +165,7 @@ namespace HLGranite.Mvc.Controllers
             {
                 nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();
                 db.Entry(nisan).State = EntityState.Modified;
+                LogActivity(nisan);
                 db.SaveChanges();
                 //return RedirectToAction("Edit", "Nisan",  new { Id = nisan.Id});
                 return RedirectToAction("Index");
