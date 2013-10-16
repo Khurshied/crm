@@ -1,9 +1,8 @@
 ﻿@model HLGranite.Mvc.Models.Nisan
 <script>
     function setStatus(status) {
-        //$(this).css("background", "#ccc");
+        // TODO: Fail $(this).css("background", "#ccc");
         $("#StatusId option").each(function () {
-            //console.log($(this).html());
             if ($(this).html() == status) {
                 $(this).attr("selected", true);
                 return;
@@ -12,13 +11,24 @@
     }
 
     $(function () {
-        $("#edit").click(function () {
+
+        $("#Edit").click(function () {
             $(this).css("background", "#ccc");
             $("#body input").each(function () {
                 $(this).removeAttr("readonly");
             });
             $("#body textarea").each(function () {
                 $(this).removeAttr("readonly");
+            });
+        });
+
+        $("#Design").click(function() {
+            var assignee = $("#login a").html().trim();
+            $("#AssigneeId option").each(function(i, option) {
+                if ($(option).text().trim() == assignee) {
+                    $(option).attr("selected", "selected");
+                    return;
+                }
             });
         });
     });
@@ -28,7 +38,7 @@
     @{
         if(Model.StatusId > 0)
         {
-            <input id="edit" type="button" value="Edit" />
+            <input id="Edit" type="button" value="Edit" />
         }
         
         var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
