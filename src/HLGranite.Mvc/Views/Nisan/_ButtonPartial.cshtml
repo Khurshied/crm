@@ -26,7 +26,11 @@
 
 <p>
     @{
-        <input id="edit" type="button" value="Edit" />
+        if(Model.StatusId > 0)
+        {
+            <input id="edit" type="button" value="Edit" />
+        }
+        
         var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
         int i = 0;
         foreach (var status in statuses)
