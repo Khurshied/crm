@@ -32,19 +32,19 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StockId, "Stock")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("StockId", String.Empty)
-            @Html.ValidationMessageFor(model => model.StockId)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.SoldToId, "SoldTo")
         </div>
         <div class="editor-field">
             @Html.DropDownList("SoldToId", String.Empty)
             @Html.ValidationMessageFor(model => model.SoldToId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StockId, "Stock")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StockId", String.Empty)
+            @Html.ValidationMessageFor(model => model.StockId)
         </div>
 
         <div class="editor-label">
