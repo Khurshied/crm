@@ -208,5 +208,30 @@ namespace HLGranite.Mvc.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult Rss()
+        {
+            Feed feed = new Feed { Title = "Nisan Order", Description = "Latest updates"};
+            var activities = db.Activities.Include(a => a.User).Include(a => a.Status).Take(50).OrderByDescending(a => a.Date);
+            foreach (var activity in activities)
+            {
+                // compose nisan case
+                FeedItem item = new FeedItem();
+                var nisan = db.Nisans.Include(n => n.SoldTo).Include(n => n.Stock).Where(n => n.Id.Equals(activity.WorkItemId)).FirstOrDefault();
+                if(nisan != null)
+                {
+                    item.Title = nisan.SoldTo.DisplayName + " | " + nisan.Rumi + " - " + nisan.Stock.Name;
+                    if(nisan.Assignee != null)
+                        item.Creator = nisan.Assignee.UserName; // TODO: Display creator name
+                    item.Description = activity.User.UserName + " " + activity.Status.Name.ToLower() + " " + nisan.Rumi + " at " + activity.Date;
+                    item.Published = DateTime.Now;// activity.Date;
+                }
+
+                if(!String.IsNullOrEmpty(item.Title))
+                    feed.Items.Add(item);
+            }
+
+            return View(feed);
+        }
     }
 }
