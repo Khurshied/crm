@@ -19,14 +19,26 @@
                     <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
+                    @{
+                        HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+                        HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+                        bool isAdmin = false;
+                        if (user != null)
+                        {
+                            isAdmin = user.IsAdmin;
+                        }
+                    }
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Renovation", "Index", "Slab")</li>
                             <li>@Html.ActionLink("Tomb", "Index", "Tomb")</li>
                             <li>@Html.ActionLink("Nisan", "Index", "Nisan")</li>
-                            <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
-                            <li>@Html.ActionLink("User", "Index", "User")</li>
+                            @if(isAdmin)
+                            {
+                                <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
+                                <li>@Html.ActionLink("User", "Index", "User")</li>
+                            }
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
