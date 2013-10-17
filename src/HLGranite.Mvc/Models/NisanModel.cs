@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -14,5 +15,7 @@ namespace HLGranite.Mvc.Models
             else
                 return this.Rumi;
         }
+        [DisplayName("Muslim")]
+        public Nullable<System.DateTime> Deathm { get; set; }
     }
 }

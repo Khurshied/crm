@@ -1,6 +1,7 @@
 ﻿@if (Request.IsAuthenticated) {
     HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
-    int id = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).First().Id;
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    int id = (user != null) ? user.Id : 0;
     <text>
         Hello, @Html.ActionLink(User.Identity.Name, "Edit", "User", routeValues: new {Id = id}, htmlAttributes: new { @class = "username", title = "Manage" })!
         @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" })) {
