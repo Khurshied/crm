@@ -18,7 +18,7 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var stocks = db.Stocks.Include(s => s.StockType);
+            var stocks = db.Stocks.Include(s => s.StockType).OrderBy(s => s.Name);
             return View(stocks.ToList());
         }
 

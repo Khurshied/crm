@@ -18,7 +18,7 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index(string soldTo, string status, string searchString)
         {
-            ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName");
+            ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
             short submit = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == "Submit").First().Id;
 
             // TODO: SelectList statusList = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");//, submit);
@@ -92,9 +92,9 @@ namespace HLGranite.Mvc.Controllers
             Nisan nisan = db.Nisans.Create();
             //nisan.StatusId = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).First().Id;
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID), "Id", "DisplayName");
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName");
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name");
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
             return View(nisan);
         }
 
@@ -148,9 +148,9 @@ namespace HLGranite.Mvc.Controllers
                 return HttpNotFound();
             }
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -171,9 +171,9 @@ namespace HLGranite.Mvc.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
 
@@ -209,9 +209,14 @@ namespace HLGranite.Mvc.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Return rss feed.
+        /// See http://blogs.microsoft.co.il/blogs/bursteg/archive/2009/01/11/asp-net-mvc-rss-feed-action-result.aspx
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Rss()
         {
-            Feed feed = new Feed { Title = "Nisan Order", Description = "Latest updates"};
+            Feed feed = new Feed { Title = "Nisan Orders", Description = "Latest updates"};
             var activities = db.Activities.Include(a => a.User).Include(a => a.Status).Take(50).OrderByDescending(a => a.Date);
             foreach (var activity in activities)
             {
@@ -220,10 +225,10 @@ namespace HLGranite.Mvc.Controllers
                 var nisan = db.Nisans.Include(n => n.SoldTo).Include(n => n.Stock).Where(n => n.Id.Equals(activity.WorkItemId)).FirstOrDefault();
                 if(nisan != null)
                 {
-                    item.Title = nisan.SoldTo.DisplayName + " | " + nisan.Rumi + " - " + nisan.Stock.Name;
+                    item.Title = nisan.SoldTo.DisplayName + " | " + nisan + " - " + nisan.Stock.Name;
                     if(nisan.Assignee != null)
                         item.Creator = nisan.Assignee.UserName; // TODO: Display creator name
-                    item.Description = activity.User.UserName + " " + activity.Status.Name.ToLower() + " " + nisan.Rumi + " at " + activity.Date;
+                    item.Description = activity.User.UserName + " " + activity.Status.Name.ToLower() + " " + nisan + " - " + nisan.Stock.Name + " at " + activity.Date;
                     item.Published = DateTime.Now;// activity.Date;
                 }
 
