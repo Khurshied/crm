@@ -121,7 +121,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4", @readonly = "readonly" })
+            @Html.TextAreaFor(model => model.Remarks, new {@readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 
