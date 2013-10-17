@@ -16,9 +16,24 @@ namespace HLGranite.Mvc.Controllers
         //
         // GET: /Stock/
 
-        public ActionResult Index()
+        public ActionResult Index(string type, string searchString)
         {
-            var stocks = db.Stocks.Include(s => s.StockType).OrderBy(s => s.StockType.Type).ThenBy(s => s.Name);
+            ViewBag.Type = new SelectList(db.StockTypes, "Id", "Type");
+
+            var stocks = db.Stocks.Include(s => s.StockType);
+            if (!String.IsNullOrEmpty(type))
+            {
+                int id = Convert.ToInt32(type);
+                stocks = stocks.Where(s => s.StockTypeId == id);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                stocks = stocks.Where(s => s.Name.ToLower().Contains(searchString) || s.Code.ToLower().Contains(searchString));
+            }
+            
+            stocks = stocks.OrderBy(s => s.StockType.Type).ThenBy(s => s.Name);
             return View(stocks.ToList());
         }
 
