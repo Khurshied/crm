@@ -797,7 +797,7 @@ input[type="submit"].search,
 	text-align: right;
     margin: 2pt 1em 0 0;
 	clear: left;
-	width: 150px;
+	width: 80px;
 }
 
 .editor-field
@@ -813,6 +813,13 @@ input[type="submit"].search,
 	float: none;
     margin: 2pt 1em 0 0;
 	clear: right;
+}
+
+.group {
+    width: 270px;
+    border: solid 1px #999;
+    float: right;
+    border-radius: 7px 7px;
 }
 
 .status
@@ -838,3 +845,10 @@ input[type="submit"].search,
 .complete { background: #333; color: #FFFFFF;}
 .deliver { background: #ff6a00;}
 .close { background: #AAA; }
+
+#Amount,
+#Postcode,
+#Mobile,
+#Telephone,
+#Price,
+#Discount {width: 100px;}

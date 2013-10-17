@@ -17,5 +17,31 @@ namespace HLGranite.Mvc.Models
         }
         [DisplayName("Muslim")]
         public Nullable<System.DateTime> Deathm { get; set; }
+
+        public User Creator
+        {
+            get
+            {
+                HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
+                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).First();
+                if (activity != null)
+                    return activity.User;
+
+                return null;
+            }
+        }
+
+        public DateTime Created
+        {
+            get
+            {
+                HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
+                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).First();
+                if (activity != null)
+                    return activity.Date;
+
+                return DateTime.MinValue;
+            }
+        }
     }
 }

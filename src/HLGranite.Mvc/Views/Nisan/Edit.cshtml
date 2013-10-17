@@ -40,20 +40,36 @@
         <legend>Nisan</legend>
 
         @Html.HiddenFor(model => model.Id)
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StatusId, "Status")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("StatusId", String.Empty)
-            @Html.ValidationMessageFor(model => model.StatusId)
-        </div>
+        <div class="group">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.StatusId, "Status")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("StatusId", String.Empty)
+                @Html.ValidationMessageFor(model => model.StatusId)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AssigneeId, "Assignee")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("AssigneeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.AssigneeId)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Creator, "Creator")
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.Creator.DisplayName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Creator, "Created")
+            </div>
+            <div class="editor-field">
+                @Html.DisplayFor(model => model.Created)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AssigneeId, "Assignee")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("AssigneeId", String.Empty)
+                @Html.ValidationMessageFor(model => model.AssigneeId)
+            </div>
         </div>
 
         <div class="editor-label">
