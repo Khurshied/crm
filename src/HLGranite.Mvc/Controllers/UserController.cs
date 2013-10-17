@@ -98,7 +98,7 @@ namespace HLGranite.Mvc.Controllers
 
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.UserType);
+            var users = db.Users.Include(u => u.UserType).OrderBy(u => u.UserType.Id).ThenBy(u => u.UserName);
             return View(users.ToList());
         }
 
