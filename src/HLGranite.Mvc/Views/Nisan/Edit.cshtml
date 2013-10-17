@@ -2,9 +2,33 @@
 
 @{
     ViewBag.Title = "Edit";
+    
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    bool isAdmin = false;
+    if (user != null)
+    {
+        isAdmin = user.IsAdmin;
+    }
 }
 
 @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+<script>
+    $(function () {
+        $("#StockId").change(function () {
+            var stockId = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/../Stock/Edit/" + stockId,
+                content: document.body,
+                success: function (data) {
+                    var price = $("#Price", data).val();
+                    $("#Price").val(price);
+                }
+            });
+        });
+    });
+</script>
 
 <h2>Edit</h2>
 
@@ -46,6 +70,14 @@
         <div class="editor-field">
             @Html.DropDownList("StockId", String.Empty)
             @Html.ValidationMessageFor(model => model.StockId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Price, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Price)
         </div>
 
         <div class="editor-label">
