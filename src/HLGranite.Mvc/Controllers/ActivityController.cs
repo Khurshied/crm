@@ -25,7 +25,7 @@ namespace HLGranite.Mvc.Controllers
         //
         // GET: /Activity/
 
-        public ActionResult WorkItem(int id)
+        public ActionResult Parent(int id)
         {
             var activities = db.Activities.Include(a => a.Status).Include(a => a.User).Include(a => a.WorkItem).Where(a => a.WorkItemId.Equals(id));
             return View(activities.ToList());
