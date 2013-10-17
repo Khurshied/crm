@@ -96,9 +96,24 @@ namespace HLGranite.Mvc.Controllers
         //
         // GET: /User/
 
-        public ActionResult Index()
+        public ActionResult Index(string type, string searchString)
         {
-            var users = db.Users.Include(u => u.UserType).OrderBy(u => u.UserType.Id).ThenBy(u => u.UserName);
+            ViewBag.Type = new SelectList(db.UserTypes, "Id", "Type");
+
+            var users = db.Users.Include(u => u.UserType);
+            if (!String.IsNullOrEmpty(type))
+            {
+                int id = Convert.ToInt32(type);
+                users = users.Where(u => u.UserTypeId == id);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                users = users.Where(u => u.UserName.ToLower().Contains(searchString) || u.FirstName.ToLower().Contains(searchString) || u.LastName.ToLower().Contains(searchString));
+            }
+
+            users = users.OrderBy(u => u.UserType.Id).ThenBy(u => u.UserName);
             return View(users.ToList());
         }
 
