@@ -210,18 +210,18 @@ INSERT INTO [StockTypes](Type) VALUES ('Renovation');
 INSERT INTO [StockTypes](Type) VALUES ('Tomb');
 INSERT INTO [StockTypes](Type) VALUES ('Nisan');
 
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Save', 1); --indicate save draft
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Start', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Profiling', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Complete', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Deliver', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Installing', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Complete', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('SAVE', 1); --indicate save draft
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('START', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('PROFILING', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DELIVER', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('INSTALLING', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 1);
 
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Save', 3); --indicate save draft
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Submit', 3); --submitted by customer or confirm created
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Design', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Cut', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Complete', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Deliver', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('Complete', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('SAVE', 3); --indicate save draft
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('SUBMIT', 3); --submitted by customer or confirm created
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DESIGN', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('CUT', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DELIVER', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 3);

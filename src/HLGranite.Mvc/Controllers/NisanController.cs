@@ -30,7 +30,6 @@ namespace HLGranite.Mvc.Controllers
                 new SelectListItem{Text="Cut", Value="Cut"},
                 new SelectListItem{Text="Complete", Value="Complete"},
                 new SelectListItem{Text="Deliver", Value="Deliver"},
-                new SelectListItem{Text="Close", Value="Close"},
                 new SelectListItem{Text="All Status", Value="all"}
             };
             ViewBag.Status = statusList;
@@ -67,7 +66,7 @@ namespace HLGranite.Mvc.Controllers
             if (!String.IsNullOrEmpty(searchString))
                 nisans = nisans.Where(n => n.Rumi.ToLower().Contains(searchString.ToLower()));
 
-            nisans = nisans.OrderBy(n => n.StatusId);
+            nisans = nisans.OrderBy(n => n.StatusId).ThenBy(n => n.Id);
             return View(nisans.ToList());
         }
 

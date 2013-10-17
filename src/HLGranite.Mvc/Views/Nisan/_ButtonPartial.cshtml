@@ -12,7 +12,7 @@
 
     $(function () {
 
-        $("#Edit").click(function () {
+        $("#edit").click(function () {
             $(this).css("background", "#ccc");
             $("#body input").each(function () {
                 $(this).removeAttr("readonly");
@@ -22,7 +22,7 @@
             });
         });
 
-        $("#Design").click(function() {
+        $("#design").click(function() {
             var assignee = $("#login a").html().trim();
             $("#AssigneeId option").each(function(i, option) {
                 if ($(option).text().trim() == assignee) {
@@ -34,11 +34,18 @@
     });
 </script>
 
+@functions{
+    public string toLower(string sender)
+    {
+        return sender.ToLower();
+    }
+}
+
 <p>
     @{
         if(Model.StatusId > 0)
         {
-            <input id="Edit" type="button" value="Edit" />
+            <input id="edit" type="button" value="Edit" />
         }
         
         var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
@@ -52,12 +59,12 @@
             
             if (status.Id == Model.StatusId)
             {
-                <input id="@status.Name" type="submit" value="@status.Name" style="background: #ccc");" />
+                <input id="@toLower(status.Name)" type="submit" value="@status.Name" style="background: #ccc");" />
             }
 
             if (status.Id > Model.StatusId)
             {
-                <input id="@status.Name" type="submit" value="@status.Name" onclick="setStatus('@status.Name');" />
+                <input id="@toLower(status.Name)" type="submit" value="@status.Name" onclick="setStatus('@status.Name');" />
             }
             i++;
         }

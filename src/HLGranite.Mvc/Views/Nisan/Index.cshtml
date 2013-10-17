@@ -22,6 +22,13 @@
     var grid = new WebGrid(source: Model, rowsPerPage: 30);
 }
 
+@functions{
+    public string toLower(string sender)
+    {
+        return sender.ToLower();
+    }
+}
+
 <div id="grid">
     @grid.GetHtml(
         htmlAttributes: new {id = "nisan_table"},
@@ -29,7 +36,7 @@
         headerStyle: "head",
         alternatingRowStyle: "alt",
         columns: grid.Columns(
-            grid.Column("Status.Name","Status"),
+            grid.Column("Status.Name","Status", format: @<text><span class="status @toLower(item.Status.Name)">@item.Status.Name</span></text>),
             grid.Column("SoldTo.DisplayName","To"),
             grid.Column("Stock.Name", "Batu"),
             grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),

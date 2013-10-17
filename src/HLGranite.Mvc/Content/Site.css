@@ -814,3 +814,27 @@ input[type="submit"].search,
     margin: 2pt 1em 0 0;
 	clear: right;
 }
+
+.status
+{
+	background: #FFFFFF;
+	border: solid 1px #EAE8ED;
+	color: #4A6785;
+	border-radius: 7px 7px;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 2px 5px 1px;
+	margin: 0px 0px 0px 10px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+    /*width: 50px;*/
+}
+.save { }
+.submit { background: #AAA; color: #FFFFFF;}
+.design { background-color: #0052CC; color: #FFFFFF;}
+.cut { background: #ff6a00;}
+.complete { background: #333; color: #FFFFFF;}
+.deliver { background: #ff6a00;}
+.close { background: #AAA; }
