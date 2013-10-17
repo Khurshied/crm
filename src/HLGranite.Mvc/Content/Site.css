@@ -783,8 +783,9 @@ input[type="submit"].search,
     border: solid 0;
     width: 24px;
 	height: 24px;
-    padding: 8px;
-	/*margin-top: 0;*/
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
 }
 
 /* Styles for editor and display helpers

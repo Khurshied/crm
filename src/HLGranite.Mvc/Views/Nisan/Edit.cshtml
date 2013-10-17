@@ -72,13 +72,18 @@
             @Html.ValidationMessageFor(model => model.StockId)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Price, new { @readonly = "readonly" })
-            @Html.ValidationMessageFor(model => model.Price)
-        </div>
+        @{
+            if(isAdmin)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Price)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Price, new { @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+            }
+        }
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Rumi)
