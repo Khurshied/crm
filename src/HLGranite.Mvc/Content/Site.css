@@ -815,6 +815,9 @@ input[type="submit"].search,
 	clear: right;
 }
 
+/* alternative row style */
+.alt {background-color: whitesmoke;}
+
 .group {
     width: 270px;
     border: solid 1px #999;
