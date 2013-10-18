@@ -14,7 +14,44 @@
 
 @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
 <script>
+
+    /**
+     * Convert date object to Malaysia format.
+     */
+    function toLocalDateFormat(date) {
+        var output = date.getDate() + "/" + (date.getMonth() + 1) + "/" + (date.getYear() + 1900);
+        output += " ";
+
+        var hour = date.getHours();
+        var tt = "AM";
+        if (date.getHours() > 12) {
+            hour -= 12;
+            tt = "PM";
+        }
+        output += hour + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + tt;
+        return output;
+    }
+
     $(function () {
+
+        var createdString = $("#Created").html();
+        //console.log(createdString);
+        var timestamp = Date.parse(createdString);
+        //console.log(timestamp);
+        var created = new Date(timestamp);
+        //console.log("After: " + created);
+
+        var now = new Date();
+        var timezone = now.getTimezoneOffset();
+        var totalSeconds = timezone * 60 * 1000;// x seconds x 1000 milli seconds
+        //console.log("Timezone: " + timezone);
+
+        var localTimestamp = timestamp - totalSeconds;
+        var localTime = new Date(localTimestamp);
+        //console.log("Local: " + localTime);
+        var localFormat = toLocalDateFormat(localTime);
+        $("#Created").html(localFormat);//localTime.toString());
+
         $("#StockId").change(function () {
             var stockId = $(this).val();
             $.ajax({
@@ -60,7 +97,7 @@
                 @Html.LabelFor(model => model.Creator, "Created")
             </div>
             <div class="editor-field">
-                @Html.DisplayFor(model => model.Created)
+                <span id="Created">@Model.Created</span>
             </div>
 
             <div class="editor-label">
