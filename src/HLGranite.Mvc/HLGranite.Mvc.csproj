@@ -333,6 +333,7 @@
     <Content Include="Images\email.png" />
     <Content Include="Images\help.png" />
     <Content Include="Images\magnifier.png" />
+    <Content Include="Images\plot.png" />
     <Content Include="Images\rss.gif" />
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />

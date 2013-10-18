@@ -844,7 +844,11 @@ input[type="submit"].search,
 .save { }
 .submit { background: #AAA; color: #FFFFFF;}
 .design { background-color: #0052CC; color: #FFFFFF;}
-.cut { background: #ff6a00;}
+.cut {
+    background: #ff6a00 url(/Images/plot.png) no-repeat center right;
+    /*width: 40px;*/
+    padding-right: 22px;
+}
 .complete { background: #333; color: #FFFFFF;}
 .deliver { background: #ff6a00;}
 .close { background: #AAA; }
