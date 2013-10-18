@@ -14,6 +14,8 @@ namespace HLGranite.Mvc
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public const string MONEY_FORMAT = "C2";
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
