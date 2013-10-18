@@ -16,10 +16,22 @@
 <script>
 
     /**
+     * Append target value with desired prefix.
+     */
+    function append(value, digit, needle) {
+        var after = value.toString();
+        while (after.length < digit) {
+            after = needle + after;
+        }
+
+        return after;
+    }
+
+    /**
      * Convert date object to Malaysia format.
      */
     function toLocalDateFormat(date) {
-        var output = date.getDate() + "/" + (date.getMonth() + 1) + "/" + (date.getYear() + 1900);
+        var output = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
         output += " ";
 
         var hour = date.getHours();
@@ -28,7 +40,8 @@
             hour -= 12;
             tt = "PM";
         }
-        output += hour + ":" + date.getMinutes() + ":" + date.getSeconds() + " " + tt;
+
+        output += append(hour,2,"0") + ":" + append(date.getMinutes(),2,"0") + ":" + append(date.getSeconds(),2,"0") + " " + tt;
         return output;
     }
 
