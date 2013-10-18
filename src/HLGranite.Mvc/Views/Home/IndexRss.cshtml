@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Rss Listing";
+    string host = Request.Url.Authority;// Url.Content("~/");
 }
+
 <style>
     ul { list-style-type: none;}
 </style>
@@ -9,6 +11,6 @@
 
 <ul>
     <li>
-        @Html.ActionLink("Nisan Updates", "Rss", "Nisan") <a href="~/Nisan/Rss" title="Subscribe to the updates"><img src="~/Images/rss.gif" /></a>
+        Nisan Updates - @Html.ActionLink("http://"+@host+"/Nisan/Rss", "Rss", "Nisan")<a href="~/Nisan/Rss" title="Subscribe to the updates"><img src="~/Images/rss.gif" /></a>
     </li>
 </ul>
