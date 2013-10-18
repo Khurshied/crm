@@ -12,11 +12,11 @@
             <dc:creator><%=Html.Encode(item.Creator)%></dc:creator>
             <title><%=Html.Encode(item.Title)%></title>
             <description><%=Html.Encode(item.Description)%></description>
-            <link><%=item.Url %></link>
-            <pubDate><%=item.Published.ToString("R") %></pubDate>
+            <link><%=item.Url%></link>
+            <pubDate><%=item.Published%></pubDate>
             <% foreach (string tag in item.Tags)
                { %>
-                <category><%=tag %></category>
+                <category><%=tag%></category>
             <% } %>
         </item>
         <%

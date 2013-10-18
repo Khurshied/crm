@@ -235,10 +235,11 @@ namespace HLGranite.Mvc.Controllers
                 if(nisan != null)
                 {
                     item.Title = nisan.SoldTo.DisplayName + " | " + nisan + " - " + nisan.Stock.Name;
-                    if(nisan.Assignee != null)
-                        item.Creator = nisan.Assignee.UserName; // TODO: Display creator name
+                    if (nisan.Assignee != null)
+                        item.Creator = nisan.Creator.DisplayName;
                     item.Description = activity.User.UserName + " " + activity.Status.Name.ToLower() + " " + nisan + " - " + nisan.Stock.Name + " at " + activity.Date;
-                    item.Published = DateTime.Now;// activity.Date;
+                    item.Published = activity.Date;// DateTime.Now;
+                    item.Url = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + "/Nisan/Edit/" + nisan.Id;
                 }
 
                 if(!String.IsNullOrEmpty(item.Title))
