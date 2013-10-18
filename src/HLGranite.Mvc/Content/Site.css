@@ -861,3 +861,9 @@ input[type="submit"].search,
 #Discount {width: 100px;}
 
 .money {text-align:right;}
+
+/** HACK: Make table floating so that fix in mobile view */
+@media (max-width:40em) {
+    table, thead, tbody, tfoot, th, td, tr { display:block; }
+    tr + tr { margin-top:1em; }
+}
