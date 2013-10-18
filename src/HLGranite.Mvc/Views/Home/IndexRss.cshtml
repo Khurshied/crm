@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Rss Listing";
+}
+<style>
+    ul { list-style-type: none;}
+</style>
+
+<h2>All RSS</h2>
+
+<ul>
+    <li>
+        @Html.ActionLink("Nisan Updates", "Rss", "Nisan") <a href="~/Nisan/Rss" title="Subscribe to the updates"><img src="~/Images/rss.gif" /></a>
+    </li>
+</ul>

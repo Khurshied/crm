@@ -55,7 +55,10 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - HLGranite Ordering Application ver @typeof(HLGranite.Mvc.MvcApplication).Assembly.GetName().Version</p>
+                    <p>
+                        &copy; @DateTime.Now.Year - HLGranite Ordering Application ver @typeof(HLGranite.Mvc.MvcApplication).Assembly.GetName().Version
+                        | <a href="~/Home/IndexRss" title="Subscribe RSS"><img src="~/Images/rss.gif" /></a>
+                    </p>
                 </div>
             </div>
         </footer>

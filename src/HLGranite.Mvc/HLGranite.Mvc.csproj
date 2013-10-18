@@ -333,6 +333,7 @@
     <Content Include="Images\email.png" />
     <Content Include="Images\help.png" />
     <Content Include="Images\magnifier.png" />
+    <Content Include="Images\rss.gif" />
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\user_add.png" />
@@ -445,6 +446,7 @@
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
     <Content Include="Views\Activity\Parent.cshtml" />
+    <Content Include="Views\Home\IndexRss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
