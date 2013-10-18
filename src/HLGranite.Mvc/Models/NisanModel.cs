@@ -23,7 +23,7 @@ namespace HLGranite.Mvc.Models
             get
             {
                 HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
-                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).First();
+                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).FirstOrDefault();
                 if (activity != null)
                     return activity.User;
 
@@ -36,7 +36,7 @@ namespace HLGranite.Mvc.Models
             get
             {
                 HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
-                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).First();
+                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).FirstOrDefault();
                 if (activity != null)
                     return activity.Date;
 

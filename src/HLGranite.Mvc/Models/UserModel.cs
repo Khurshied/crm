@@ -75,7 +75,12 @@ namespace HLGranite.Mvc.Models
         /// </summary>
         public string DisplayName
         {
-            get { return this.FirstName + " " + this.LastName; }
+            get {
+                if (this == null)
+                    return string.Empty;
+                else
+                    return this.FirstName + " " + this.LastName;
+            }
         }
         /// <summary>
         /// For display at login page purpose.
