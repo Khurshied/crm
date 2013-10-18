@@ -44,7 +44,7 @@
             grid.Column("StockType.Type","Type"),
             grid.Column("Name","Name", format: @<text><a href="@Href("~/Stock/Edit/" + item.Id)">@item.Name</a></text>),
             grid.Column("Code","Code"),
-            grid.Column("Price","Price", format: @<text>@String.Format("{0:"+HLGranite.Mvc.MvcApplication.MONEY_FORMAT+"}", @item.Price)</text>),
+            grid.Column("Price","Price", style: "money",  format: @<text>@String.Format("{0:"+HLGranite.Mvc.MvcApplication.MONEY_FORMAT+"}", @item.Price)</text>),
             grid.Column("Remarks","Remarks"),
             grid.Column("Active","Active"),
             grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)

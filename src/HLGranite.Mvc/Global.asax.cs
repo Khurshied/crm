@@ -14,7 +14,7 @@ namespace HLGranite.Mvc
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        public const string MONEY_FORMAT = "C2";
+        public const string MONEY_FORMAT = "###,###,###,##0.00";// "C2";
 
         protected void Application_Start()
         {

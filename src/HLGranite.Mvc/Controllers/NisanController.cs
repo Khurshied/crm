@@ -120,7 +120,7 @@ namespace HLGranite.Mvc.Controllers
 
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
@@ -148,7 +148,7 @@ namespace HLGranite.Mvc.Controllers
             }
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }
@@ -162,6 +162,16 @@ namespace HLGranite.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                // put loggin person as assignee after submit (normally submit is the second status after save or new).
+                List<Status> statuses = db.Statuses.Where(s => s.StockTypeId == StockType.NISAN_TYPE_ID).Take(3).ToList();
+                Status status = statuses[2];
+                if (nisan.StatusId == status.Id && (nisan.AssigneeId == null || nisan.AssigneeId == 0))
+                {
+                    Mvc.Models.User assignee = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+                    if (assignee != null)
+                        nisan.AssigneeId = assignee.Id;
+                }
+
                 nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();
                 db.Entry(nisan).State = EntityState.Modified;
                 LogActivity(nisan);
@@ -171,7 +181,7 @@ namespace HLGranite.Mvc.Controllers
             }
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
             return View(nisan);
         }

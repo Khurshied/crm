@@ -859,3 +859,5 @@ input[type="submit"].search,
 #Telephone,
 #Price,
 #Discount {width: 100px;}
+
+.money {text-align:right;}
