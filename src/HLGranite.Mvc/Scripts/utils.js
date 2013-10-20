@@ -11,6 +11,13 @@ function append(value, digit, needle) {
 }
 
 /**
+ * Replace all occurances of text to a new value.
+ */
+function replaceAll(find, replace, str) {
+    return str.replace(new RegExp(find, 'g'), replace);
+}
+
+/**
  * Convert date object to Malaysia format.
  */
 function toLocalDateFormat(date) {

@@ -768,8 +768,8 @@ tr.pager td {
 }
 
 /** HACK: Make textarea or textbox look like label */
-.readonly {border: 0; resize:none;}
-.readonly input[type="text"] {border: 0;}
+.readonly {border: 0; resize:none; background-color: transparent;}
+.readonly input[type="text"] {border: 0; background-color: transparent;}
 
 /** TODO: Dim the button after pressed */
 .pressed {background-color: red;}
@@ -855,14 +855,16 @@ input[type="submit"].search,
 
 #Amount,
 #Postcode,
-#Mobile,
-#Telephone,
 #Price,
 #Discount {width: 100px;}
-
 .money {text-align:right;}
 
+#Mobile,
+#Telephone {width: 120px;}
+
 #Death, #DeathDP, #Date, #DateDP {width: 100px;}
+#MuslimDay {width: 20px;}
+#MuslimYear {width: 40px;}
 
 /**
  * HACK: Make table floating so that fix in mobile view.

@@ -21,9 +21,11 @@
             //$("#StockId").disabled = false;
 
             $("#body input").each(function () {
+                $(this).removeClass("readonly");
                 $(this).removeAttr("readonly");
             });
             $("#body textarea").each(function () {
+                $(this).removeClass("readonly");
                 $(this).removeAttr("readonly");
             });
         });

@@ -128,7 +128,7 @@
                     @Html.LabelFor(model => model.Price)
                 </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.Price, new { @Value = String.Format("{0:"+HLGranite.Mvc.MvcApplication.MONEY_FORMAT+"}", Model.Price), @readonly = "readonly" })
+                    @Html.TextBoxFor(model => model.Price, new { @Value = String.Format("{0:"+HLGranite.Mvc.MvcApplication.MONEY_FORMAT+"}", Model.Price), @class="readonly", @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.Price)
                 </div>
             }
@@ -138,7 +138,7 @@
             @Html.LabelFor(model => model.Rumi)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Rumi, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Rumi, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Rumi)
         </div>
 
@@ -146,7 +146,7 @@
             @Html.LabelFor(model => model.Jawi)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Jawi, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Jawi, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Jawi)
         </div>
 
@@ -154,7 +154,7 @@
             @Html.LabelFor(model => model.Death)
         </div>
         <div class="editor-field">
-            @Html.TextBox("DeathDP", @toLocalDateFormat(Model.Death), new { @readonly = "readonly"})
+            @Html.TextBox("DeathDP", @toLocalDateFormat(Model.Death), new {@class="readonly", @readonly = "readonly"})
             @Html.HiddenFor(model => model.Death)
             @Html.ValidationMessageFor(model => model.Death)
         </div>
@@ -163,7 +163,7 @@
             @Html.LabelFor(model => model.Deathm)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Deathm, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Deathm, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Deathm)
         </div>
 
@@ -171,7 +171,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Remarks, new {@readonly = "readonly" })
+            @Html.TextAreaFor(model => model.Remarks, new {@class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 
