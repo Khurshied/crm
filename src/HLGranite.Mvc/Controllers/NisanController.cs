@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HLGranite.Mvc.Models;
+using HLGranite.Jawi;
 
 namespace HLGranite.Mvc.Controllers
 {
@@ -216,6 +217,52 @@ namespace HLGranite.Mvc.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private DataTable ReadXml(string fileName)
+        {
+            DataTable table = new DataTable();
+            DataSet dataset = new DataSet();
+
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                    dataset.ReadXml(fileName);
+                if (dataset.Tables.Count > 0)
+                    table = dataset.Tables[0].Copy();
+
+                return table;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+                return table;
+            }
+            finally { dataset.Dispose(); }
+        }
+        public ActionResult Calendar()
+        {
+            ViewBag.Date = DateTime.Now;
+            ViewBag.Muslim = "";
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Calendar(string date)
+        {
+            DateTime gregorian;
+            DateTime.TryParse(date, out gregorian);
+
+            string file = Request.MapPath("~\\App_Data\\muslimcal.xml");
+            MuslimCalendar calendar = new MuslimCalendar(ReadXml(file));
+            calendar.GetDate(gregorian);
+
+            DateTime muslim = new DateTime(calendar.Year, calendar.Month, calendar.Day);
+            string output = muslim.Day.ToString("00") + "/" + muslim.Month.ToString("00") + "/" + muslim.Year;
+
+            ViewBag.Muslim = output;
+            ViewBag.Date = date;
+            ViewBag.Gregorian = gregorian.Day.ToString("00") + "/" + gregorian.Month.ToString("00") + "/" + gregorian.Year;
+            return View();
         }
 
         /// <summary>

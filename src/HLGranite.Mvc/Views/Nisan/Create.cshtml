@@ -17,19 +17,6 @@
 @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
 <script>
 
-    /**
-     * Convert to US Dateformat for input use.
-     */
-    function toUSDate(dateString) {
-
-        var dates = dateString.split("/");
-        if (dates.length >= 3) {
-            return dates[1] + "/" + dates[0] + "/" + dates[2];
-        }
-
-        return dateString;
-    }
-
     $(function () {
 
         $("#Death").datepicker({ dateFormat: "dd/mm/yy" });

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+}
+
+@Styles.Render("~/Content/themes/base/jquery-ui.css")
+@Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+<script>
+
+    $(function () {
+        $("#DateDP").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#DateDP").change(function () {
+            $("#Date").val(toUSDate($(this).val()));
+        });
+        //$("#DateDP").datepicker("setDate", new Date());
+    });
+</script>
+
+<h2>Calendar</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @*@Html.EditorFor("Date", "Date")*@
+    @*@Html.EditorFor("Muslim", "Muslim")*@
+
+    <input id="DateDP" type="text" /><br />
+    <input id="Date" name="Date" type="hidden" value="@ViewBag.Date" /><br />
+    <span id="Gregorian">@ViewBag.Gregorian</span><br />
+    <span id="Muslim">@ViewBag.Muslim</span>
+    <p>
+        <input type="submit" value="Convert" />
+    </p>    
+}

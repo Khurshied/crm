@@ -71,6 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="HLGranite.Jawi">
+      <HintPath>..\..\lib\HLGranite.Jawi.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -383,6 +386,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Sql\Build.sql" />
     <Content Include="Sql\Change.sql" />
     <Content Include="Views\Shared\Rss.aspx" />
@@ -459,6 +463,7 @@
     <Content Include="Views\Activity\Delete.cshtml" />
     <Content Include="Views\Activity\Parent.cshtml" />
     <Content Include="Views\Home\IndexRss.cshtml" />
+    <Content Include="Views\Nisan\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

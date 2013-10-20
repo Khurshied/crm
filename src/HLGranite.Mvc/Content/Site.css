@@ -862,6 +862,8 @@ input[type="submit"].search,
 
 .money {text-align:right;}
 
+#Death, #DeathDP, #Date, #DateDP {width: 100px;}
+
 /**
  * HACK: Make table floating so that fix in mobile view.
  * see http://stackoverflow.com/questions/9746979/tables-in-a-responsive-web-design
