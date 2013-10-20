@@ -13,21 +13,8 @@
     $(function () {
 
         $("#edit").click(function () {
-            $(this).css("background", "#ccc");
-            
-            //$("#DeathDP").enabled = true;
-            //$("#DeathDP").disabled = false;
-            //$("#StockId").enabled = true;
-            //$("#StockId").disabled = false;
-
-            $("#body input").each(function () {
-                $(this).removeClass("readonly");
-                $(this).removeAttr("readonly");
-            });
-            $("#body textarea").each(function () {
-                $(this).removeClass("readonly");
-                $(this).removeAttr("readonly");
-            });
+            $(this).css("background", "#ccc");            
+            enableAll();
         });
 
         $("#design").click(function() {

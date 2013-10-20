@@ -100,3 +100,17 @@ function toLocalDate(dateString) {
 
     return result;
 }
+
+/**
+ * Enable all controls in web page.
+ */
+function enableAll() {
+    $("#body input").each(function () {
+        $(this).removeAttr("readonly");
+        $(this).removeClass("readonly");
+    });
+    $("#body textarea").each(function () {
+        $(this).removeAttr("readonly");
+        $(this).removeClass("readonly");
+    });
+}

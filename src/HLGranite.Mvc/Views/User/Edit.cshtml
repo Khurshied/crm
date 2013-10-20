@@ -10,12 +10,7 @@
         $("#edit").click(function () {
             //$(this).addClass("pressed");
             $(this).css("background", "#ccc");
-            $("#body input").each(function () {
-                $(this).removeAttr("readonly");
-            });
-            $("#body textarea").each(function () {
-                $(this).removeAttr("readonly");
-            });
+            enableAll();
         });
     });
 </script>
@@ -56,15 +51,15 @@
             @Html.LabelFor(model => model.UserName)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.UserName, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.UserName, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.UserName)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Password, new { @readonly = "readonly" })
+            @Html.LabelFor(model => model.Password)
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(model => model.Password, new { @readonly = "readonly" })
+            @Html.PasswordFor(model => model.Password, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
@@ -72,7 +67,7 @@
             @Html.LabelFor(model => model.FirstName)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.FirstName, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.FirstName, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.FirstName)
         </div>
 
@@ -80,7 +75,7 @@
             @Html.LabelFor(model => model.LastName)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.LastName, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.LastName, new {@class="readonly",  @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.LastName)
         </div>
 
@@ -88,7 +83,7 @@
             @Html.LabelFor(model => model.Email)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Email, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Email, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
@@ -96,7 +91,7 @@
             @Html.LabelFor(model => model.Telephone)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Telephone, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Telephone, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Telephone)
         </div>
 
@@ -104,7 +99,7 @@
             @Html.LabelFor(model => model.Mobile)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Mobile, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Mobile, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Mobile)
         </div>
 
@@ -112,7 +107,7 @@
             @Html.LabelFor(model => model.Street1)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Street1, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Street1, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Street1)
         </div>
 
@@ -120,7 +115,7 @@
             @Html.LabelFor(model => model.Street2)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Street2, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Street2, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Street2)
         </div>
 
@@ -128,7 +123,7 @@
             @Html.LabelFor(model => model.City)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.City, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.City, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.City)
         </div>
 
@@ -136,7 +131,7 @@
             @Html.LabelFor(model => model.Postcode)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Postcode, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Postcode, new { @class="readonly",@readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Postcode)
         </div>
 
@@ -144,7 +139,7 @@
             @Html.LabelFor(model => model.State)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.State, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.State, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.State)
         </div>
 
@@ -152,7 +147,7 @@
             @Html.LabelFor(model => model.Country)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Country, new { @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Country, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Country)
         </div>
 
@@ -160,7 +155,7 @@
             @Html.LabelFor(model => model.Remarks)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Remarks, new { @cols = "80", @rows = "4", @readonly = "readonly" })
+            @Html.TextAreaFor(model => model.Remarks, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Remarks)
         </div>
 
@@ -168,7 +163,7 @@
             @Html.LabelFor(model => model.Active)
         </div>
         <div class="editor-field">
-            @Html.CheckBoxFor(model => model.Active, new { @readonly = "readonly" })
+            @Html.CheckBoxFor(model => model.Active, new { @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Active)
         </div>
 
