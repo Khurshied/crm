@@ -13,6 +13,34 @@ namespace HLGranite.Mvc.Controllers
     public class NisanController : Controller
     {
         private hlgraniteEntities db = new hlgraniteEntities();
+        // TODO: SelectList statusList = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");//, submit);
+        private IEnumerable<SelectListItem> statusList = new[]{
+                new SelectListItem{Text="Pending", Value=""},
+                new SelectListItem{Text="Save", Value="Save"},
+                new SelectListItem{Text="Submit", Value="Submit"},
+                new SelectListItem{Text="Design", Value="Design"},
+                new SelectListItem{Text="Cut", Value="Cut"},
+                new SelectListItem{Text="Complete", Value="Complete"},
+                new SelectListItem{Text="Deliver", Value="Deliver"},
+                new SelectListItem{Text="All Status", Value="all"}
+        };
+
+        private IEnumerable<SelectListItem> muslimMonthList = new[]{
+                new SelectListItem{Text="", Value="0"},
+                new SelectListItem{Text="Muharram", Value="1"},
+                new SelectListItem{Text="Safar", Value="2"},
+                new SelectListItem{Text="Rabiulawal", Value="3"},
+                new SelectListItem{Text="Rabiulakhir", Value="4"},
+                new SelectListItem{Text="Jamadilawal", Value="5"},
+                new SelectListItem{Text="Jamadilakhir", Value="6"},
+                new SelectListItem{Text="Rejab", Value="7"},
+                new SelectListItem{Text="Syaaban", Value="8"},
+                new SelectListItem{Text="Ramadhan", Value="9"},
+                new SelectListItem{Text="Syawal", Value="10"},
+                new SelectListItem{Text="Zulkaedah", Value="11"},
+                new SelectListItem{Text="Zulhijjah", Value="12"}
+        };
+
 
         //
         // GET: /Nisan/
@@ -22,17 +50,6 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
             short submit = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == "Submit").First().Id;
 
-            // TODO: SelectList statusList = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");//, submit);
-            IEnumerable<SelectListItem> statusList = new[]{
-                new SelectListItem{Text="Pending", Value=""},
-                new SelectListItem{Text="Save", Value="Save"},
-                new SelectListItem{Text="Submit", Value="Submit"},
-                new SelectListItem{Text="Design", Value="Design"},
-                new SelectListItem{Text="Cut", Value="Cut"},
-                new SelectListItem{Text="Complete", Value="Complete"},
-                new SelectListItem{Text="Deliver", Value="Deliver"},
-                new SelectListItem{Text="All Status", Value="all"}
-            };
             ViewBag.Status = statusList;
 
             var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);//.OrderBy(n => n.StatusId);
@@ -95,6 +112,8 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name");
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
+
+            ViewBag.MuslimMonth = muslimMonthList;
             return View(nisan);
         }
 

@@ -17,12 +17,39 @@
 @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
 <script>
 
+    function displayMuslimDate(muslim) {
+        $("#Deathm").val(muslim);
+        var splits = muslim.split('/');
+        if (splits.length >= 3) {
+            $("#MuslimDay").val(splits[0]);
+            $("#MuslimMonth option").each(function (i, option) {
+                if (i == splits[1]) {
+                    //console.log(i);
+                    $(option).attr("selected", "selected");
+                    return;
+                }
+            });
+            $("#MuslimYear").val(splits[2]);
+        }
+    }
+
     $(function () {
 
         $("#Death").datepicker({ dateFormat: "dd/mm/yy" });
         $("#DeathDP").datepicker({ dateFormat: "dd/mm/yy" });
         $("#DeathDP").change(function () {
             $("#Death").val(toUSDate($(this).val()));
+
+            $.ajax({
+                type: "POST",
+                url: "/Nisan/Calendar",
+                data: { 'date': $("#Death").val() },
+                content: document.body,
+                success: function (data) {
+                    var muslim = $("#Muslim", data).val();
+                    displayMuslimDate(muslim);
+                }
+            });
         });
 
         $("#StockId").change(function () {
@@ -123,6 +150,10 @@
             @Html.LabelFor(model => model.Deathm)
         </div>
         <div class="editor-field">
+            @Html.TextBox("MuslimDay")
+            @Html.DropDownList("MuslimMonth")
+            @Html.TextBox("MuslimYear")
+
             @Html.EditorFor(model => model.Deathm)
             @Html.ValidationMessageFor(model => model.Deathm)
         </div>
