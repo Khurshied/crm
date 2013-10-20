@@ -53,13 +53,50 @@ function afterLocalTime(createdString) {
 
 /**
  * Convert to US Dateformat for input use.
+ * @dateString String Local date format string 'dd/MM/yyyy'.
+ * @return String
  */
 function toUSDate(dateString) {
-
+    var result = dateString;
     var dates = dateString.split("/");
     if (dates.length >= 3) {
-        return dates[1] + "/" + dates[0] + "/" + dates[2];
+        result = dates[1] + "/" + dates[0] + "/" + dates[2];
+
+        // remove 12:00:00 am if contains
+        var suffix = dates[2];
+        var years = suffix.split(" ");
+        if (suffix.toLowerCase().indexOf("12:00:00 am") > -1) {
+            if (years.length > 1) result = dates[1] + "/" + dates[0] + "/" + years[0];
+        }
+        if (suffix.toLowerCase().indexOf("00:00:00") > -1) {
+            if (years.length > 1) result = dates[1] + "/" + dates[0] + "/" + years[0];
+        }
     }
 
-    return dateString;
+    return result;
+}
+
+/**
+ * Convert to local Malaysia Dateformat for input use.
+ * @dateString String US date format string 'MM/dd/yyyy'.
+ * @return String
+ */
+function toLocalDate(dateString) {
+    var result = dateString;
+    var dates = dateString.split("/");
+    if (dates.length >= 3) {
+        result = dates[1] + "/" + dates[0] + "/" + dates[2];
+
+        // remove 12:00:00 am if contains
+        var suffix = dates[2];
+        var years = suffix.split(" ");
+        if (suffix.toLowerCase().indexOf("12:00:00 am") > -1) {
+            if (years.length > 1) result = dates[1] + "/" + dates[0] + "/" + years[0];
+        }
+        if (suffix.toLowerCase().indexOf("00:00:00") > -1) {
+            if (years.length > 1) result = dates[1] + "/" + dates[0] + "/" + years[0];
+        }
+    }
+
+    return result;
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="hlgraniteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="hlgraniteModelStoreContainer">
           <EntitySet Name="Activities" EntityType="hlgraniteModel.Store.Activities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Nisans" EntityType="hlgraniteModel.Store.Nisans" store:Type="Tables" Schema="dbo" />
@@ -129,7 +129,7 @@
           <Property Name="Rumi" Type="nvarchar" MaxLength="100" />
           <Property Name="Jawi" Type="nvarchar" MaxLength="100" />
           <Property Name="Death" Type="datetime" />
-          <Property Name="Deathm" Type="datetime" />
+          <Property Name="Deathm" Type="datetime2" />
           <Property Name="Remarks" Type="ntext" />
           <Property Name="WorkItemId" Type="int" Nullable="false" />
         </EntityType>
@@ -500,8 +500,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hlgraniteModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -632,7 +631,7 @@
           <Property Name="Rumi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Jawi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Death" Type="DateTime" Precision="3" />
-          <Property Name="Deathm" Type="DateTime" Precision="3" />
+          <Property Name="Deathm" Type="DateTime" Precision="7" />
           <Property Name="Remarks" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="WorkItemId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Assignee" Relationship="hlgraniteModel.FK_Nisans_AssigneeId" FromRole="Nisans" ToRole="Users" />
