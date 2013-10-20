@@ -17,6 +17,33 @@
 @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
 <script>
 
+    function displayMuslimDate(muslim) {
+        var splits = muslim.split('/');
+        if (splits.length >= 3) {
+            $("#MuslimDay").val(splits[1]);
+            $("#MuslimMonth option").each(function (i, option) {
+                if (i == splits[0]) {
+                    $(option).attr("selected", "selected");
+                    return;
+                }
+            });
+            $("#MuslimYear").val(splits[2]);
+        }
+    }
+
+    function setMuslimDate(day, month, year) {
+        if (day == null || month == null || year == null) {
+            $("#Deathm").val("");
+            return;
+        }
+
+        var splits = $("#Deathm").val().split('/');
+        if (day > 0) splits[1] = append(day, 2, "0");
+        if (month > 0) splits[0] = append(month, 2, "0");
+        if (year > 0) splits[2] = year;
+        $("#Deathm").val(splits[0] + "/" + splits[1] + "/" + splits[2]);
+    }
+
     $(function () {
 
         $("#Created").html(afterLocalTime($("#Created").html()));
@@ -25,6 +52,29 @@
         $("#DeathDP").datepicker({ dateFormat: "dd/mm/yy" });
         $("#DeathDP").change(function () {
             $("#Death").val(toUSDate($(this).val()));
+
+            $.ajax({
+                type: "POST",
+                url: "/Nisan/Calendar",
+                data: { 'date': $("#Death").val() },
+                content: document.body,
+                success: function (data) {
+                    var muslim = $("#Muslim", data).val();
+                    $("#Deathm").val(muslim);
+                    displayMuslimDate(muslim);
+                }
+            });
+        });
+
+        displayMuslimDate($("#Deathm").val());
+        $("#MuslimDay").change(function () {
+            setMuslimDate($(this).val(), 0, 0);
+        });
+        $("#MuslimMonth").change(function () {
+            setMuslimDate(0, $(this).val(), 0);
+        });
+        $("#MuslimYear").change(function () {
+            setMuslimDate(0, 0, $(this).val());
         });
 
         //$("#DeathDP").enabled = false;
@@ -163,7 +213,10 @@
             @Html.LabelFor(model => model.Deathm)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Deathm, new { @class="readonly", @readonly = "readonly" })
+            <input id="MuslimDay" type="text" name="MuslimDay" class="readonly" readonly="readonly" />
+            @Html.DropDownList("MuslimMonth")
+            <input id="MuslimYear" type="text" name="MuslimYear" class="readonly" readonly="readonly" />
+            @Html.HiddenFor(model => model.Deathm)
             @Html.ValidationMessageFor(model => model.Deathm)
         </div>
 

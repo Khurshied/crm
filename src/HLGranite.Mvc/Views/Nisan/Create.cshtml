@@ -18,19 +18,30 @@
 <script>
 
     function displayMuslimDate(muslim) {
-        $("#Deathm").val(muslim);
         var splits = muslim.split('/');
         if (splits.length >= 3) {
-            $("#MuslimDay").val(splits[0]);
+            $("#MuslimDay").val(splits[1]);
             $("#MuslimMonth option").each(function (i, option) {
-                if (i == splits[1]) {
-                    //console.log(i);
+                if (i == splits[0]) {
                     $(option).attr("selected", "selected");
                     return;
                 }
             });
             $("#MuslimYear").val(splits[2]);
         }
+    }
+
+    function setMuslimDate(day, month, year) {
+        if (day == null || month == null || year == null) {
+            $("#Deathm").val("");
+            return;
+        }
+
+        var splits = $("#Deathm").val().split('/');
+        if (day > 0) splits[1] = append(day, 2, "0");
+        if (month > 0) splits[0] = append(month, 2, "0");
+        if (year > 0) splits[2] = year;
+        $("#Deathm").val(splits[0] + "/" + splits[1] + "/" + splits[2]);
     }
 
     $(function () {
@@ -47,9 +58,20 @@
                 content: document.body,
                 success: function (data) {
                     var muslim = $("#Muslim", data).val();
+                    $("#Deathm").val(muslim);
                     displayMuslimDate(muslim);
                 }
             });
+        });
+
+        $("#MuslimDay").change(function() {
+            setMuslimDate($(this).val(), 0, 0);
+        });
+        $("#MuslimMonth").change(function () {
+            setMuslimDate(0, $(this).val(), 0);
+        });
+        $("#MuslimYear").change(function () {
+            setMuslimDate(0, 0, $(this).val());
         });
 
         $("#StockId").change(function () {
@@ -153,8 +175,7 @@
             @Html.TextBox("MuslimDay")
             @Html.DropDownList("MuslimMonth")
             @Html.TextBox("MuslimYear")
-
-            @Html.EditorFor(model => model.Deathm)
+            @Html.HiddenFor(model => model.Deathm)
             @Html.ValidationMessageFor(model => model.Deathm)
         </div>
 

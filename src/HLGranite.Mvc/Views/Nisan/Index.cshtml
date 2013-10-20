@@ -28,7 +28,7 @@
         return sender.ToLower();
     }
     
-    public string toLocalDateFormat(DateTime? date)
+    public string toLocalDate(DateTime? date)
     {
         string output = "";
         if (date != null)
@@ -55,11 +55,11 @@
             grid.Column("Stock.Name", "Batu"),
             grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),
             grid.Column("Jawi", "Jawi"),
-            grid.Column("Death", "Death", format: @<text>@toLocalDateFormat(item.Death)</text>),
-            grid.Column("Deathm", "Muslim"),
             grid.Column("Remarks","Remarks"),
             grid.Column("Assignee","Assignee"),
             grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)
         )
     )
+    @*grid.Column("Death", "Death", format: @<text>@toLocalDate(item.Death)</text>)*@
+    @*grid.Column("Deathm", "Muslim", format: @<text>@toLocalDate(item.Deathm)</text>)*@
 </div>

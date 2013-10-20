@@ -142,6 +142,7 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.MuslimMonth = muslimMonthList;
             return View(nisan);
         }
 
@@ -170,6 +171,7 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.MuslimMonth = muslimMonthList;
             return View(nisan);
         }
 
@@ -203,6 +205,7 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
             ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.MuslimMonth = muslimMonthList;
             return View(nisan);
         }
 
@@ -276,11 +279,10 @@ namespace HLGranite.Mvc.Controllers
             calendar.GetDate(gregorian);
 
             DateTime muslim = new DateTime(calendar.Year, calendar.Month, calendar.Day);
-            string output = muslim.Day.ToString("00") + "/" + muslim.Month.ToString("00") + "/" + muslim.Year;
 
-            ViewBag.Muslim = output;
             ViewBag.Date = date;
-            ViewBag.Gregorian = gregorian.Day.ToString("00") + "/" + gregorian.Month.ToString("00") + "/" + gregorian.Year;
+            ViewBag.Gregorian = gregorian;
+            ViewBag.Muslim = muslim;
             return View();
         }
 
