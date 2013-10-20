@@ -23,6 +23,9 @@
 @Styles.Render("~/Content/themes/base/jquery-ui.css")
 @Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
 @Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
+
+@Styles.Render("~/Content/keyboard.css")
+@Scripts.Render("~/Scripts/keyboard.js")
 <script>
 
     function displayMuslimDate(muslim) {
@@ -108,6 +111,7 @@
                 }
             });
         });
+
     });
 </script>
 
@@ -182,7 +186,8 @@
             @Html.LabelFor(model => model.Jawi)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Jawi)
+            <!-- source http://www.ajaxblender.com/jquery-virtual-keyboard.html -->
+            @Html.TextBoxFor(model => model.Jawi, "", new { @class = "keyboardInput" })
             @Html.ValidationMessageFor(model => model.Jawi)
         </div>
 
