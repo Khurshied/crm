@@ -86,6 +86,20 @@
                 }
             });
         });
+
+        // http://www.ejawi.net/v3/index?e=converter
+        $("#Rumi").change(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Nisan/Translate",
+                data: {'Rumi': $(this).val()},
+                content: document.body,
+                success: function (data) {
+                    var jawi = $("#Jawi", data).val();
+                    $("#Jawi").val(jawi);
+                }
+            });
+        });
     });
 </script>
 

@@ -464,6 +464,7 @@
     <Content Include="Views\Activity\Parent.cshtml" />
     <Content Include="Views\Home\IndexRss.cshtml" />
     <Content Include="Views\Nisan\Calendar.cshtml" />
+    <Content Include="Views\Nisan\Translate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

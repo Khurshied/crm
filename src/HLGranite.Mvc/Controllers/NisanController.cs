@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using HLGranite.Mvc.Models;
 using HLGranite.Jawi;
+using HLGranite.Mvc.Models;
 
 namespace HLGranite.Mvc.Controllers
 {
@@ -283,6 +286,22 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.Date = date;
             ViewBag.Gregorian = gregorian;
             ViewBag.Muslim = muslim;
+            return View();
+        }
+
+        public ActionResult Translate(string rumi)
+        {
+            string result = string.Empty;
+
+            JawiTranslator translator = new JawiTranslator();
+            if(!String.IsNullOrEmpty(rumi))
+            {
+                string[] words = rumi.Split(new char[] { ' ' });
+                foreach (string word in words)
+                    result += translator.Translate(word) + " ";
+            }
+
+            ViewBag.Jawi = result.Trim();
             return View();
         }
 
