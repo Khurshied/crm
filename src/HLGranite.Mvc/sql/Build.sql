@@ -129,7 +129,7 @@ CREATE TABLE [Nisans] (
 		[Rumi]									nvarchar(100),
 		[Jawi]									nvarchar(100),
 		[Death]									datetime,
-		[Deathm]								datetime,
+		[Deathm]								datetime2,
 		[Remarks]								ntext,
 		[WorkItemId]							int NOT NULL
 CONSTRAINT [PK_Nisans] PRIMARY KEY ([Id]),
