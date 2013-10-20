@@ -12,7 +12,9 @@
     }
 }
 
-@Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+@Styles.Render("~/Content/themes/base/jquery-ui.css")
+@Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
+@Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
 <script>
 
     /**
@@ -45,25 +47,49 @@
         return output;
     }
 
-    $(function () {
-
-        var createdString = $("#Created").html();
-        //console.log(createdString);
+    /**
+     * Manually add up local timezone value.
+     */
+    function afterLocalTime(createdString) {
         var timestamp = Date.parse(createdString);
-        //console.log(timestamp);
         var created = new Date(timestamp);
-        //console.log("After: " + created);
 
         var now = new Date();
         var timezone = now.getTimezoneOffset();
         var totalSeconds = timezone * 60 * 1000;// x seconds x 1000 milli seconds
-        //console.log("Timezone: " + timezone);
 
         var localTimestamp = timestamp - totalSeconds;
         var localTime = new Date(localTimestamp);
-        //console.log("Local: " + localTime);
-        var localFormat = toLocalDateFormat(localTime);
-        $("#Created").html(localFormat);//localTime.toString());
+        return toLocalDateFormat(localTime);
+    }
+
+    /**
+     * Convert to US Dateformat for input use.
+     */
+    function toUSDate(dateString) {
+
+        var dates = dateString.split("/");
+        if (dates.length >= 3) {
+            return dates[1] + "/" + dates[0] + "/" + dates[2];
+        }
+
+        return dateString;
+    }
+
+    $(function () {
+
+        $("#Created").html(afterLocalTime($("#Created").html()));
+
+        $("#Death").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#DeathDP").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#DeathDP").change(function () {
+            $("#Death").val(toUSDate($(this).val()));
+        });
+
+        //$("#DeathDP").enabled = false;
+        //$("#DeathDP").disabled = true;
+        //$("#StockId").enabled = false;
+        //$("#StockId").disabled = true;
 
         $("#StockId").change(function () {
             var stockId = $(this).val();
@@ -81,6 +107,22 @@
 </script>
 
 <h2>Edit</h2>
+
+@functions{
+    public string toLocalDateFormat(DateTime? date)
+    {
+        string output = "";
+        if (date != null)
+        {
+            if (date.Value.Hour > 0 && date.Value.Minute > 0)
+                output = date.Value.ToString("dd/MM/yyyy hh:mm:ss tt");
+            else
+                output = date.Value.ToString("dd/MM/yyyy");
+        }
+
+        return output;
+    }
+}
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -171,7 +213,8 @@
             @Html.LabelFor(model => model.Death)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Death, new { @readonly = "readonly" })
+            @Html.TextBox("DeathDP", @toLocalDateFormat(Model.Death), new { @readonly = "readonly"})
+            @Html.HiddenFor(model => model.Death)
             @Html.ValidationMessageFor(model => model.Death)
         </div>
 

@@ -22,7 +22,6 @@ namespace HLGranite.Mvc.Models
         public int SoldToId { get; set; }
         public string Rumi { get; set; }
         public string Jawi { get; set; }
-        public Nullable<System.DateTime> Death { get; set; }
         public string Remarks { get; set; }
         public int WorkItemId { get; set; }
     

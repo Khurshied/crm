@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,6 +16,11 @@ namespace HLGranite.Mvc.Models
             else
                 return this.Rumi;
         }
+
+        // TODO: Failed [DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> Death { get; set; }
+
         [DisplayName("Muslim")]
         public Nullable<System.DateTime> Deathm { get; set; }
 

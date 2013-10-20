@@ -862,8 +862,12 @@ input[type="submit"].search,
 
 .money {text-align:right;}
 
-/** HACK: Make table floating so that fix in mobile view */
-@media (max-width:40em) {
+/**
+ * HACK: Make table floating so that fix in mobile view.
+ * see http://stackoverflow.com/questions/9746979/tables-in-a-responsive-web-design
+ * TODO: Looking for device-width 
+ */
+/*@media (max-width:40em) {
     table, thead, tbody, tfoot, th, td, tr { display:block; }
     tr + tr { margin-top:1em; }
-}
+}*/
