@@ -833,7 +833,7 @@ input[type="submit"].search,
     padding-bottom: 4pt;
 }
     .group .editor-field {
-        margin-top: 4pt;
+        margin-top: 6px;
     }
 
 .status

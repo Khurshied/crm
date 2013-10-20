@@ -28,7 +28,7 @@
     function displayMuslimDate(muslim) {
         var splits = muslim.split('/');
         if (splits.length >= 3) {
-            $("#MuslimDay").val(splits[1]);
+            $("#MuslimDay").val(append(splits[1],2,"0"));
             $("#MuslimMonth option").each(function (i, option) {
                 if (i == splits[0]) {
                     $(option).attr("selected", "selected");
@@ -55,6 +55,7 @@
     $(function () {
 
         $("#Created").html(afterLocalTime($("#Created").html()));
+        $("#LastUpdated").html(afterLocalTime($("#LastUpdated").html()));
 
         $("#Death").datepicker({ dateFormat: "dd/mm/yy" });
         $("#DeathDP").datepicker({ dateFormat: "dd/mm/yy" });
@@ -143,7 +144,7 @@
 
         <div class="group">
             <div class="editor-label">
-                @Html.LabelFor(model => model.StatusId, "Status")
+                @Html.LabelFor(model => model.StatusId)
             </div>
             <div class="editor-field">
                 @if(isCustomer) {
@@ -155,21 +156,28 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.Creator, "Creator")
+                @Html.LabelFor(model => model.LastUpdated)
+            </div>
+            <div class="editor-field">
+                <span id="LastUpdated">@Model.LastUpdated</span>
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Creator)
             </div>
             <div class="editor-field">
                 @Html.DisplayFor(model => model.Creator.DisplayName)
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.Creator, "Created")
+                @Html.LabelFor(model => model.Creator)
             </div>
             <div class="editor-field">
                 <span id="Created">@Model.Created</span>
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.AssigneeId, "Assignee")
+                @Html.LabelFor(model => model.AssigneeId)
             </div>
             <div class="editor-field">
                 @if(isCustomer) {
@@ -182,7 +190,7 @@
         </div>
 
         <div class="editor-label @visibility">
-            @Html.LabelFor(model => model.SoldToId, "SoldTo")
+            @Html.LabelFor(model => model.SoldToId)
         </div>
         <div class="editor-field @visibility">
             @Html.DropDownList("SoldToId", String.Empty)
@@ -190,7 +198,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StockId, "Stock")
+            @Html.LabelFor(model => model.StockId)
         </div>
         <div class="editor-field">
             @Html.DropDownList("StockId", String.Empty)

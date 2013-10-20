@@ -17,6 +17,15 @@ namespace HLGranite.Mvc.Models
                 return this.Rumi;
         }
 
+        [DisplayName("Stock")]
+        public int StockId { get; set; }
+
+        [DisplayName("Status")]
+        public short StatusId { get; set; }
+
+        [DisplayName("Assignee")]
+        public Nullable<int> AssigneeId { get; set; }
+
         // TODO: Failed [DataType(DataType.Date)]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> Death { get; set; }
@@ -24,6 +33,9 @@ namespace HLGranite.Mvc.Models
         [DisplayName("Muslim")]
         public Nullable<System.DateTime> Deathm { get; set; }
 
+        /// <summary>
+        /// Return the person who create the order.
+        /// </summary>
         public User Creator
         {
             get
@@ -37,15 +49,31 @@ namespace HLGranite.Mvc.Models
             }
         }
 
+        /// <summary>
+        /// Return the order created datetime.
+        /// </summary>
         public DateTime Created
         {
             get
             {
                 HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
                 Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).FirstOrDefault();
-                if (activity != null)
-                    return activity.Date;
+                if (activity != null) return activity.Date;
+                return DateTime.MinValue;
+            }
+        }
 
+        /// <summary>
+        /// Return the last status updated time.
+        /// </summary>
+        [DisplayName("Updated")]
+        public DateTime LastUpdated
+        {
+            get
+            {
+                HLGranite.Mvc.Models.hlgraniteEntities db = new hlgraniteEntities();
+                Activity activity = db.Activities.Where(a => a.WorkItemId == this.WorkItemId).OrderByDescending(a => a.Id).FirstOrDefault();
+                if (activity != null) return activity.Date;
                 return DateTime.MinValue;
             }
         }

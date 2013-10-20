@@ -15,9 +15,6 @@ namespace HLGranite.Mvc.Models
     public partial class Nisan
     {
         public int Id { get; set; }
-        public short StatusId { get; set; }
-        public int StockId { get; set; }
-        public Nullable<int> AssigneeId { get; set; }
         public Nullable<decimal> Price { get; set; }
         public int SoldToId { get; set; }
         public string Rumi { get; set; }
