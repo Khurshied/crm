@@ -2,13 +2,21 @@
 
 @{
     ViewBag.Title = "Edit";
-    
+
     HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
     HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
-    bool isAdmin = false;
+    bool isAdmin = false; // default is false
+    bool isCustomer = true; // default is true
+    string visibility = "";
     if (user != null)
     {
         isAdmin = user.IsAdmin;
+        isCustomer = user.IsCustomer;
+    }
+
+    if (isCustomer)
+    {
+        visibility = "hidden";
     }
 }
 
@@ -77,11 +85,6 @@
             setMuslimDate(0, 0, $(this).val());
         });
 
-        //$("#DeathDP").enabled = false;
-        //$("#DeathDP").disabled = true;
-        //$("#StockId").enabled = false;
-        //$("#StockId").disabled = true;
-
         $("#StockId").change(function () {
             var stockId = $(this).val();
             $.ajax({
@@ -137,12 +140,17 @@
         <legend>Nisan</legend>
 
         @Html.HiddenFor(model => model.Id)
+
         <div class="group">
             <div class="editor-label">
                 @Html.LabelFor(model => model.StatusId, "Status")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("StatusId", String.Empty)
+                @if(isCustomer) {
+                    @Html.DisplayFor(model => model.Status.Name)
+                } else {
+                    @Html.DropDownList("StatusId", String.Empty)
+                }
                 @Html.ValidationMessageFor(model => model.StatusId)
             </div>
 
@@ -164,15 +172,19 @@
                 @Html.LabelFor(model => model.AssigneeId, "Assignee")
             </div>
             <div class="editor-field">
-                @Html.DropDownList("AssigneeId", String.Empty)
+                @if(isCustomer) {
+                    @Html.DisplayFor(model => model.Assignee.DisplayName)
+                } else {
+                    @Html.DropDownList("AssigneeId", String.Empty)
+                }
                 @Html.ValidationMessageFor(model => model.AssigneeId)
             </div>
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label @visibility">
             @Html.LabelFor(model => model.SoldToId, "SoldTo")
         </div>
-        <div class="editor-field">
+        <div class="editor-field @visibility">
             @Html.DropDownList("SoldToId", String.Empty)
             @Html.ValidationMessageFor(model => model.SoldToId)
         </div>

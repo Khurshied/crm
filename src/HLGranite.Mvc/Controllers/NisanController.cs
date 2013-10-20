@@ -17,7 +17,7 @@ namespace HLGranite.Mvc.Controllers
     {
         private hlgraniteEntities db = new hlgraniteEntities();
         // TODO: SelectList statusList = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");//, submit);
-        private IEnumerable<SelectListItem> statusList = new[]{
+        public static IEnumerable<SelectListItem> StatusList = new[]{
                 new SelectListItem{Text="Pending", Value=""},
                 new SelectListItem{Text="Save", Value="Save"},
                 new SelectListItem{Text="Submit", Value="Submit"},
@@ -28,7 +28,7 @@ namespace HLGranite.Mvc.Controllers
                 new SelectListItem{Text="All Status", Value="all"}
         };
 
-        private IEnumerable<SelectListItem> muslimMonthList = new[]{
+        public static IEnumerable<SelectListItem> MuslimMonthList = new[]{
                 new SelectListItem{Text="", Value="0"},
                 new SelectListItem{Text="Muharram", Value="1"},
                 new SelectListItem{Text="Safar", Value="2"},
@@ -51,11 +51,32 @@ namespace HLGranite.Mvc.Controllers
         public ActionResult Index(string soldTo, string status, string searchString)
         {
             ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
-            short submit = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == "Submit").First().Id;
-
-            ViewBag.Status = statusList;
-
+            //short submit = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == "Submit").First().Id;
+            ViewBag.Status = StatusList;
             var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);//.OrderBy(n => n.StatusId);
+
+            if (User.Identity.Name.Length == 0)
+            {
+                nisans = db.Nisans.Where(n => n.Id == 0);
+                return View(nisans);
+            }
+            else
+            {
+                HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+                if (user == null)
+                {
+                    nisans = db.Nisans.Where(n => n.Id == 0);
+                    return View();
+                }
+                else
+                {
+                    if (user.UserTypeId != Models.User.ADMIN_TYPE_ID && user.UserTypeId != Models.User.STAFF_TYPE_ID)
+                    {
+                        nisans = nisans.Where(n => n.SoldToId == user.Id);
+                    }
+                }
+            }
+
             if (!String.IsNullOrEmpty(soldTo))
             {
                 int id = Convert.ToInt32(soldTo);
@@ -104,19 +125,29 @@ namespace HLGranite.Mvc.Controllers
             return View(nisan);
         }
 
+        private void SetViewBag(Nisan nisan)
+        {
+            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
+            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
+            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
+            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+            ViewBag.MuslimMonth = MuslimMonthList;
+        }
+
         //
         // GET: /Nisan/Create
 
         public ActionResult Create()
         {
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             Nisan nisan = db.Nisans.Create();
-            //nisan.StatusId = db.Statuses.Where(s => s.StockTypeId == StockController.NISAN_TYPE_ID).First().Id;
-            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name");
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name");
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
+            if (user != null)
+            {
+                if (user.UserTypeId != Models.User.ADMIN_TYPE_ID && user.UserTypeId != Models.User.STAFF_TYPE_ID)
+                    nisan.SoldToId = user.Id;
+            }
 
-            ViewBag.MuslimMonth = muslimMonthList;
+            SetViewBag(nisan);
             return View(nisan);
         }
 
@@ -141,11 +172,7 @@ namespace HLGranite.Mvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID), "Id", "DisplayName", nisan.SoldToId);
-            ViewBag.MuslimMonth = muslimMonthList;
+            SetViewBag(nisan);
             return View(nisan);
         }
 
@@ -170,11 +197,8 @@ namespace HLGranite.Mvc.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
-            ViewBag.MuslimMonth = muslimMonthList;
+
+            SetViewBag(nisan);
             return View(nisan);
         }
 
@@ -204,11 +228,7 @@ namespace HLGranite.Mvc.Controllers
                 //return RedirectToAction("Edit", "Nisan",  new { Id = nisan.Id});
                 return RedirectToAction("Index");
             }
-            ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
-            ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
-            ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
-            ViewBag.MuslimMonth = muslimMonthList;
+            SetViewBag(nisan);
             return View(nisan);
         }
 

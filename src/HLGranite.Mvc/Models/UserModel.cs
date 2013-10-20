@@ -65,6 +65,20 @@ namespace HLGranite.Mvc.Models
         {
             get { return this.UserTypeId == ADMIN_TYPE_ID; }
         }
+        /// <summary>
+        /// Return true if is client who can place order. Normally refer to agent and one time customer.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCustomer
+        {
+            get
+            {
+                if (this.UserTypeId != ADMIN_TYPE_ID && this.UserTypeId != STAFF_TYPE_ID)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         /// <summary>
         /// TODO: A unique username in system.

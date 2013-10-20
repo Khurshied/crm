@@ -2,13 +2,21 @@
 
 @{
     ViewBag.Title = "Create";
-    
+
     HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
     HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
-    bool isAdmin = false;
+    bool isAdmin = false; // default is false
+    bool isCustomer = true; // default is true
+    string visibility = "";
     if (user != null)
     {
         isAdmin = user.IsAdmin;
+        isCustomer = user.IsCustomer;
+    }
+    
+    if(isCustomer)
+    {
+        visibility = "hidden";
     }
 }
 
@@ -105,33 +113,34 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Nisan</legend>
-
-        <div class="editor-label">
+        
+        <div class="editor-label @visibility">
             @Html.LabelFor(model => model.StatusId, "Status")
         </div>
-        <div class="editor-field">
+        <div class="editor-field @visibility">
             @Html.DropDownList("StatusId", String.Empty)
             @Html.ValidationMessageFor(model => model.StatusId)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label" @visibility>
             @Html.LabelFor(model => model.AssigneeId, "Assignee")
         </div>
-        <div class="editor-field">
+        <div class="editor-field" @visibility>
             @Html.DropDownList("AssigneeId", String.Empty)
             @Html.ValidationMessageFor(model => model.AssigneeId)
         </div>
 
-        <div class="editor-label">
+        <div class="editor-label" @visibility>
             @Html.LabelFor(model => model.SoldToId, "SoldTo")
         </div>
-        <div class="editor-field">
+        <div class="editor-field" @visibility>
             @Html.DropDownList("SoldToId", String.Empty)
             @Html.ValidationMessageFor(model => model.SoldToId)
         </div>
@@ -145,7 +154,7 @@
         </div>
 
         @{
-            if(isAdmin)
+            if (isAdmin)
             {
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Price)
@@ -154,6 +163,10 @@
                     @Html.EditorFor(model => model.Price)
                     @Html.ValidationMessageFor(model => model.Price)
                 </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.Price)
             }
         }
 

@@ -1,9 +1,10 @@
 ﻿@model HLGranite.Mvc.Models.Nisan
 <script>
     function setStatus(status) {
+        status = status.toLowerCase();
         // TODO: Fail $(this).css("background", "#ccc");
         $("#StatusId option").each(function () {
-            if ($(this).html() == status) {
+            if ($(this).html().toLowerCase() == status) {
                 $(this).attr("selected", true);
                 return;
             }
@@ -38,6 +39,14 @@
 
 <p>
     @{
+        HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+        HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+        bool isCustomer = true;
+        if (user != null)
+        {
+            isCustomer = user.IsCustomer;
+        }
+        
         if(Model.StatusId > 0)
         {
             <input id="edit" type="button" value="Edit" />
@@ -46,10 +55,18 @@
         var statuses = new HLGranite.Mvc.Models.hlgraniteEntities().Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
         int i = 0;
         foreach (var status in statuses)
-        {
-            if (Model.StatusId == 0 && i == 2)
+        {            
+            if(i==2)
             {
-                break;
+                if(Model.StatusId == 0)
+                {
+                    break;
+                }
+                
+                if(isCustomer)
+                {
+                    break;
+                }
             }
             
             if (status.Id == Model.StatusId)
