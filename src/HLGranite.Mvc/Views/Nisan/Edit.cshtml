@@ -115,6 +115,12 @@
                 }
             });
         });
+
+        // disable control when load
+        $("#StockId").prop("disabled", true);
+        $("#DeathDP").prop("disabled", true);
+        $("#MuslimMonth").prop("disabled", true);
+        //$(".keyboardInputInitiator").unbind('click');
     });
 </script>
 
@@ -146,50 +152,50 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="group">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.StatusId)
-            </div>
-            <div class="editor-field">
-                @if(isCustomer) {
-                    @Html.DisplayFor(model => model.Status.Name)
-                } else {
-                    @Html.DropDownList("StatusId", String.Empty)
-                }
-                @Html.ValidationMessageFor(model => model.StatusId)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StatusId)
+        </div>
+        <div class="editor-field">
+            @if(isCustomer) {
+                @Html.DisplayFor(model => model.Status.Name)
+            } else {
+                @Html.DropDownList("StatusId", String.Empty)
+            }
+            @Html.ValidationMessageFor(model => model.StatusId)
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.LastUpdated)
-            </div>
-            <div class="editor-field">
-                <span id="LastUpdated">@Model.LastUpdated</span>
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastUpdated)
+        </div>
+        <div class="editor-field">
+            <span id="LastUpdated">@Model.LastUpdated</span>
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Creator)
-            </div>
-            <div class="editor-field">
-                @Html.DisplayFor(model => model.Creator.DisplayName)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Creator)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.Creator.DisplayName)
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Creator)
-            </div>
-            <div class="editor-field">
-                <span id="Created">@Model.Created</span>
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Creator)
+        </div>
+        <div class="editor-field">
+            <span id="Created">@Model.Created</span>
+        </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AssigneeId)
-            </div>
-            <div class="editor-field">
-                @if(isCustomer) {
-                    @Html.DisplayFor(model => model.Assignee.DisplayName)
-                } else {
-                    @Html.DropDownList("AssigneeId", String.Empty)
-                }
-                @Html.ValidationMessageFor(model => model.AssigneeId)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssigneeId)
+        </div>
+        <div class="editor-field">
+            @if(isCustomer) {
+                @Html.DisplayFor(model => model.Assignee.DisplayName)
+            } else {
+                @Html.DropDownList("AssigneeId", String.Empty)
+            }
+            @Html.ValidationMessageFor(model => model.AssigneeId)
+        </div>
         </div>
 
         <div class="editor-label @visibility">

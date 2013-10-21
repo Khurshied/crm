@@ -105,12 +105,17 @@ function toLocalDate(dateString) {
  * Enable all controls in web page.
  */
 function enableAll() {
+    $("#body select").each(function () {
+        $(this).prop("disabled", false);
+    });
     $("#body input").each(function () {
         $(this).removeAttr("readonly");
         $(this).removeClass("readonly");
+        $(this).prop("disabled", false);
     });
     $("#body textarea").each(function () {
         $(this).removeAttr("readonly");
         $(this).removeClass("readonly");
+        $(this).prop("disabled", false);
     });
 }

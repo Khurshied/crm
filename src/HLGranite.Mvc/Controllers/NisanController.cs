@@ -134,7 +134,16 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
             ViewBag.StockId = new SelectList(db.Stocks.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderBy(s => s.Name), "Id", "Name", nisan.StockId);
             ViewBag.AssigneeId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.AssigneeId);
-            ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (user != null)
+            {
+                if (user.UserTypeId != Models.User.ADMIN_TYPE_ID && user.UserTypeId != Models.User.STAFF_TYPE_ID)
+                    ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID || u.UserTypeId == HLGranite.Mvc.Models.User.CUSTOMER_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+                else
+                    ViewBag.SoldToId = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName", nisan.SoldToId);
+            }
+
             ViewBag.MuslimMonth = MuslimMonthList;
         }
 
@@ -167,11 +176,8 @@ namespace HLGranite.Mvc.Controllers
                 WorkItem workItem = db.WorkItems.Create();
                 db.WorkItems.Add(workItem);
                 nisan.WorkItemId = workItem.Id;
-
                 db.Nisans.Add(nisan);
-
                 LogActivity(nisan);
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
