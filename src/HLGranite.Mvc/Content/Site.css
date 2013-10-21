@@ -857,11 +857,14 @@ input[type="submit"].search,
 .design { background-color: #0052CC; color: #FFFFFF;}
 .cut {
     background: #ff6a00 url(/Images/plot.png) no-repeat center right;
-    /*width: 40px;*/
     padding-right: 22px;
 }
+.deliver {
+    background: #A64B00 url(/Images/lorry.png) no-repeat center right;
+    padding-right: 22px;
+    color: #FFFFFF;
+}
 .complete { background: #333; color: #FFFFFF;}
-.deliver { background: #ff6a00;}
 .close { background: #AAA; }
 
 #Amount,

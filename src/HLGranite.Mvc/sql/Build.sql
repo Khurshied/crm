@@ -216,7 +216,7 @@ INSERT INTO [Statuses](Name,StockTypeId) VALUES ('PROFILING', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DELIVER', 1);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('INSTALLING', 1);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 1);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('PAID', 1);
 
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('SAVE', 3); --indicate save draft
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('SUBMIT', 3); --submitted by customer or confirm created
@@ -224,4 +224,4 @@ INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DESIGN', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('CUT', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 3);
 INSERT INTO [Statuses](Name,StockTypeId) VALUES ('DELIVER', 3);
-INSERT INTO [Statuses](Name,StockTypeId) VALUES ('COMPLETE', 3);
+INSERT INTO [Statuses](Name,StockTypeId) VALUES ('PAID', 3);
