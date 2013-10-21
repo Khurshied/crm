@@ -17,6 +17,9 @@ namespace HLGranite.Mvc.Models
                 return this.Rumi;
         }
 
+        [DisplayName("Sold To")]
+        public int SoldToId { get; set; }
+
         [DisplayName("Stock")]
         public int StockId { get; set; }
 

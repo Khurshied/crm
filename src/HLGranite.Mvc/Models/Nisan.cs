@@ -16,7 +16,6 @@ namespace HLGranite.Mvc.Models
     {
         public int Id { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public int SoldToId { get; set; }
         public string Rumi { get; set; }
         public string Jawi { get; set; }
         public string Remarks { get; set; }

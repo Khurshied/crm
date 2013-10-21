@@ -125,6 +125,10 @@ namespace HLGranite.Mvc.Controllers
             return View(nisan);
         }
 
+        /// <summary>
+        /// Set ViewBag collection return to view.
+        /// </summary>
+        /// <param name="nisan"></param>
         private void SetViewBag(Nisan nisan)
         {
             ViewBag.StatusId = new SelectList(db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID), "Id", "Name", nisan.StatusId);
@@ -217,8 +221,7 @@ namespace HLGranite.Mvc.Controllers
                 if (nisan.StatusId == status.Id && (nisan.AssigneeId == null || nisan.AssigneeId == 0))
                 {
                     Mvc.Models.User assignee = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-                    if (assignee != null)
-                        nisan.AssigneeId = assignee.Id;
+                    if (assignee != null) nisan.AssigneeId = assignee.Id;
                 }
 
                 nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();

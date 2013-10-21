@@ -196,7 +196,8 @@
             @Html.LabelFor(model => model.SoldToId)
         </div>
         <div class="editor-field @visibility">
-            @Html.DropDownList("SoldToId", String.Empty)
+            @Html.DisplayFor(model => model.SoldTo.DisplayName)
+            @Html.HiddenFor(model => model.SoldToId)
             @Html.ValidationMessageFor(model => model.SoldToId)
         </div>
 
