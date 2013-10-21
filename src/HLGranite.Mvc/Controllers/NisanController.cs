@@ -351,7 +351,7 @@ namespace HLGranite.Mvc.Controllers
                 var nisan = db.Nisans.Where(n => n.WorkItemId == activity.WorkItemId).FirstOrDefault();
                 if(nisan != null)
                 {
-                    item.Title = nisan.SoldTo.DisplayName + " | " + nisan + " - " + nisan.Stock.Name;
+                    item.Title = activity.Status.Name.ToLower() + ": " + nisan.SoldTo.DisplayName + " | " + nisan + " - " + nisan.Stock.Name;
                     if (nisan.Assignee != null) item.Creator = nisan.Creator.DisplayName;
                     item.Description = activity.User.UserName + " " + activity.Status.Name.ToLower() + " " + nisan + " - " + nisan.Stock.Name + " at " + activity.Date;
                     item.Published = activity.Date;// DateTime.Now;
