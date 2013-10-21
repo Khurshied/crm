@@ -2,6 +2,25 @@
     ViewBag.Title = "Contact";
 }
 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+@Scripts.Render("~/Scripts/jquery.ui.map.js")
+<script>
+    $(function () {
+
+        var tip = "<a target='_blank' href='https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=Cf6wyzhpOOK7FVDFWQAdzPX9BSmhRUBfE3ZJMDGkTqsKEYPkbA&q=HLGranite+loc:+Kedah,+Malaysia&aq=&sll=6.102237,100.383797&sspn=0.029657,0.052314&vpsrc=6&ie=UTF8&hq=HLGranite&hnear=&ll=6.093587,100.382531&spn=0.001854,0.00327&t=m&z=19&cid=5343873147049093163&iwloc=A'>HL GRANITE & MARBLE SDN. BHD.</a>";
+
+        // source http://code.google.com/p/jquery-ui-map/
+        $('#map_canvas').gmap({
+            'center': '6.093094,100.382252', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
+                var self = this;
+                self.addMarker({ 'position': this.get('map').getCenter() }).click(function () {
+                    self.openInfoWindow({ 'content': tip+"<br/>"+$("#address").html() }, this);
+                });
+            }
+        });
+    });
+</script>
+
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
     <h2>@ViewBag.Message</h2>
@@ -12,38 +31,50 @@
     HLGranite.Mvc.Models.User company = db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).First();
 }
 
-<section class="contact">
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>@company.Telephone</span>
-    </p>
-    <p>
-        <span class="label">Mobile:</span>
-        <span>@company.Mobile</span>
-    </p>
-</section>
+<style>
+    table tr td {vertical-align: top;}
+</style>
+<table>
+    <tr>
+        <td>
+            <section class="contact">
+                <header>
+                    <h3>Phone</h3>
+                </header>
+                <p>
+                    <span class="label">Main:</span>
+                    <span>@company.Telephone</span>
+                </p>
+                <p>
+                    <span class="label">Mobile:</span>
+                    <span>@company.Mobile</span>
+                </p>
+            </section>
 
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:@company.Email">@company.Email</a></span>
-    </p>
-</section>
+            <section class="contact">
+                <header>
+                    <h3>Email</h3>
+                </header>
+                <p>
+                    <span class="label">Support:</span>
+                    <span><a href="mailto:@company.Email">@company.Email</a></span>
+                </p>
+            </section>
 
-<section class="contact">
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        @company.Street1<br />
-        @company.Street2<br />
-        @company.Postcode @company.City<br />
-        @company.State, @company.Country
-    </p>
-</section>
+            <section class="contact">
+                <header>
+                    <h3>Address</h3>
+                </header>
+                <p id="address">
+                    @company.Street1<br />
+                    @company.Street2<br />
+                    @company.Postcode @company.City<br />
+                    @company.State, @company.Country
+                </p>
+            </section>
+        </td>
+        <td>
+            <div id="map_canvas" style="width:400px;height:400px;"></div>
+        </td>
+    </tr>
+</table>
