@@ -55,6 +55,7 @@ namespace HLGranite.Mvc.Controllers
             ViewBag.Status = StatusList;
             var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);//.OrderBy(n => n.StatusId);
 
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (User.Identity.Name.Length == 0)
             {
                 nisans = db.Nisans.Where(n => n.Id == 0);
@@ -62,7 +63,6 @@ namespace HLGranite.Mvc.Controllers
             }
             else
             {
-                HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
                 if (user == null)
                 {
                     nisans = db.Nisans.Where(n => n.Id == 0);
@@ -108,6 +108,7 @@ namespace HLGranite.Mvc.Controllers
             if (!String.IsNullOrEmpty(searchString))
                 nisans = nisans.Where(n => n.Rumi.ToLower().Contains(searchString.ToLower()));
 
+            // last updated not support in linq sorting
             nisans = nisans.OrderBy(n => n.StatusId).ThenBy(n => n.Id);
             return View(nisans.ToList());
         }

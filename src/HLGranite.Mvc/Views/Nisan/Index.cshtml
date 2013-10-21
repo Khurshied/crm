@@ -53,13 +53,22 @@
             grid.Column("Status.Name","Status", format: @<text><span class="status @toLower(item.Status.Name)">@item.Status.Name</span></text>),
             grid.Column("SoldTo.DisplayName","To"),
             grid.Column("Stock.Name", "Batu"),
-            grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),
-            grid.Column("Jawi", "Jawi"),
-            grid.Column("Remarks","Remarks"),
+            grid.Column("Rumi", "Name",
+                format: @<text>
+                    @if(!String.IsNullOrEmpty(item.Remarks)){
+                        <a href="@Href("~/Nisan/Edit/" + item.Id)" title="@item.Remarks">*@item</a>
+                    } else {
+                        <a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a>
+                    }
+                </text>),
+            grid.Column("LastUpdated", "LastUpdated"),
             grid.Column("Assignee","Assignee"),
             grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)
         )
     )
+    @*grid.Column("Jawi", "Jawi")*@
+    @*grid.Column("Remarks","Remarks")*@
+    @*grid.Column("Created", "Created")*@
     @*grid.Column("Death", "Death", format: @<text>@toLocalDate(item.Death)</text>)*@
     @*grid.Column("Deathm", "Muslim", format: @<text>@toLocalDate(item.Deathm)</text>)*@
 </div>
