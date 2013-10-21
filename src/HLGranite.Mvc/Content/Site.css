@@ -761,7 +761,8 @@ tr.pager td {
 /** Customization                                            */
 /**----------------------------------------------------------*/
 
-input, textarea {padding: 0;}
+/* input, textarea {padding: 0;} */
+select { padding: 5px 0 5px 0;}
 
 .delete a
 {
