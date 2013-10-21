@@ -4,9 +4,6 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
 <script>
     $(function () {
         $("#edit").click(function () {
@@ -15,6 +12,8 @@
         });
     });
 </script>
+
+<h2>Edit</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

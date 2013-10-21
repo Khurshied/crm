@@ -20,10 +20,6 @@
     }
 }
 
-@Styles.Render("~/Content/themes/base/jquery-ui.css")
-@Scripts.Render("~/Scripts/jquery-2.0.3.min.js")
-@Scripts.Render("~/Scripts/jquery-ui-1.10.3.min.js")
-
 @Styles.Render("~/Content/keyboard.css")
 @Scripts.Render("~/Scripts/keyboard.js")
 <script>
@@ -117,7 +113,8 @@
         });
 
         // disable control when load
-        $("#StockId").prop("disabled", true);
+        // TODO: After disable always postback 0 for stock id
+        //$("#StockId").prop("disabled", true);
         $("#DeathDP").prop("disabled", true);
         $("#MuslimMonth").prop("disabled", true);
         //$(".keyboardInputInitiator").unbind('click');
@@ -158,6 +155,7 @@
         <div class="editor-field">
             @if(isCustomer) {
                 @Html.DisplayFor(model => model.Status.Name)
+                @Html.HiddenFor(model => model.StatusId)
             } else {
                 @Html.DropDownList("StatusId", String.Empty)
             }
