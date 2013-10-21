@@ -150,7 +150,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Nisan/Create
-
+        [Authorize]
         public ActionResult Create()
         {
             HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
@@ -170,6 +170,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(Nisan nisan)
         {
             if (ModelState.IsValid)
@@ -200,7 +201,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Nisan/Edit/5
-
+        [AuthorizeOwner]
         public ActionResult Edit(int id = 0)
         {
             Nisan nisan = db.Nisans.Find(id);
@@ -218,6 +219,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOwner]
         public ActionResult Edit(Nisan nisan)
         {
             if (ModelState.IsValid)
@@ -245,6 +247,7 @@ namespace HLGranite.Mvc.Controllers
         //
         // GET: /Nisan/Delete/5
 
+        [Authorize]
         public ActionResult Delete(int id = 0)
         {
             Nisan nisan = db.Nisans.Find(id);

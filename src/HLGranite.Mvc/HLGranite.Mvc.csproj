@@ -212,6 +212,8 @@
     <Compile Include="Models\Activity.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuthorizeAdmin.cs" />
+    <Compile Include="Models\AuthorizeOwner.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FeedItem.cs" />
     <Compile Include="Models\Model.Context.cs">

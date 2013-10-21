@@ -15,7 +15,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Stock/
-
+        [Authorize]
         public ActionResult Index(string type, string searchString)
         {
             ViewBag.Type = new SelectList(db.StockTypes, "Id", "Type");
@@ -52,7 +52,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Stock/Create
-
+        [AuthorizeAdmin]
         public ActionResult Create()
         {
             Stock stock = db.Stocks.Create();
@@ -65,6 +65,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeAdmin]
         public ActionResult Create(Stock stock)
         {
             if (ModelState.IsValid)
@@ -80,7 +81,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Stock/Edit/5
-
+        [Authorize]
         public ActionResult Edit(int id = 0)
         {
             Stock stock = db.Stocks.Find(id);
@@ -97,6 +98,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeAdmin]
         public ActionResult Edit(Stock stock)
         {
             if (ModelState.IsValid)
@@ -111,7 +113,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /Stock/Delete/5
-
+        [AuthorizeAdmin]
         public ActionResult Delete(int id = 0)
         {
             Stock stock = db.Stocks.Find(id);

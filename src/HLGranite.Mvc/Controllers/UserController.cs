@@ -95,7 +95,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /User/
-
+        [AuthorizeAdmin]
         public ActionResult Index(string type, string searchString)
         {
             ViewBag.Type = new SelectList(db.UserTypes, "Id", "Type");
@@ -132,7 +132,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /User/Create
-
+        [AuthorizeAdmin]
         public ActionResult Create()
         {
             User user = db.Users.Create();
@@ -145,6 +145,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeAdmin]
         public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
@@ -197,7 +198,7 @@ namespace HLGranite.Mvc.Controllers
 
         //
         // GET: /User/Edit/5
-
+        [AuthorizeOwner]
         public ActionResult Edit(int id = 0)
         {
             User user = db.Users.Find(id);
@@ -214,6 +215,7 @@ namespace HLGranite.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeOwner]
         public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
