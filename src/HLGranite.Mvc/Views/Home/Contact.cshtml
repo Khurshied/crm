@@ -31,50 +31,41 @@
     HLGranite.Mvc.Models.User company = db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.ADMIN_TYPE_ID).First();
 }
 
-<style>
-    table tr td {vertical-align: top;}
-</style>
-<table>
-    <tr>
-        <td>
-            <section class="contact">
-                <header>
-                    <h3>Phone</h3>
-                </header>
-                <p>
-                    <span class="label">Tel/Fax:</span>
-                    <span>@company.Telephone</span>
-                </p>
-                <p>
-                    <span class="label">Mobile:</span>
-                    <span>@company.Mobile</span>
-                </p>
-            </section>
+<div style="float:left;padding:10px;">
+    <section class="contact">
+        <header>
+            <h3>Phone</h3>
+        </header>
+        <p>
+            <span class="label">Tel/Fax:</span>
+            <span>@company.Telephone</span>
+        </p>
+        <p>
+            <span class="label">Mobile:</span>
+            <span>@company.Mobile</span>
+        </p>
+    </section>
 
-            <section class="contact">
-                <header>
-                    <h3>Email</h3>
-                </header>
-                <p>
-                    <span class="label">Support:</span>
-                    <span><a href="mailto:@company.Email">@company.Email</a></span>
-                </p>
-            </section>
+    <section class="contact">
+        <header>
+            <h3>Email</h3>
+        </header>
+        <p>
+            <span class="label">Support:</span>
+            <span><a href="mailto:@company.Email">@company.Email</a></span>
+        </p>
+    </section>
 
-            <section class="contact">
-                <header>
-                    <h3>Address</h3>
-                </header>
-                <p id="address">
-                    @company.Street1<br />
-                    @company.Street2<br />
-                    @company.Postcode @company.City<br />
-                    @company.State, @company.Country
-                </p>
-            </section>
-        </td>
-        <td>
-            <div id="map_canvas" style="width:450px;height:400px;"></div>
-        </td>
-    </tr>
-</table>
+    <section class="contact">
+        <header>
+            <h3>Address</h3>
+        </header>
+        <p id="address">
+            @company.Street1<br />
+            @company.Street2<br />
+            @company.Postcode @company.City<br />
+            @company.State, @company.Country
+        </p>
+    </section>
+</div>
+<div id="map_canvas" style="width:450px;height:400px;float:left;padding:10px;"></div>
