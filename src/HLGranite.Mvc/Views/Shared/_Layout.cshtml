@@ -28,9 +28,11 @@
                         HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
                         HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
                         bool isAdmin = false;
+                        bool isInternal = false;
                         if (user != null)
                         {
                             isAdmin = user.IsAdmin;
+                            isInternal = !user.IsCustomer;
                         }
                     }
                     <nav>
@@ -62,7 +64,9 @@
                 <div class="float-left">
                     <p>
                         &copy; @DateTime.Now.Year - HLGranite Ordering Application ver @typeof(HLGranite.Mvc.MvcApplication).Assembly.GetName().Version
-                        | <a href="~/Home/IndexRss" title="Subscribe RSS"><img src="~/Images/rss.gif" /></a>
+                        @if(isInternal) {
+                            @Html.Raw(" | <a href='~/Home/IndexRss' title='Subscribe RSS'><img src='/Images/rss.gif' /></a>")
+                        }
                     </p>
                 </div>
             </div>
