@@ -867,8 +867,11 @@ input[type="submit"].search,
     padding-right: 22px;
     color: #FFFFFF;
 }
-.complete { background: #333; color: #FFFFFF;}
-.close { background: #AAA; }
+.complete { background: #14892C; color: #FFFFFF;}
+.paid {
+    background: #ffd800 url(/Images/money.png) no-repeat center right;
+    padding-right: 22px;
+}
 
 #Amount,
 #Postcode,

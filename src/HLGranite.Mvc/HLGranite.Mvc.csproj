@@ -350,6 +350,7 @@
     <Content Include="Images\keyboard.png" />
     <Content Include="Images\lorry.png" />
     <Content Include="Images\magnifier.png" />
+    <Content Include="Images\money.png" />
     <Content Include="Images\plot.png" />
     <Content Include="Images\rss.gif" />
     <Content Include="Images\tick.png" />
