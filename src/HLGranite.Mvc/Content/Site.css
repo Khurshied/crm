@@ -761,8 +761,10 @@ tr.pager td {
 /** Customization                                            */
 /**----------------------------------------------------------*/
 
+footer a img { vertical-align: bottom;}
+
 /* input, textarea {padding: 0;} */
-select { padding: 5px 0 5px 0;}
+select { padding: 5px;}
 
 .delete a
 {
