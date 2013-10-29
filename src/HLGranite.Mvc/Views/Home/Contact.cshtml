@@ -10,8 +10,10 @@
         var tip = "<a target='_blank' href='https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=Cf6wyzhpOOK7FVDFWQAdzPX9BSmhRUBfE3ZJMDGkTqsKEYPkbA&q=HLGranite+loc:+Kedah,+Malaysia&aq=&sll=6.102237,100.383797&sspn=0.029657,0.052314&vpsrc=6&ie=UTF8&hq=HLGranite&hnear=&ll=6.093587,100.382531&spn=0.001854,0.00327&t=m&z=19&cid=5343873147049093163&iwloc=A'><b>HL GRANITE & MARBLE SDN. BHD.</b></a>";
 
         // source http://code.google.com/p/jquery-ui-map/
+        //AS: 6.093094,100.382252
+        //BM: 5.33398,100.50754
         $('#map_canvas').gmap({
-            'center': '5.33398,100.50754', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
+            'center': '6.093094,100.382252', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
                 var self = this;
                 self.addMarker({ 'position': this.get('map').getCenter() }).click(function () {
                     self.openInfoWindow({ 'content': tip+"<br/>"+$("#address").html() }, this);
