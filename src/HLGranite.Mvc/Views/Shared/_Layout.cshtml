@@ -41,6 +41,7 @@
                             @*<li>@Html.ActionLink("Renovation", "Index", "Slab")</li>*@
                             @*<li>@Html.ActionLink("Tomb", "Index", "Tomb")</li>*@
                             <li>@Html.ActionLink("Nisan", "Index", "Nisan")</li>
+                            <li><a href="#" id="tool">Tool</a></li>
                             @if(isAdmin)
                             {
                                 <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
@@ -65,7 +66,7 @@
                     <p>
                         &copy; @DateTime.Now.Year - HLGranite Ordering Application ver @typeof(HLGranite.Mvc.MvcApplication).Assembly.GetName().Version
                         @if(isInternal) {
-                            @Html.Raw(" | <a href='~/Home/IndexRss' title='Subscribe RSS'><img src='/Images/rss.gif' /></a>")
+                            @Html.Raw(" | <a href='/Home/IndexRss' title='Subscribe RSS'><img src='/Images/rss.gif' /></a>")
                         }
                     </p>
                 </div>
