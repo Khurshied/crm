@@ -2,6 +2,14 @@
 
 @{
     ViewBag.Title = "Index";
+
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    bool isCustomer = true; // default is true
+    if (user != null)
+    {
+        isCustomer = user.IsCustomer;
+    }
 }
 
 <h2>Index</h2>
@@ -11,8 +19,13 @@
 </p>
 
 @using (Html.BeginForm()) {
-    <p>                
-        @Html.DropDownList("SoldTo", "All Customer")
+    <p>
+        @{
+            if (!isCustomer)
+            {
+                @Html.DropDownList("SoldTo", "All Customer")
+            }
+        }
         @Html.DropDownList("Status")
         @Html.TextBox("SearchString") <input type="submit" class="search" value="" />
     </p>
