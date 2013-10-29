@@ -11,7 +11,7 @@
 
         // source http://code.google.com/p/jquery-ui-map/
         $('#map_canvas').gmap({
-            'center': '5.33398,100.50754', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
+            'center': '6.093094,100.382252', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
                 var self = this;
                 self.addMarker({ 'position': this.get('map').getCenter() }).click(function () {
                     self.openInfoWindow({ 'content': tip+"<br/>"+$("#address").html() }, this);
