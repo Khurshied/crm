@@ -36,12 +36,19 @@
                         }
                     }
                     <nav>
-                        <ul id="menu">
+                        <div id="cssmenu">
+                        <ul>
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             @*<li>@Html.ActionLink("Renovation", "Index", "Slab")</li>*@
                             @*<li>@Html.ActionLink("Tomb", "Index", "Tomb")</li>*@
                             <li>@Html.ActionLink("Nisan", "Index", "Nisan")</li>
-                            <li><a href="#" id="tool">Tool</a></li>
+                            <li>
+                                <a href="#" id="tool">Tool <b style="font-size:10pt;">▼</b></a>
+                                <ul>
+                                    <li><a href="/Nisan/Calendar">Muslim Calendar</a></li>
+                                    <li><a href="/Tomb/Calendar">Lunar Calendar</a></li>
+                                </ul>
+                            </li>
                             @if(isAdmin)
                             {
                                 <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
@@ -50,6 +57,7 @@
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
