@@ -1679,6 +1679,8 @@ var VKI_attach, VKI_close;
           fudge = -self.VKI_keyboard.offsetHeight - 3;
         } else if (kPos[1] - sDis[1] < 0) place = true;
       }
+      fudge += 20; // HACK: Recorrect positioning in application
+
       if (place || force === true) {
         var iPos = VKI_findPos(self.VKI_target), scr = self.VKI_target;
         while (scr = scr.parentNode) {
@@ -1690,6 +1692,7 @@ var VKI_attach, VKI_close;
             } // Check if the input is in view
             var pPos = VKI_findPos(scr), oTop = iPos[1] - pPos[1], oLeft = iPos[0] - pPos[0];
             var top = oTop + self.VKI_target.offsetHeight;
+            top += 20; // HACK: Recorrect positioning in application
             var left = oLeft + self.VKI_target.offsetWidth;
             var bottom = scr.offsetHeight - oTop - self.VKI_target.offsetHeight;
             var right = scr.offsetWidth - oLeft - self.VKI_target.offsetWidth;
