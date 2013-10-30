@@ -75,6 +75,7 @@
                         <a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a>
                     }
                 </text>),
+            grid.Column("Created", "Created"),
             grid.Column("LastUpdated", "LastUpdated"),
             grid.Column("Assignee","Assignee"),
             grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)
