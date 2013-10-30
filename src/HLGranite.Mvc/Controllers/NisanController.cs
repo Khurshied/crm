@@ -262,7 +262,7 @@ namespace HLGranite.Mvc.Controllers
         // POST: /Nisan/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Nisan nisan = db.Nisans.Find(id);

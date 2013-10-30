@@ -28,6 +28,29 @@
                 }
             });
         });
+
+        $("#delete-dialog").dialog({
+            autoOpen: false,
+            resizable: false,
+            draggable: false,
+            modal: true,
+            buttons: {
+                "Delete": function () {
+                    $(this).dialog("close");
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Content("~/Nisan/Delete/"+Model.Id)",
+                        success: function (msg) {
+                            alert("Delete successfully!");
+                            window.location = "@Url.Content("~/Nisan")";
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
     });
 </script>
 
@@ -61,10 +84,12 @@
 
         var statuses = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
         int i = 0;
+        int confirm = 0;
         foreach (var status in statuses)
         {            
             if(i==2)
             {
+                confirm = status.Id;
                 if(Model.StatusId == 0)
                 {
                     break;
@@ -86,6 +111,18 @@
                 <input id="@toLower(status.Name)" type="submit" value="@status.Name" onclick="setStatus('@status.Name');" />
             }
             i++;
+        }
+        
+        // TODO: Need to restrict once already work in progress no more can be remove?
+        if(Model.StatusId < confirm)
+        {
+            <input id="delete" type="button" value="DELETE" style="margin-left: 60px;" title="Delete this item?" onclick="$('#delete-dialog').dialog('open');" />
+            <div id="delete-dialog" title="Delete this item?">
+                <p>
+                    <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 50px 0;"></span>
+                    This item will be permanently deleted and cannot be recovered. Are you sure?
+                </p>
+            </div>
         }
     }
 </p>

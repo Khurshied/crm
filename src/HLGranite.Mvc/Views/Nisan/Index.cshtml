@@ -77,8 +77,7 @@
                 </text>),
             grid.Column("Created", "Created"),
             grid.Column("LastUpdated", "LastUpdated"),
-            grid.Column("Assignee","Assignee"),
-            grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>)
+            grid.Column("Assignee","Assignee")
         )
     )
     @*grid.Column("Jawi", "Jawi")*@
@@ -86,4 +85,5 @@
     @*grid.Column("Created", "Created")*@
     @*grid.Column("Death", "Death", format: @<text>@toLocalDate(item.Death)</text>)*@
     @*grid.Column("Deathm", "Muslim", format: @<text>@toLocalDate(item.Deathm)</text>)*@
+    @*grid.Column("", "", style: "delete", format: @<text>@Html.ActionLink("Delete" , "Delete", new {id=item.Id })</text>) *@
 </div>
