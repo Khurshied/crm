@@ -237,7 +237,6 @@ namespace HLGranite.Mvc.Controllers
                 db.Entry(nisan).State = EntityState.Modified;
                 LogActivity(nisan);
                 db.SaveChanges();
-                //return RedirectToAction("Edit", "Nisan",  new { Id = nisan.Id});
                 return RedirectToAction("Index");
             }
             SetViewBag(nisan);

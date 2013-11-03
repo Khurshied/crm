@@ -44,7 +44,7 @@ namespace HLGranite.Mvc.Models
                 switch(controller)
                 {
                     case "Nisan":
-                        if (!canView) canView = (user.Id == HLGranite.Mvc.Models.User.STAFF_TYPE_ID);
+                        if (!canView) canView = (user.UserTypeId == HLGranite.Mvc.Models.User.STAFF_TYPE_ID);
                         if (!canView)
                         {
                             Nisan nisan = db.Nisans.Where(n => n.Id == id).FirstOrDefault();
