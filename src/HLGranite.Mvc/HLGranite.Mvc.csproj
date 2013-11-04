@@ -346,11 +346,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\add.png" />
+    <Content Include="Images\blackAccent.png" />
+    <Content Include="Images\blueAccent.png" />
     <Content Include="Images\cog.png" />
     <Content Include="Images\cross.png" />
     <Content Include="Images\date.png" />
     <Content Include="Images\disk.png" />
     <Content Include="Images\email.png" />
+    <Content Include="Images\grayAccent.png" />
+    <Content Include="Images\greenAccent.png" />
     <Content Include="Images\help.png" />
     <Content Include="Images\keyboard.png" />
     <Content Include="Images\lorry.png" />

@@ -1029,3 +1029,13 @@ input[type="submit"].search,
   background-color: red; /*#cc2c24;*/
   color: #f0f0f0;
 }
+
+.blue { background: blue; color:white;}
+.gray { background: #999999;}
+.green { background: green;}
+.black { background: black; color:white;}
+
+/*.blue { background: url("../Images/blueAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
+/*.gray { background: url("../Images/grayAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
+/*.green { background: url("../Images/greenAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
+/*.black { background: url("../Images/blackAccent.png") no-repeat scroll 0 0 #EFEEEF; } */

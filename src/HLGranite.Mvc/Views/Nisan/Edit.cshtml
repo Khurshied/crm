@@ -51,7 +51,26 @@
         $("#Deathm").val(splits[0] + "/" + splits[1] + "/" + splits[2]);
     }
 
+    function getColor(stockName) {
+        console.log("Stock: " + stockName);
+        if (stockName.toLowerCase().indexOf("batik") > -1) {
+            return "blue";
+        } else if (stockName.toLowerCase().indexOf("hijau") > -1) {
+            return "green";
+        } else if (stockName.toLowerCase().indexOf("putih") > -1) {
+            return "gray";
+        } else if (stockName.toLowerCase().indexOf("hitam") > -1) {
+            return "black";
+        }
+
+        return "";
+    }
+
     $(function () {
+
+        $("#stock-label").addClass(getColor($("#StockId option:selected").text()));
+        //var color = getColor($("#StockId option:selected").text());
+        //$(".main-content").addClass(color);
 
         $("#Created").html(afterLocalTime($("#Created").html()));
         $("#LastUpdated").html(afterLocalTime($("#LastUpdated").html()));
@@ -210,7 +229,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StockId)
+            @Html.LabelFor(model => model.StockId, new { id="stock-label"})
         </div>
         <div class="editor-field">
             @Html.DropDownList("StockId", String.Empty)
