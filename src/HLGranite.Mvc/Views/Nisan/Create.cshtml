@@ -96,6 +96,20 @@
 
         // http://www.ejawi.net/v3/index?e=converter
         $("#Rumi").change(function () {
+
+            // validate stock type with decease gender
+            var rumi = $("#Rumi").val();
+            var stock = $("#StockId option:selected").text();
+            if (rumi.indexOf(" bin") && stock.indexOf("(P)")) {
+                alert("Are you sure pick a correct stock?");
+            } else if (rumi.indexOf(" b.") && stock.indexOf("(P)")) {
+                alert("Are you sure pick a correct stock?");
+            } else if (rumi.indexOf(" bt") && stock.indexOf("(L)")) {
+                alert("Are you sure pick a correct stock?");
+            } else if (rumi.indexOf(" binti") && stock.indexOf("(P)")) {
+                alert("Are you sure pick a correct stock?");
+            }
+
             $.ajax({
                 type: "POST",
                 url: "/Nisan/Translate",
