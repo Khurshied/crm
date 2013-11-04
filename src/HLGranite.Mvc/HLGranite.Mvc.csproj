@@ -356,6 +356,7 @@
     <Content Include="Images\grayAccent.png" />
     <Content Include="Images\greenAccent.png" />
     <Content Include="Images\help.png" />
+    <Content Include="Images\inkscape.png" />
     <Content Include="Images\keyboard.png" />
     <Content Include="Images\lorry.png" />
     <Content Include="Images\magnifier.png" />

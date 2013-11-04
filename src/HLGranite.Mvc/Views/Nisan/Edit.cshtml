@@ -318,6 +318,13 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+@if(!isCustomer)
+{
+<div style="margin-top:10px;">
+    <a href='../Svg/@Model.Id' title='Generate svg'><img src='/Images/inkscape.png' height="24" width="24" /></a>
+</div>
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

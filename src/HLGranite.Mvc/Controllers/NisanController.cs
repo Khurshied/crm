@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -270,12 +271,6 @@ namespace HLGranite.Mvc.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
         private DataTable ReadXml(string fileName)
         {
             DataTable table = new DataTable();
@@ -365,6 +360,42 @@ namespace HLGranite.Mvc.Controllers
             }
 
             return View(feed);
+        }
+
+        /// <summary>
+        /// TODO: Generate svg template.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public FileStreamResult Svg(int id)
+        {
+            Nisan nisan = db.Nisans.Find(id);
+            MemoryStream stream = new MemoryStream();
+            //MemoryWriter mwriter = new MemoryWriter();
+
+            TextWriter writer = new StreamWriter(stream);
+            writer.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            writer.WriteLine("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">");
+            writer.WriteLine("<svg viewBox=\"0 0 600 600\" version=\"1.1\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">");
+            //foreach (UIElement child in this.workspace.Children)
+            //{
+            //    if (child is System.Windows.Shapes.Path)
+            //        writer.WriteLine(ConvertToSvgPathSyntax(child as System.Windows.Shapes.Path));
+            //}
+
+            writer.WriteLine("</svg>");
+            writer.Flush();
+
+            stream.Flush();
+            stream.Position = 0;
+
+            return File(stream, "application/text", nisan.Rumi + ".svg");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
