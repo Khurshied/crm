@@ -46,8 +46,9 @@
         string output = "";
         if (date != null)
         {
+            date = date.Value.AddHours(8); // TODO: Get client local timezone
             if(date.Value.Hour > 0 && date.Value.Minute > 0)
-                output = date.Value.ToString("dd/MM/yyyy hh:mm:ss tt");
+                output = date.Value.ToString("dd/MM/yyyy hh:mm tt");
             else
                 output = date.Value.ToString("dd/MM/yyyy");
         }
@@ -68,8 +69,8 @@
             grid.Column("SoldTo.DisplayName","To"),
             grid.Column("Stock.Name", "Batu"),
             grid.Column("Rumi", "Name", format: @<text><a href="@Href("~/Nisan/Edit/" + item.Id)">@item</a></text>),
-            grid.Column("Created", "Created"),
-            grid.Column("LastUpdated", "LastUpdated"),
+            grid.Column("Created", "Created", format: @<text>@toLocalDate(@item.Created)</text>),
+            grid.Column("LastUpdated", "LastUpdated", format: @<text>@toLocalDate(@item.LastUpdated)</text>),
             grid.Column("Assignee","Assignee")
         )
     )
