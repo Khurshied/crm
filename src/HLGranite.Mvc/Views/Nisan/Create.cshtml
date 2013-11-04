@@ -22,6 +22,7 @@
 
 @Styles.Render("~/Content/keyboard.css")
 @Scripts.Render("~/Scripts/keyboard.js")
+@Scripts.Render("~/Scripts/jquery.cookie.js")
 <script>
 
     function displayMuslimDate(muslim) {
@@ -49,6 +50,16 @@
         if (month > 0) splits[0] = append(month, 2, "0");
         if (year > 0) splits[2] = year;
         $("#Deathm").val(splits[0] + "/" + splits[1] + "/" + splits[2]);
+    }
+
+    function presetStock(stockId) {
+        $("#StockId option").each(function () {
+            if ($(this).val() == stockId) {
+                $(this).attr("selected", true);
+                return;
+            }
+        });
+        $("#StockId").trigger("change");
     }
 
     $(function () {
@@ -122,6 +133,9 @@
             });
         });
 
+        // preload
+        var previousStock = $.cookie('nisan_stockId');
+        presetStock(previousStock);
     });
 </script>
 

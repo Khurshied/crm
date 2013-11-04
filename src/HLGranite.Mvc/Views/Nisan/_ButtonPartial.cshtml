@@ -19,6 +19,14 @@
             //$(".keyboardInputInitiator").bind('click');
         });
 
+        $("#save").click(function() {
+            $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
+        });
+
+        $("#submit").click(function() {
+            $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
+        });
+
         $("#design").click(function() {
             var assignee = $("#login a").html().trim();
             $("#AssigneeId option").each(function(i, option) {
