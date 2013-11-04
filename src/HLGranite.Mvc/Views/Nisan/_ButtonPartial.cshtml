@@ -19,10 +19,13 @@
             //$(".keyboardInputInitiator").bind('click');
         });
 
+        /**
+         * Store selected stock into cookie.
+         * source https://github.com/carhartl/jquery-cookie
+         */
         $("#save").click(function() {
             $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
         });
-
         $("#submit").click(function() {
             $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
         });
