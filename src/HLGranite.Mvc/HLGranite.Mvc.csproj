@@ -474,7 +474,7 @@
     <Content Include="Views\StockType\Create.cshtml" />
     <Content Include="Views\StockType\Edit.cshtml" />
     <Content Include="Views\StockType\Delete.cshtml" />
-    <Content Include="Views\Nisan\_ButtonPartial.cshtml" />
+    <Content Include="Views\Nisan\_EditButtons.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\Activity\Details.cshtml" />
     <Content Include="Views\Activity\Create.cshtml" />
@@ -484,6 +484,7 @@
     <Content Include="Views\Home\IndexRss.cshtml" />
     <Content Include="Views\Nisan\Calendar.cshtml" />
     <Content Include="Views\Nisan\Translate.cshtml" />
+    <Content Include="Views\Nisan\_ActionButtons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

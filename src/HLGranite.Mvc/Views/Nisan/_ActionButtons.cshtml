@@ -13,23 +13,6 @@
 
     $(function () {
 
-        $("#edit").click(function () {
-            $(this).css("background", "#ccc");            
-            enableAll();
-            //$(".keyboardInputInitiator").bind('click');
-        });
-
-        /**
-         * Store selected stock into cookie.
-         * source https://github.com/carhartl/jquery-cookie
-         */
-        $("#save").click(function() {
-            $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
-        });
-        $("#submit").click(function() {
-            $.cookie("nisan_stockId", $("#StockId").val(), {expires: 1000});
-        });
-
         $("#design").click(function() {
             var assignee = $("#login a").html().trim();
             $("#AssigneeId option").each(function(i, option) {
@@ -40,28 +23,6 @@
             });
         });
 
-        $("#delete-dialog").dialog({
-            autoOpen: false,
-            resizable: false,
-            draggable: false,
-            modal: true,
-            buttons: {
-                "Delete": function () {
-                    $(this).dialog("close");
-                    $.ajax({
-                        type: "POST",
-                        url: "@Url.Content("~/Nisan/Delete/"+Model.Id)",
-                        success: function (msg) {
-                            alert("Delete successfully!");
-                            window.location = "@Url.Content("~/Nisan")";
-                        }
-                    });
-                },
-                Cancel: function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
     });
 </script>
 
@@ -88,19 +49,18 @@
             return;
         }
         
-        if(Model.StatusId > 0)
-        {
-            <input id="edit" type="button" value="Edit" />
-        }
-
         var statuses = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID);
         int i = 0;
-        int confirm = 0;
         foreach (var status in statuses)
-        {            
-            if(i==2)
+        {
+            i++;
+            if(i==1 || i==2)
             {
-                confirm = status.Id;
+                continue;
+            }
+            
+            if(i==3)
+            {
                 if(Model.StatusId == 0)
                 {
                     break;
@@ -116,24 +76,11 @@
             {
                 <input id="@toLower(status.Name)" type="submit" value="@status.Name" style="background: #ccc");" />
             }
-
+            
             if (status.Id > Model.StatusId)
             {
                 <input id="@toLower(status.Name)" type="submit" value="@status.Name" onclick="setStatus('@status.Name');" />
             }
-            i++;
-        }
-        
-        // TODO: Need to restrict once already work in progress no more can be remove?
-        if(Model.StatusId < confirm)
-        {
-            <input id="delete" type="button" value="DELETE" style="margin-left: 60px;" title="Delete this item?" onclick="$('#delete-dialog').dialog('open');" />
-            <div id="delete-dialog" title="Delete this item?">
-                <p>
-                    <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 50px 0;"></span>
-                    This item will be permanently deleted and cannot be recovered. Are you sure?
-                </p>
-            </div>
         }
     }
 </p>
