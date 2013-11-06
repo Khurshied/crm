@@ -485,6 +485,7 @@
     <Content Include="Views\Nisan\Calendar.cshtml" />
     <Content Include="Views\Nisan\Translate.cshtml" />
     <Content Include="Views\Nisan\_ActionButtons.cshtml" />
+    <Content Include="Views\Nisan\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

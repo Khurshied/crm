@@ -884,7 +884,7 @@ input[type="submit"].search,
 #Mobile,
 #Telephone {width: 120px;}
 
-#Death, #DeathDP, #Date, #DateDP {width: 100px;}
+#Death, #DeathDP, #Date, #DateDP, #FromDP, #ToDP {width: 100px;}
 #MuslimDay {width: 20px;}
 #MuslimYear {width: 40px;}
 
@@ -1039,3 +1039,5 @@ input[type="submit"].search,
 /*.gray { background: url("../Images/grayAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
 /*.green { background: url("../Images/greenAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
 /*.black { background: url("../Images/blackAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
+
+.align-right {text-align: right;}

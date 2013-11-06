@@ -114,6 +114,99 @@ namespace HLGranite.Mvc.Controllers
             return View(nisans.ToList());
         }
 
+        /// <summary>
+        /// Show Nisan report.
+        /// </summary>
+        /// <param name="soldTo"></param>
+        /// <param name="status"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public ActionResult Report(string soldTo, string status, DateTime? from, DateTime? to)
+        {
+            ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
+            ViewBag.Status = StatusList;
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
+
+            HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (User.Identity.Name.Length == 0)
+            {
+                nisans = db.Nisans.Where(n => n.Id == 0);
+                return View(nisans);
+            }
+            else
+            {
+                if (user == null)
+                {
+                    nisans = db.Nisans.Where(n => n.Id == 0);
+                    return View();
+                }
+                else
+                {
+                    if (user.UserTypeId != Models.User.ADMIN_TYPE_ID && user.UserTypeId != Models.User.STAFF_TYPE_ID)
+                    {
+                        nisans = nisans.Where(n => n.SoldToId == user.Id);
+                    }
+                }
+            }
+
+            if (!String.IsNullOrEmpty(soldTo))
+            {
+                int id = Convert.ToInt32(soldTo);
+                nisans = nisans.Where(n => n.SoldToId == id);
+            }
+
+            if (String.IsNullOrEmpty(status))
+            {
+                // pending case
+                short draft = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).First().Id;
+                short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+                nisans = nisans.Where(n => n.StatusId > draft && n.StatusId < close);
+            }
+            else
+            {
+                if (status.ToLower() == "all")
+                {
+                    //short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+                    //nisans = nisans.Where(n => n.StatusId < close);
+                }
+                else
+                {
+                    short id = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID && s.Name == status).First().Id;
+                    nisans = nisans.Where(n => n.StatusId == id);
+                }
+            }
+
+            if (from.HasValue)
+            {
+                DateTime fromDate = new DateTime(from.Value.Year, from.Value.Month, from.Value.Day);
+                List<Nisan> holder = new List<Nisan>();
+
+                // HACK: Created cannot quarable with linq because it is an virtual field.
+                foreach (Nisan nisan in nisans)
+                {
+                    if (nisan.Created >= fromDate)
+                        holder.Add(nisan);
+                }
+                nisans = holder.AsQueryable();
+            }
+
+            if (to.HasValue)
+            {
+                DateTime toDate = new DateTime(to.Value.Year, to.Value.Month, to.Value.Day);
+                toDate = toDate.AddDays(1);
+
+                List<Nisan> holder = new List<Nisan>();
+                foreach (Nisan nisan in nisans)
+                {
+                    if (nisan.Created < toDate)
+                        holder.Add(nisan);
+                }
+                nisans = holder.AsQueryable();
+            }
+
+            return View(nisans.ToList());
+        }
+
         //
         // GET: /Nisan/Details/5
 

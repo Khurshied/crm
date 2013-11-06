@@ -1,0 +1,99 @@
+﻿@model IEnumerable<HLGranite.Mvc.Models.Nisan>
+
+@{
+    ViewBag.Title = "Report";
+
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    bool isCustomer = true; // default is true
+    if (user != null)
+    {
+        isCustomer = user.IsCustomer;
+    }
+}
+
+@functions{
+    public string ToDateString(HLGranite.Mvc.Models.Nisan nisan)
+    {
+        string displayText = string.Empty;
+        if(nisan.Death.HasValue)
+        {
+            displayText += nisan.Death.Value.ToString("dd-MM-yyyy");
+        }
+        if(nisan.Deathm.HasValue)
+        {
+            if(displayText.Length>0)
+            {
+                displayText += " = ";
+            }
+            displayText += nisan.Deathm.Value.ToString("dd-MM-yyyy");
+        }
+
+        return displayText;
+    }
+}
+
+<script>
+    $(function () {
+        $("#FromDP").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#ToDP").datepicker({ dateFormat: "dd/mm/yy" });
+        $("#FromDP").change(function () {
+            $("#From").val(toUSDate($(this).val()));
+        });
+        $("#ToDP").change(function () {
+            $("#To").val(toUSDate($(this).val()));
+        });
+    });
+</script>
+
+<h2>Report</h2>
+
+@using (Html.BeginForm()) {
+    <p>
+        @{
+            if (!isCustomer)
+            {
+                @Html.DropDownList("SoldTo", "All Customer")
+            }
+        }
+        @Html.DropDownList("Status")
+        From @Html.TextBox("FromDP") To @Html.TextBox("ToDP") <input type="submit" class="search" value="" /> @Html.Hidden("From") @Html.Hidden("To")
+    </p>
+}
+
+<table>
+    <tr>
+        <th colspan="4"><hr /></th>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Created)</th>
+        <th>Description</th>
+        <th>Item</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+    </tr>
+    <tr>
+        <th colspan="4"><hr /></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@item.Created.ToString("dd-MM-yyyy")</td>
+        <td>@Html.DisplayFor(modelItem => item.Rumi) (@ToDateString(@item)) @Html.DisplayFor(modelItem => item.Jawi)</td>
+        <td>@item.Stock.Name</td>
+        <td class="align-right">@Html.DisplayFor(modelItem => item.Price)</td>
+    </tr>
+}
+
+    <tr>
+        <th colspan="4"><hr /></th>
+    </tr>
+    <tr>
+        <th />
+        <th />
+        <th>Total</th>
+        <th class="align-right">@String.Format("{0:C}", Model.Sum(n => n.Price))</th>
+    </tr>
+    <tr>
+        <th colspan="4"><hr /></th>
+    </tr>
+</table>
