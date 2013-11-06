@@ -45,12 +45,20 @@
                             <li>
                                 <a href="#" id="tool">Tool <b style="font-size:10pt;">▼</b></a>
                                 <ul>
-                                    <li><a href="/Nisan/Calendar">Muslim Calendar</a></li>
-                                    <li><a href="/Tomb/Calendar">Lunar Calendar</a></li>
+                                    <li>@Html.ActionLink("Muslim Calendar", "Calendar", "Nisan")</li>
+                                    <li>@Html.ActionLink("Lunar Calendar", "Calendar", "Tomb")</li>
                                 </ul>
                             </li>
                             @if(isAdmin)
                             {
+                                <li>
+                                    <a href="#" id="report">Reports</a>
+                                    <ul>
+                                        <li>@Html.ActionLink("Renovation Report", "Report", "Slab")</li>
+                                        <li>@Html.ActionLink("Tomb Report", "Report", "Tomb")</li>
+                                        <li>@Html.ActionLink("Nisan Report", "Report", "Nisan")</li>
+                                    </ul>
+                                </li>
                                 <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
                                 <li>@Html.ActionLink("User", "Index", "User")</li>
                             }
