@@ -119,3 +119,18 @@ function enableAll() {
         $(this).prop("disabled", false);
     });
 }
+
+/**
+ * Prompt a messagebox for possible enter a wrong stock by decease name.
+ */
+function validateNisanGender(rumi, stock) {
+    if (rumi.indexOf(" bin ") > -1 && stock.indexOf("(P)") > -1) {
+        alert("Are you sure pick a correct stock?");
+    } else if (rumi.indexOf(" b.") > -1 && stock.indexOf("(P)") > -1) {
+        alert("Are you sure pick a correct stock?");
+    } else if (rumi.indexOf(" bt") > -1 && stock.indexOf("(L)") > -1) {
+        alert("Are you sure pick a correct stock?");
+    } else if (rumi.indexOf(" binti") > -1 && stock.indexOf("(L)") > -1) {
+        alert("Are you sure pick a correct stock?");
+    }
+}

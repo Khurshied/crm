@@ -123,15 +123,7 @@
             // validate stock type with decease gender
             var rumi = $("#Rumi").val();
             var stock = $("#StockId option:selected").text();
-            if (rumi.indexOf(" bin") > -1 && stock.indexOf("(P)") > -1) {
-                alert("Are you sure pick a correct stock?");
-            } else if (rumi.indexOf(" b.") > -1 && stock.indexOf("(P)") > -1) {
-                alert("Are you sure pick a correct stock?");
-            } else if (rumi.indexOf(" bt") > -1 && stock.indexOf("(L)") > -1) {
-                alert("Are you sure pick a correct stock?");
-            } else if (rumi.indexOf(" binti") > -1 && stock.indexOf("(P)") > -1) {
-                alert("Are you sure pick a correct stock?");
-            }
+            validateNisanGender(rumi, stock);
 
             $.ajax({
                 type: "POST",
