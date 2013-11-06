@@ -205,6 +205,7 @@ INSERT INTO [UserTypes](Type) VALUES ('Admin');
 INSERT INTO [UserTypes](Type) VALUES ('Staff');
 INSERT INTO [UserTypes](Type) VALUES ('Agent');
 INSERT INTO [UserTypes](Type) VALUES ('Customer');
+INSERT INTO [Users](UserTypeId,UserName,Password,FirstName) VALUES(1,'admin', 'AJMuODpzNXrU5jKNSm1TahwJMU8T0aYykJJZqLH2deRk+rKOuqIg6wSuWagkS3O24Q==                                                            ', 'admin');
 
 INSERT INTO [StockTypes](Type) VALUES ('Renovation');
 INSERT INTO [StockTypes](Type) VALUES ('Tomb');

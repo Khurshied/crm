@@ -228,10 +228,13 @@ namespace HLGranite.Mvc.Controllers
                 // put loggin person as assignee after submit (normally submit is the second status after save or new).
                 List<Status> statuses = db.Statuses.Where(s => s.StockTypeId == StockType.NISAN_TYPE_ID).Take(3).ToList();
                 Status status = statuses[2];
-                if (nisan.StatusId == status.Id && (nisan.AssigneeId == null || nisan.AssigneeId == 0))
+                if (nisan.AssigneeId == null || nisan.AssigneeId == 0)
                 {
-                    Mvc.Models.User assignee = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-                    if (assignee != null) nisan.AssigneeId = assignee.Id;
+                    if (nisan.StatusId >= status.Id)
+                    {
+                        Mvc.Models.User assignee = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+                        if (assignee != null) nisan.AssigneeId = assignee.Id;
+                    }
                 }
 
                 nisan.WorkItem = db.WorkItems.Where(w => w.Id.Equals(nisan.WorkItemId)).First();
