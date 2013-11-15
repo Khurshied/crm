@@ -26,11 +26,12 @@
 <script>
 
     function displayMuslimDate(muslim) {
+        console.log("Muslim: " + muslim);
         var splits = muslim.split('/');
         if (splits.length >= 3) {
-            $("#MuslimDay").val(append(splits[1],2,"0"));
+            $("#MuslimDay").val(append(splits[0],2,"0"));
             $("#MuslimMonth option").each(function (i, option) {
-                if (i == splits[0]) {
+                if (i == splits[1]) {
                     $(option).attr("selected", "selected");
                     return;
                 }
@@ -46,8 +47,8 @@
         }
 
         var splits = $("#Deathm").val().split('/');
-        if (day > 0) splits[1] = append(day, 2, "0");
-        if (month > 0) splits[0] = append(month, 2, "0");
+        if (day > 0) splits[0] = append(day, 2, "0");
+        if (month > 0) splits[1] = append(month, 2, "0");
         if (year > 0) splits[2] = year;
         $("#Deathm").val(splits[0] + "/" + splits[1] + "/" + splits[2]);
     }
@@ -65,10 +66,7 @@
     $(function () {
 
         $("#Death").datepicker({ dateFormat: "dd/mm/yy" });
-        $("#DeathDP").datepicker({ dateFormat: "dd/mm/yy" });
-        $("#DeathDP").change(function () {
-            $("#Death").val(toUSDate($(this).val()));
-
+        $("#Death").change(function () {
             $.ajax({
                 type: "POST",
                 url: "/Nisan/Calendar",
@@ -213,8 +211,7 @@
             @Html.LabelFor(model => model.Death)
         </div>
         <div class="editor-field">
-            @Html.TextBox("DeathDP")
-            @Html.HiddenFor(model => model.Death)
+            @Html.EditorFor(model => model.Death)
             @Html.ValidationMessageFor(model => model.Death)
         </div>
 

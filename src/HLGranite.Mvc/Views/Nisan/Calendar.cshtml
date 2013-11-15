@@ -6,20 +6,17 @@
 
     $(function () {
 
-        if ($("#Gregorian").val().length > 0) {
-            var local = toLocalDate($("#Gregorian").val());
-            $("#Gregorian").val(local);
-        }
+        //if ($("#Gregorian").val().length > 0) {
+        //    var local = toLocalDate($("#Gregorian").val());
+        //    $("#Gregorian").val(local);
+        //}
 
-        if ($("#Muslim").val().length > 0) {
-            var local = toLocalDate($("#Muslim").val());
-            $("#LocalMuslim").val(local);
-        }
+        //if ($("#Muslim").val().length > 0) {
+        //    var local = toLocalDate($("#Muslim").val());
+        //    $("#LocalMuslim").val(local);
+        //}
 
-        $("#DateDP").datepicker({ dateFormat: "dd/mm/yy" });
-        $("#DateDP").change(function () {
-            $("#Date").val(toUSDate($(this).val()));
-        });
+        $("#Date").datepicker({ dateFormat: "dd/mm/yy" });
     });
 </script>
 
@@ -32,8 +29,7 @@
     @*@Html.EditorFor("Date", "Date")*@
     @*@Html.EditorFor("Muslim", "Muslim")*@
 
-    <input id="DateDP" type="text" /><br />
-    <input id="Date" name="Date" type="hidden" value="@ViewBag.Date" /><br />
+    <input id="Date" name="Date" value="@ViewBag.Date" /><br />
     <span>Gregorian</span><input id="Gregorian" name="Gregorian" type="text" value="@ViewBag.Gregorian" class="readonly" readonly="readonly" /><br />
     <span>Muslim:</span><input id="LocalMuslim" name="Muslim" type="text" value="@ViewBag.Muslim" class="readonly" readonly="readonly" />
     <input id="Muslim" name="Muslim" type="hidden" value="@ViewBag.Muslim" class="readonly" readonly="readonly" />
