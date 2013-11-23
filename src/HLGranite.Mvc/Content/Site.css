@@ -1032,7 +1032,7 @@ input[type="submit"].search,
 
 .blue { background: blue; color:white;}
 .gray { background: #999999;}
-.green { background: green;}
+.green { background: green; color:white;}
 .black { background: black; color:white;}
 
 /*.blue { background: url("../Images/blueAccent.png") no-repeat scroll 0 0 #EFEEEF; } */
