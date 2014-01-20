@@ -60,7 +60,7 @@
             @Html.LabelFor(model => model.Price)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Price, new { @Value = String.Format("{0:"+HLGranite.Mvc.MvcApplication.MONEY_FORMAT+"}", Model.Price), @class="readonly", @readonly = "readonly" })
+            @Html.TextBoxFor(model => model.Price, new { @Value = String.Format("{0:############.00}", Model.Price), @class="readonly", @readonly = "readonly" })
             @Html.ValidationMessageFor(model => model.Price)
         </div>
 
