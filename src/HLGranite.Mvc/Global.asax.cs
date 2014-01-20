@@ -26,5 +26,13 @@ namespace HLGranite.Mvc
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            // HACK: Customize Malaysia currency format to 2 digit decimal. Default only shown RM1,234. But we need RM1,234.50
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());//"ms-MY"
+            culture.NumberFormat.CurrencyDecimalDigits = 2;
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+        }
     }
 }
