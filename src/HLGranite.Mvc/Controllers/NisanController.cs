@@ -110,7 +110,7 @@ namespace HLGranite.Mvc.Controllers
                 nisans = nisans.Where(n => n.Rumi.ToLower().Contains(searchString.ToLower()));
 
             // last updated not support in linq sorting
-            nisans = nisans.OrderBy(n => n.StatusId).ThenBy(n => n.Id);
+            nisans = nisans.OrderBy(n => n.StatusId).OrderByDescending(n => n.Id);//.ThenBy(n => n.Id);
             return View(nisans.ToList());
         }
 
