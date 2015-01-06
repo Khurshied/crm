@@ -97,7 +97,7 @@
         <th />
         <th />
         <th>Total</th>
-        <th class="align-right">@String.Format("{0:C}", Model.Sum(n => n.Price))</th>
+        <th class="align-right">@String.Format("{0:C}", Model.Sum(n => n.Stock.Price))</th>
     </tr>
     <tr>
         <th colspan="5"><hr /></th>
