@@ -88,8 +88,9 @@ namespace HLGranite.Mvc.Controllers
             {
                 // pending case
                 short draft = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).First().Id;
-                short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
-                nisans = nisans.Where(n => n.StatusId > draft && n.StatusId < close);
+                //short close = db.Statuses.Where(s => s.StockTypeId == HLGranite.Mvc.Models.StockType.NISAN_TYPE_ID).OrderByDescending(s => s.Id).First().Id;
+                // 47 is deliver
+                nisans = nisans.Where(n => n.StatusId > draft && n.StatusId < 47); // close);
             }
             else
             {
