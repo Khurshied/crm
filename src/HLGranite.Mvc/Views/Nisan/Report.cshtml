@@ -85,7 +85,7 @@
         <td>@item.Created.ToString("dd-MM-yyyy")</td>
         <td>@item (@ToDateString(@item)) @Html.DisplayFor(modelItem => item.Jawi)</td>
         <td>@item.Stock.Name</td>
-        <td class="align-right">@Html.DisplayFor(modelItem => item.Price)</td>
+        <td class="align-right">@Html.DisplayFor(modelItem => item.Stock.Price)</td>
     </tr>
 }
 
