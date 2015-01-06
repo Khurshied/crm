@@ -121,6 +121,7 @@ namespace HLGranite.Mvc.Controllers
         /// <param name="status"></param>
         /// <param name="searchString"></param>
         /// <returns></returns>
+        [AuthorizeAdmin]
         public ActionResult Report(string soldTo, string status, DateTime? from, DateTime? to)
         {
             ViewBag.SoldTo = new SelectList(db.Users.Where(u => u.UserTypeId == HLGranite.Mvc.Models.User.AGENT_TYPE_ID).OrderBy(u => u.UserName), "Id", "DisplayName");
