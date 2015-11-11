@@ -37,43 +37,12 @@
 
 <h2>Chart</h2>
 
-<table>
-    <tr>
-        <th colspan="5"><hr /></th>
-    </tr>
-    <tr>
-        <th>No.</th>
-        <th>@Html.DisplayNameFor(model => model.Created)</th>
-        <th>Description</th>
-        <th>Item</th>
-        <th>@Html.DisplayNameFor(model => model.Price)</th>
-    </tr>
-    <tr>
-        <th colspan="5"><hr /></th>
-    </tr>
-
-@foreach (var item in Model) {
-    i++;
-    <tr>
-        <td>@i.</td>
-        <td>@item.Created.ToString("dd-MM-yyyy")</td>
-        <td>@item (@ToDateString(@item)) @Html.DisplayFor(modelItem => item.Jawi)</td>
-        <td>@item.Stock.Name</td>
-        <td class="align-right">@Html.DisplayFor(modelItem => item.Stock.Price)</td>
-    </tr>
+@{
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Chart Title")
+        .AddSeries(
+            name: "Employee",
+            xValue: new[] {"Peter", "Andrew", "Julie", "Mary", "Dave"},
+            yValues: new[] {"2", "6", "4", "5", "3"}
+        ).Write();
 }
-
-    <tr>
-        <th colspan="5"><hr /></th>
-    </tr>
-    <tr>
-        <th />
-        <th />
-        <th />
-        <th>Total</th>
-        <th class="align-right">@String.Format("{0:C}", Model.Sum(n => n.Stock.Price))</th>
-    </tr>
-    <tr>
-        <th colspan="5"><hr /></th>
-    </tr>
-</table>
