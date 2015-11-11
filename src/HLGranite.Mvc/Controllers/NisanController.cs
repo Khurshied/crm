@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using System.Web.UI.DataVisualization.Charting;
 using System.Web.Mvc;
 using HLGranite.Jawi;
 using HLGranite.Mvc.Models;
@@ -214,9 +215,45 @@ namespace HLGranite.Mvc.Controllers
         /// <returns></returns>
         public ActionResult Chart()
         {
-            //var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
-            //return View(nisans.ToList());
-            return View();
+            // prepare data
+            string sql = "select";
+            sql += " Year(Activities.Date)*100+Month(Activities.Date) as Month, COUNT(Nisans.Id) as Quantity";
+            sql += " from Nisans";
+            //sql += " join Users on Nisans.SoldToId=Users.Id";
+            //sql += " join Stocks on Nisans.StockId=Stocks.Id";
+            sql += " join WorkItems on Nisans.WorkItemId=WorkItems.Id";
+            sql += " join Activities on WorkItems.Id=Activities.WorkItemId";
+            sql += " where Activities.StatusId=43";
+            sql += " and Activities.Id in (";
+            sql += " select a.Id";
+            sql += " from (select b.Id, rowid = ROW_NUMBER() OVER (PARTITION BY WorkItemId ORDER BY Id) from Activities b) a";
+            sql += " where rowid <= 1";
+            sql += " )";
+            sql += " group by Year(Activities.Date)*100+Month(Activities.Date)"; //, Stocks.Name";
+            sql += " order by Year(Activities.Date)*100+Month(Activities.Date)";
+
+            var data = db.Database.SqlQuery<HLGranite.Mvc.Models.MonthVolume>(sql).ToList();
+            int[] m = data.Select(f => f.Month).ToArray();
+            List<string> months = new List<string>();
+            foreach (int month in m)
+                months.Add(month.ToString());
+            int[] quantities = data.Select(f => f.Quantity).ToArray();
+
+            var chart = new Chart();
+            chart.Width = 1000;
+            chart.Height = 400;
+            chart.ChartAreas.Add(new ChartArea());
+            chart.Series.Add(new Series("Data"));
+            chart.Series["Data"].ChartType = SeriesChartType.Column;
+            for (int i = 0; i < data.Count; i++)
+                chart.Series["Data"].Points.AddXY(data[i].Month.ToString(), data[i].Quantity);
+            chart.Series["Data"].IsValueShownAsLabel = true;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                chart.SaveImage(ms, ChartImageFormat.Png);
+                return File(ms.ToArray(), "image/png");
+            }
         }
 
         //
