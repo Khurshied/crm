@@ -214,8 +214,9 @@ namespace HLGranite.Mvc.Controllers
         /// <returns></returns>
         public ActionResult Chart()
         {
-            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
-            return View(nisans.ToList());
+            //var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
+            //return View(nisans.ToList());
+            return View();
         }
 
         //
