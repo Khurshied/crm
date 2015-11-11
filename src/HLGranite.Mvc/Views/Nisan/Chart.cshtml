@@ -1,0 +1,79 @@
+﻿@model IEnumerable<HLGranite.Mvc.Models.Nisan>
+
+@{
+    ViewBag.Title = "Chart";
+
+    HLGranite.Mvc.Models.hlgraniteEntities db = new HLGranite.Mvc.Models.hlgraniteEntities();
+    HLGranite.Mvc.Models.User user = db.Users.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+    bool isCustomer = true; // default is true
+    if (user != null)
+    {
+        isCustomer = user.IsCustomer;
+    }
+
+    int i = 0; // numbering
+}
+
+@functions{
+    public string ToDateString(HLGranite.Mvc.Models.Nisan nisan)
+    {
+        string displayText = string.Empty;
+        if(nisan.Death.HasValue)
+        {
+            displayText += nisan.Death.Value.ToString("dd-MM-yyyy");
+        }
+        if(nisan.Deathm.HasValue)
+        {
+            if(displayText.Length>0)
+            {
+                displayText += " = ";
+            }
+            displayText += nisan.Deathm.Value.ToString("dd-MM-yyyy");
+        }
+
+        return displayText;
+    }
+}
+
+<h2>Chart</h2>
+
+<table>
+    <tr>
+        <th colspan="5"><hr /></th>
+    </tr>
+    <tr>
+        <th>No.</th>
+        <th>@Html.DisplayNameFor(model => model.Created)</th>
+        <th>Description</th>
+        <th>Item</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+    </tr>
+    <tr>
+        <th colspan="5"><hr /></th>
+    </tr>
+
+@foreach (var item in Model) {
+    i++;
+    <tr>
+        <td>@i.</td>
+        <td>@item.Created.ToString("dd-MM-yyyy")</td>
+        <td>@item (@ToDateString(@item)) @Html.DisplayFor(modelItem => item.Jawi)</td>
+        <td>@item.Stock.Name</td>
+        <td class="align-right">@Html.DisplayFor(modelItem => item.Stock.Price)</td>
+    </tr>
+}
+
+    <tr>
+        <th colspan="5"><hr /></th>
+    </tr>
+    <tr>
+        <th />
+        <th />
+        <th />
+        <th>Total</th>
+        <th class="align-right">@String.Format("{0:C}", Model.Sum(n => n.Stock.Price))</th>
+    </tr>
+    <tr>
+        <th colspan="5"><hr /></th>
+    </tr>
+</table>

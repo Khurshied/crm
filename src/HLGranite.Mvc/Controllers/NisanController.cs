@@ -208,6 +208,16 @@ namespace HLGranite.Mvc.Controllers
             return View(nisans.ToList());
         }
 
+        /// <summary>
+        /// Show nisan chart.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Chart()
+        {
+            var nisans = db.Nisans.Include(n => n.Stock).Include(n => n.SoldTo);
+            return View(nisans.ToList());
+        }
+
         //
         // GET: /Nisan/Details/5
 
