@@ -40,10 +40,10 @@
         $("#FromDP").datepicker({ dateFormat: "dd/mm/yy" });
         $("#ToDP").datepicker({ dateFormat: "dd/mm/yy" });
         $("#FromDP").change(function () {
-            $("#From").val($(this).val());
+            $("#From").val(toUSDate($(this).val()));
         });
         $("#ToDP").change(function () {
-            $("#To").val($(this).val());
+            $("#From").val(toUSDate($(this).val()));
         });
     });
 </script>
