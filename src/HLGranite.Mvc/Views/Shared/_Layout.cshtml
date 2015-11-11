@@ -51,16 +51,16 @@
                                     <li>@Html.ActionLink("Lunar Calendar", "Calendar", "Tomb")</li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#" id="report">Reports</a>
+                                <ul>
+                                    <li>@Html.ActionLink("Renovation Report", "Report", "Slab")</li>
+                                    <li>@Html.ActionLink("Tomb Report", "Report", "Tomb")</li>
+                                    <li>@Html.ActionLink("Nisan Report", "Report", "Nisan")</li>
+                                </ul>
+                            </li>
                             @if(isAdmin)
                             {
-                                <li>
-                                    <a href="#" id="report">Reports</a>
-                                    <ul>
-                                        <li>@Html.ActionLink("Renovation Report", "Report", "Slab")</li>
-                                        <li>@Html.ActionLink("Tomb Report", "Report", "Tomb")</li>
-                                        <li>@Html.ActionLink("Nisan Report", "Report", "Nisan")</li>
-                                    </ul>
-                                </li>
                                 <li>@Html.ActionLink("Stock", "Index", "Stock")</li>
                                 <li>@Html.ActionLink("User", "Index", "User")</li>
                             }
