@@ -54,9 +54,13 @@
                             <li>
                                 <a href="#" id="report">Reports</a>
                                 <ul>
-                                    <li>@Html.ActionLink("Renovation Report", "Report", "Slab")</li>
-                                    <li>@Html.ActionLink("Tomb Report", "Report", "Tomb")</li>
+                                    @*<li>@Html.ActionLink("Renovation Report", "Report", "Slab")</li>*@
+                                    @*<li>@Html.ActionLink("Tomb Report", "Report", "Tomb")</li>*@
                                     <li>@Html.ActionLink("Nisan Report", "Report", "Nisan")</li>
+                                    @if(isInternal)
+                                    {
+                                        <li>@Html.ActionLink("Nisan Chart", "Chart", "Nisan")</li>
+                                    }
                                 </ul>
                             </li>
                             @if(isAdmin)
