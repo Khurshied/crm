@@ -212,42 +212,60 @@ namespace HLGranite.Mvc.Controllers
         /// <summary>
         /// Show nisan chart.
         /// </summary>
+        /// <remarks>
+        /// see also http://www.scriptscoop.net/t/834358f45722/c-asp-net-mvc-chart-how-to-show-values-on-each-column.html
+        /// </remarks>
         /// <returns></returns>
         public ActionResult Chart()
         {
             // prepare data
             string sql = "select";
-            sql += " Year(Activities.Date)*100+Month(Activities.Date) as Month, COUNT(Nisans.Id) as Quantity";
+            sql += " Year(Activities.Date)*100+Month(Activities.Date) as Month, Stocks.Name, COUNT(Nisans.Id) as Quantity";
             sql += " from Nisans";
             //sql += " join Users on Nisans.SoldToId=Users.Id";
-            //sql += " join Stocks on Nisans.StockId=Stocks.Id";
+            sql += " join Stocks on Nisans.StockId=Stocks.Id";
             sql += " join WorkItems on Nisans.WorkItemId=WorkItems.Id";
             sql += " join Activities on WorkItems.Id=Activities.WorkItemId";
             sql += " where Activities.StatusId=43";
             sql += " and Activities.Id in (";
-            sql += " select a.Id";
-            sql += " from (select b.Id, rowid = ROW_NUMBER() OVER (PARTITION BY WorkItemId ORDER BY Id) from Activities b) a";
-            sql += " where rowid <= 1";
+            sql += "    select a.Id";
+            sql += "    from (select b.Id, rowid = ROW_NUMBER() OVER (PARTITION BY WorkItemId ORDER BY Id) from Activities b) a";
+            sql += "    where rowid <= 1";
             sql += " )";
-            sql += " group by Year(Activities.Date)*100+Month(Activities.Date)"; //, Stocks.Name";
-            sql += " order by Year(Activities.Date)*100+Month(Activities.Date)";
+            sql += " group by Year(Activities.Date)*100+Month(Activities.Date), Stocks.Name";
+            sql += " order by Year(Activities.Date)*100+Month(Activities.Date), Stocks.Name";
 
-            var data = db.Database.SqlQuery<HLGranite.Mvc.Models.MonthVolume>(sql).ToList();
-            int[] m = data.Select(f => f.Month).ToArray();
-            List<string> months = new List<string>();
-            foreach (int month in m)
-                months.Add(month.ToString());
-            int[] quantities = data.Select(f => f.Quantity).ToArray();
-
+            var data = db.Database.SqlQuery<HLGranite.Mvc.Models.MonthlyStock>(sql).ToList();
             var chart = new Chart();
-            chart.Width = 1000;
-            chart.Height = 400;
+            chart.Titles.Add("Monthly Sold Quantity Per Stock");
+            chart.Width = 1400;
+            chart.Height = 600;
             chart.ChartAreas.Add(new ChartArea());
-            chart.Series.Add(new Series("Data"));
-            chart.Series["Data"].ChartType = SeriesChartType.Column;
-            for (int i = 0; i < data.Count; i++)
-                chart.Series["Data"].Points.AddXY(data[i].Month.ToString(), data[i].Quantity);
-            chart.Series["Data"].IsValueShownAsLabel = true;
+
+            var allStocks = data.Select(f => f.Name).ToList().Distinct();
+            List<string> stocks = allStocks.ToList();
+            stocks.Sort();
+
+            var allDates = data.Select(f => f.Month).ToList().Distinct();
+            List<int> dates = allDates.ToList();
+            dates.Sort();
+
+            foreach (string stock in stocks)
+            {
+                chart.Series.Add(new Series(stock));
+                chart.Series[stock].ChartType = SeriesChartType.StackedColumn;
+                foreach (int date in dates)
+                {
+                    var monthlyStock = data.Where(f => f.Month.Equals(date) && f.Name.Equals(stock)).FirstOrDefault();
+                    int qty = (monthlyStock != null) ? monthlyStock.Quantity : 0;
+                    chart.Series[stock].Points.AddXY(date.ToString(), qty);
+                }
+                if (stock.Contains("2' Batu Batik") || stock.Contains("Tai Hitam") || stock.Contains("Tai Putih"))
+                    chart.Series[stock].IsValueShownAsLabel = true;
+                //Legend legend = new Legend(stock);
+                //chart.Legends.Add(legend);
+            }
+            chart.Legends.Add("2' Batu Batik"); // HACK
 
             using (MemoryStream ms = new MemoryStream())
             {

@@ -240,7 +240,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\MonthVolume.cs" />
+    <Compile Include="Models\MonthlyStock.cs" />
     <Compile Include="Models\Nisan.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

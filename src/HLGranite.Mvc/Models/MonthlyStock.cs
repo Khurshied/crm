@@ -5,19 +5,22 @@ using System.Web;
 
 namespace HLGranite.Mvc.Models
 {
-    /// <summary>
-    /// To hold total quantity sold in a month for chart use only.
-    /// </summary>
-    public class MonthVolume
+    public class MonthlyStock
     {
         public int Month { get; set; }
+        public string Name { get; set; }
         public int Quantity { get; set; }
-        public MonthVolume()
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public MonthlyStock()
         {
         }
-        public MonthVolume(int month, int quantity)
+        public MonthlyStock(int month, string name, int quantity)
         {
             this.Month = month;
+            this.Name = name;
             this.Quantity = quantity;
         }
     }
