@@ -246,6 +246,7 @@ namespace HLGranite.Mvc.Controllers
             List<string> stocks = allStocks.ToList();
             stocks.Sort();
 
+            // flatten the data in columns dimension
             var allDates = data.Select(f => f.Month).ToList().Distinct();
             List<int> dates = allDates.ToList();
             dates.Sort();
@@ -262,15 +263,14 @@ namespace HLGranite.Mvc.Controllers
                 }
                 if (stock.Contains("2' Batu Batik") || stock.Contains("Tai Hitam") || stock.Contains("Tai Putih"))
                     chart.Series[stock].IsValueShownAsLabel = true;
-                //Legend legend = new Legend(stock);
-                //chart.Legends.Add(legend);
             }
             chart.Legends.Add("2' Batu Batik"); // HACK
 
             using (MemoryStream ms = new MemoryStream())
             {
                 chart.SaveImage(ms, ChartImageFormat.Png);
-                return File(ms.ToArray(), "image/png");
+                //return File(ms.ToArray(), "image/png");
+                return View(new ViewChart(ms.ToArray()));
             }
         }
 
@@ -484,7 +484,7 @@ namespace HLGranite.Mvc.Controllers
             string result = string.Empty;
 
             JawiTranslator translator = new JawiTranslator();
-            if(!String.IsNullOrEmpty(rumi))
+            if (!String.IsNullOrEmpty(rumi))
             {
                 string[] words = rumi.Split(new char[] { ' ' });
                 foreach (string word in words)
@@ -502,14 +502,14 @@ namespace HLGranite.Mvc.Controllers
         /// <returns></returns>
         public ActionResult Rss()
         {
-            Feed feed = new Feed { Title = "Nisan Orders", Description = "Latest updates"};
+            Feed feed = new Feed { Title = "Nisan Orders", Description = "Latest updates" };
             var activities = db.Activities.OrderByDescending(a => a.Date).Take(50);
             foreach (var activity in activities)
             {
                 // compose nisan case
                 FeedItem item = new FeedItem();
                 var nisan = db.Nisans.Where(n => n.WorkItemId == activity.WorkItemId).FirstOrDefault();
-                if(nisan != null)
+                if (nisan != null)
                 {
                     item.Title = activity.Status.Name.ToLower() + ": " + nisan.SoldTo.DisplayName + " | " + nisan + " - " + nisan.Stock.Name;
                     if (nisan.Assignee != null) item.Creator = nisan.Creator.DisplayName;
@@ -518,7 +518,7 @@ namespace HLGranite.Mvc.Controllers
                     item.Url = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + "/Nisan/Edit/" + nisan.Id;
                 }
 
-                if(!String.IsNullOrEmpty(item.Title))
+                if (!String.IsNullOrEmpty(item.Title))
                     feed.Items.Add(item);
             }
 

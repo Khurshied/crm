@@ -1,2 +1,4 @@
-﻿<!-- full chart sample see https://code.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId=1591 -->
-<img alt="alternateText" src="@Url.Action("Chart")" />
+﻿@model HLGranite.Mvc.Models.ViewChart
+<!-- full chart sample see https://code.msdn.microsoft.com/mschart/Release/ProjectReleases.aspx?ReleaseId=1591 -->
+<h2>Chart</h2>
+<img src="data:image;base64,@System.Convert.ToBase64String(Model.Raw)" width="1400" height="600"/>
