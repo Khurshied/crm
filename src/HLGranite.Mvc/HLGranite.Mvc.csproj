@@ -271,6 +271,7 @@
     <Compile Include="Models\UserType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewChart.cs" />
     <Compile Include="Models\WorkItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
