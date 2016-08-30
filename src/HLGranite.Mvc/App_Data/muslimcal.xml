@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="muslimcal.xsl"?>
-<!-- source from http://www.islam.gov.my/en/node/26745 -->
+<!-- source from http://www.islam.gov.my/e-falak/takwim -->
+<!-- source from http://www.islam.gov.my/images/documents/Takwim_2017-PPF-2015-MUHARRAM-1439.pdf -->
 <calendar>
   <muslim date="1300-01-01">
     <sun>1882-11-11</sun>
@@ -4983,25 +4984,25 @@
     <sun>2016-12-31</sun>
   </muslim>
   <muslim date="1438-05-01">
-    <sun>2017-01-28</sun>
+    <sun>2017-01-29</sun>
   </muslim>
   <muslim date="1438-06-01">
-    <sun>2017-02-27</sun>
+    <sun>2017-02-28</sun>
   </muslim>
   <muslim date="1438-07-01">
-    <sun>2017-03-28</sun>
+    <sun>2017-03-29</sun>
   </muslim>
   <muslim date="1438-08-01">
-    <sun>2017-04-27</sun>
+    <sun>2017-04-28</sun>
   </muslim>
   <muslim date="1438-09-01">
-    <sun>2017-05-26</sun>
+    <sun>2017-05-27</sun>
   </muslim>
   <muslim date="1438-10-01">
     <sun>2017-06-25</sun>
   </muslim>
   <muslim date="1438-11-01">
-    <sun>2017-07-24</sun>
+    <sun>2017-07-25</sun>
   </muslim>
   <muslim date="1438-12-01">
     <sun>2017-08-23</sun>
@@ -5013,10 +5014,10 @@
     <sun>2017-10-21</sun>
   </muslim>
   <muslim date="1439-03-01">
-    <sun>2017-11-19</sun>
+    <sun>2017-11-20</sun>
   </muslim>
   <muslim date="1439-04-01">
-    <sun>2017-12-19</sun>
+    <sun>2017-12-20</sun>
   </muslim>
   <muslim date="1439-05-01">
     <sun>2018-01-17</sun>
